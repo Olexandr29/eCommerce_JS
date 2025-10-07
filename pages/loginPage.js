@@ -1,4 +1,5 @@
 const { By } = require("selenium-webdriver");
+const TestData = require('../data/testData');
 
 class LoginPage {
   constructor(driver) {
@@ -6,7 +7,7 @@ class LoginPage {
   }
 
   async login(username, password) {
-    await this.driver.get("https://www.saucedemo.com/");
+    await this.driver.get(TestData.baseUrl);
     await this.driver.sleep(200)
     await this.driver.findElement(By.id("user-name")).sendKeys(username);
     await this.driver.sleep(200)
