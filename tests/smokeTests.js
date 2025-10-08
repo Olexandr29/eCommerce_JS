@@ -30,7 +30,7 @@ async function successfulLoginTest() {
         console.error("Test failed:", error);
     }
     finally {
-        console.log("-----test#1-----")
+        // console.log("-----test#1-----")
         await driver.quit();
     }
 }
@@ -43,7 +43,7 @@ async function unSuccessfulLoginTest() {
     } catch (error) {
         console.log("The error happened - ", error);
     } finally {
-                console.log("-----test#2-----")
+        // console.log("-----test#2-----")
         await driver.quit()
     }
 }
@@ -53,13 +53,14 @@ async function presenceOfPLP() {
     try {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        assert.ok(await inventoryPage.plpContainsMoreThan1Item(), "PLP contains not more than 1 product");
-        assert.ok(await inventoryPage.productContainsNameAndPrice(), "some product doesn't contain name and price");
+        assert.strictEqual(await inventoryPage.plpContainsMoreThan1Item(), true, "PLP contains not more than 1 product");
+        assert.strictEqual(await inventoryPage.productContainsNameAndPrice(), true, "some product doesn't contain name and price");
+
     } catch (error) {
         console.log("the error is -", error)
     }
     finally {
-            console.log("-----test#3-----")
+        // console.log("-----test#3-----")
         await driver.quit();
     }
 }
@@ -70,12 +71,12 @@ async function logOut() {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.logOut();
-        assert.equal(await driver.getCurrentUrl(), TestData.baseUrl, "redirection to home page after LogOut is not happened")
+        assert.strictEqual(await driver.getCurrentUrl(), TestData.baseUrl, "redirection to home page after LogOut is not happened")
         await driver.sleep(50)
     } catch (error) {
         console.log("error = ", error);
     } finally {
-        console.log("-----test#4-----")
+        // console.log("-----test#4-----")
         await driver.quit();
     }
 }
@@ -90,7 +91,7 @@ async function addToCart() {
     } catch (error) {
         console.log("error is - ", error);
     } finally {
-        console.log("-----test#5-----")
+        // console.log("-----test#5-----")
         await driver.quit();
     }
 
