@@ -3,82 +3,70 @@ const { By } = require("selenium-webdriver");
 class InventoryPage {
     constructor(driver) {
         this.driver = driver;
-        this.burgerMenuLocator = By.id("react-burger-menu-btn");
-        this.AddtoCartBtnLocator = By.xpath("//button[text()='Add to cart']");
-        this.CartBadgeLocator = By.className("shopping_cart_badge");
     }
 
+    get burgerMenuEl() { return this.driver.findElement(By.id("react-burger-menu-btn")) }
+    get logOutBtnEl() { return this.driver.findElement(By.id("logout_sidebar_link")) }
+    get addToCartBtnEl_s() { return this.driver.findElements(By.xpath("//button[text()='Add to cart']")) }
+    get cartBadgeEl() { return this.driver.findElement(By.className("shopping_cart_badge")) }
+    get inventTitleEl() { return this.driver.findElement(By.className("title")) }
+    get productEl_s() { return this.driver.findElements(By.className("inventory_item")) }
+    nameEl = By.className("inventory_item_name ")
+    priceEl = By.className("inventory_item_price")
+
     async getInventoryHeader() {
-        let actualInventoryHeader = await this.driver.findElement(By.className("title")).getText();
+        let actualInventoryHeader = await this.inventTitleEl.getText();
         return actualInventoryHeader;
     }
 
     async plpContainsMoreThan1Item() {
-        let products = await this.driver.findElements(By.className("inventory_item"));
-        console.log("typeof products =", typeof products);
-        console.log("products.length =", products.length)
+        let products = await this.productEl_s;
+        // console.log("typeof products =", typeof products);
+        // console.log("products.length =", products.length)
         return products.length > 1;
     }
 
-
     async productContainsNameAndPrice() {
-        await this.driver.sleep(3000)
-        let isThereNameAndPrice = true;
-        let products = await this.driver.findElements(By.className("inventory_item"));
-
-        for (let i = 0; i < products.length; i++) {
-            let Aproduct = products[i];
-
-            let nameElements = await Aproduct.findElements(By.className("inventory_item_name "));
-            let priceElements = await Aproduct.findElements(By.className("inventory_item_price"));
-
-            let nameText = nameElements.length > 0 ? await nameElements[0].getText() : undefined;
-            let priceText = priceElements.length > 0 ? await priceElements[0].getText() : undefined;
-
-            console.log(`Product #${i + 1}: name is ${nameText} and price is ${priceText}`)
-
-            if (nameText === undefined) {
-                console.log("nameText = ", nameText);
-                console.log(`the product ${Aproduct} doesn't contain 'name'`)
-                isThereNameAndPrice = false;
-            } else if (priceText === undefined) {
-                console.log("priceText = ", priceText);
-                console.log(`the product ${Aproduct} doesn't contain 'price'`)
-                isThereNameAndPrice = false;
+        let isAllProdContainsN_P;
+        let productsArr = await this.productEl_s;
+        for (let i = 0; i < productsArr.length; i++) {
+            let name = await productsArr[i].findElement(this.nameEl).getText()
+            let price = await productsArr[i].findElement(this.priceEl).getText()
+            // console.log(`productsArr${i + 1} has the name ${name} and price ${price}`)
+            if (!name || !price) {
+                isAllProdContainsN_P = false;
+            } else {
+                isAllProdContainsN_P = true;
             }
-            console.log("isThereNameAndPrice = ", isThereNameAndPrice)
         }
-        return isThereNameAndPrice;
+        // console.log("isAllProdContainsN_P = ", isAllProdContainsN_P)
+        return isAllProdContainsN_P;
     }
 
-
     async logOut() {
-        await this.driver.findElement(this.burgerMenuLocator).click();
-        await this.driver.sleep(1000)
-        await this.driver.findElement(By.id("logout_sidebar_link")).click();
-                await this.driver.sleep(1000)
+        await this.burgerMenuEl.click();
+        await this.logOutBtnEl.click();
 
     }
 
     async addOneItemToCart() {
-    let itemsArray = await this.driver.findElements(this.AddtoCartBtnLocator)
-       await itemsArray[0].click()
-}
+        let itemsArray = await this.addToCartBtnEl_s
+        await itemsArray[0].click()
+    }
 
     async isCartEmpty() {
         let empty;
-    let textEmaunt = await this.driver.findElement(this.CartBadgeLocator).getText();
+        let textEmaunt = await this.cartBadgeEl.getText();
         if (!textEmaunt) {
             empty = true;
         } else {
             empty = false;
 
         }
-        console.log("empty =", empty)
-        console.log("textEmaunt =",textEmaunt)
+        // console.log("empty =", empty)
+        // console.log("textEmaunt =", textEmaunt)
         return empty;
     }
-
 
 }
 
