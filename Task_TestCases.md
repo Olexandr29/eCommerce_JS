@@ -51,3 +51,4 @@ Cart icon shows badge with "1"
 
 - [ ] Refactore code
 - [ ] Add testing framework Mocha 
+- [ ] Run tests remotely via GitHub Actions
