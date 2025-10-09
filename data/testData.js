@@ -5,10 +5,10 @@ module.exports = {
         locked: {username: "locked_out_user", password: "secret_sauce"}
     },
     expected: {
-        inventPage: "https://www.saucedemo.com/inventory.html",
-        inventHeading: "Products"
+        inventoryPageUrl: "https://www.saucedemo.com/inventory.html",
+        inventoryHeading: "Products"
     },
     errors: {
-        forLockedUser: "Epic sadface: Sorry, this user has been locked out."
+        lockedUserError: "Epic sadface: Sorry, this user has been locked out."
     }
 }

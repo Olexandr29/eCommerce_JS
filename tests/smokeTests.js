@@ -6,12 +6,12 @@ const InventoryPage = require("../pages/inventoryPage");
 const TestData = require('../data/testData');
 
 async function setUp() {
-    let option = new chrome.Options();
-    option.addArguments("--incognito");
+    let options = new chrome.Options();
+    options.addArguments("--incognito");
 
     let driver = await new Builder()
         .forBrowser("chrome")
-        .setChromeOptions(option)
+        .setChromeOptions(options)
         .build();
 
     const loginPage = new LoginPage(driver);
@@ -19,13 +19,13 @@ async function setUp() {
 }
 
 
-async function successfulLoginTest() {
+async function testLoginSuccess() {
     const { driver, loginPage } = await setUp();
     try {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        assert.strictEqual(await driver.getCurrentUrl(), TestData.expected.inventPage, "Redirection on the inventory page is not happened");
-        assert.strictEqual(await inventoryPage.getInventoryHeader(), TestData.expected.inventHeading, "the inventory header is not 'Products'");
+        assert.strictEqual(await driver.getCurrentUrl(), TestData.expected.inventoryPageUrl, "user was not redirected to the inventory page");
+        assert.strictEqual(await inventoryPage.getInventoryHeader(), TestData.expected.inventoryHeading, "the inventory header is not 'Products'");
     } catch (error) {
         console.error("Test failed:", error);
     }
@@ -35,11 +35,11 @@ async function successfulLoginTest() {
     }
 }
 
-async function unSuccessfulLoginTest() {
+async function testLoginFailure() {
     const { driver, loginPage } = await setUp();
     try {
-        const actualErrMsgForLockedU = await loginPage.unSuccessfullLoginWithError(TestData.users.locked.username, TestData.users.locked.password);
-        assert.strictEqual(actualErrMsgForLockedU, TestData.errors.forLockedUser, "The error message is not the same as specified in the requirements")
+        const actualErrMsgForLockedU = await loginPage.loginWithInvalidCredentials(TestData.users.locked.username, TestData.users.locked.password);
+        assert.strictEqual(actualErrMsgForLockedU, TestData.errors.lockedUserError, "The error message is not the same as specified in the requirements")
     } catch (error) {
         console.log("The error happened - ", error);
     } finally {
@@ -48,13 +48,13 @@ async function unSuccessfulLoginTest() {
     }
 }
 
-async function presenceOfPLP() {
+async function testProductListPage() {
     const { driver, loginPage } = await setUp();
     try {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        assert.strictEqual(await inventoryPage.plpContainsMoreThan1Item(), true, "PLP contains not more than 1 product");
-        assert.strictEqual(await inventoryPage.productContainsNameAndPrice(), true, "some product doesn't contain name and price");
+        assert.strictEqual(await inventoryPage.hasMultipleProducts(), true, "PLP contains not more than 1 product");
+        assert.strictEqual(await inventoryPage.allProductsHaveNameAndPrice(), true, "some product doesn't contain name and price");
 
     } catch (error) {
         console.log("the error is -", error)
@@ -65,14 +65,14 @@ async function presenceOfPLP() {
     }
 }
 
-async function logOut() {
+async function testLogOut() {
     const { driver, loginPage } = await setUp();
     try {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.logOut();
         assert.strictEqual(await driver.getCurrentUrl(), TestData.baseUrl, "redirection to home page after LogOut is not happened")
-        await driver.sleep(50)
+        // await driver.sleep(50)
     } catch (error) {
         console.log("error = ", error);
     } finally {
@@ -81,7 +81,7 @@ async function logOut() {
     }
 }
 
-async function addToCart() {
+async function testAddToCart() {
     const { driver, loginPage } = await setUp();
     try {
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
@@ -99,9 +99,9 @@ async function addToCart() {
 
 
 (async () => {
-    await successfulLoginTest();
-    await unSuccessfulLoginTest();
-    await presenceOfPLP();
-    await logOut();
-    await addToCart()
+    await testLoginSuccess();
+    await testLoginFailure();
+    await testProductListPage();
+    await testLogOut();
+    await testAddToCart()
 })();
