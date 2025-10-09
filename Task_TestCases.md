@@ -48,3 +48,6 @@ TC-005: Add item to cart and check badge
 - Expected Result: 
 Cart icon shows badge with "1"
 </details>
+
+- [ ] Refactore code
+- [ ] Add testing framework Mocha 
