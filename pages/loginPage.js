@@ -19,7 +19,7 @@ class LoginPage {
     await this.loginBtnEl.click()
   }
 
-  async unSuccessfullLoginWithError(username, password) {
+  async loginWithInvalidCredentials(username, password) {
     await this.login(username, password);
     let errorMessage = await this.errLoginEl.getText();
     return errorMessage;

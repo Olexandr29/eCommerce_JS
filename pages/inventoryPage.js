@@ -1,4 +1,4 @@
-const { By } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 
 class InventoryPage {
     constructor(driver) {
@@ -19,14 +19,14 @@ class InventoryPage {
         return actualInventoryHeader;
     }
 
-    async plpContainsMoreThan1Item() {
+    async hasMultipleProducts() {
         let products = await this.productEl_s;
         // console.log("typeof products =", typeof products);
         // console.log("products.length =", products.length)
         return products.length > 1;
     }
 
-    async productContainsNameAndPrice() {
+    async allProductsHaveNameAndPrice() {
         let isAllProdContainsN_P;
         let productsArr = await this.productEl_s;
         for (let i = 0; i < productsArr.length; i++) {
@@ -45,8 +45,8 @@ class InventoryPage {
 
     async logOut() {
         await this.burgerMenuEl.click();
+        await this.driver.wait(until.elementIsVisible(await this.logOutBtnEl), 5000)
         await this.logOutBtnEl.click();
-
     }
 
     async addOneItemToCart() {
@@ -56,8 +56,8 @@ class InventoryPage {
 
     async isCartEmpty() {
         let empty;
-        let textEmaunt = await this.cartBadgeEl.getText();
-        if (!textEmaunt) {
+        let cartBadgeText = await this.cartBadgeEl.getText();
+        if (!cartBadgeText) {
             empty = true;
         } else {
             empty = false;
