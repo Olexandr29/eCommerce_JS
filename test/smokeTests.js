@@ -13,6 +13,7 @@ describe("Smoke tests", function () {
     this.beforeEach(async function () {
         let options = new chrome.Options();
         options.addArguments("--incognito");
+        options.addArguments("--headless=new");
 
         driver = await new Builder()
             .forBrowser("chrome")
