@@ -8,6 +8,8 @@ jobs:
   test:
     runs-on: windows-latest
 
+    timeout-minutes: 2
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,4 +23,5 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: |
+          npx mocha --timeout10000 --exit

@@ -4,7 +4,6 @@
   },
   "dependencies": {
     "mocha": "^11.7.4",
-    "selenium-webdriver": "^4.35.0",
-    "chromedriver":"^141.0.1"
+    "selenium-webdriver": "^4.35.0"
   }
 }
