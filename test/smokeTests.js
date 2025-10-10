@@ -11,13 +11,17 @@ describe("Smoke tests", function () {
     let loginPage;
 
     this.beforeEach(async function () {
-        this.timeout(11000);
+        this.timeout(19000);
 
         let options = new chrome.Options();
         options.addArguments("--incognito");
 
         if (process.env.HEADLESS === "true") {
-        options.addArguments("--headless=new");
+            options.addArguments("--headless=new");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
         }
 
         driver = await new Builder()
@@ -31,7 +35,7 @@ describe("Smoke tests", function () {
     this.afterEach(async function () {
         this.timeout(5000);
         if (driver) {
-        await driver.quit();
+            await driver.quit();
         }
     });
 
