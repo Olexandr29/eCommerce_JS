@@ -11,13 +11,15 @@ describe("Smoke tests", function () {
     let loginPage;
 
     this.beforeEach(async function () {
+        this.timeout(11000);
+
         let options = new chrome.Options();
         options.addArguments("--incognito");
 
         if (process.env.HEADLESS === "true") {
         options.addArguments("--headless=new");
         }
-        
+
         driver = await new Builder()
             .forBrowser("chrome")
             .setChromeOptions(options)
@@ -27,11 +29,13 @@ describe("Smoke tests", function () {
     });
 
     this.afterEach(async function () {
+        this.timeout(5000);
+        if (driver) {
         await driver.quit();
+        }
     });
 
     it("TC-001: Successful login with valid credentials", async function testLoginSuccess() {
-        this.timeout(11000);
         try {
             await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
             const inventoryPage = new InventoryPage(driver);

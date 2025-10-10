@@ -23,6 +23,6 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npx mocha --timeout11000 --exit
+        run: npx mocha --timeout 11000 --exit
         env: 
           HEADLESS: true
