@@ -14,6 +14,10 @@ describe("Smoke tests", function () {
         let options = new chrome.Options();
         options.addArguments("--incognito");
 
+        if (process.env.HEADLESS === "true") {
+        options.addArguments("--headless=new");
+        }
+        
         driver = await new Builder()
             .forBrowser("chrome")
             .setChromeOptions(options)

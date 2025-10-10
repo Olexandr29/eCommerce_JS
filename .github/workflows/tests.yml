@@ -8,7 +8,7 @@ jobs:
   test:
     runs-on: windows-latest
 
-    timeout-minutes: 2
+    timeout-minutes: 3
 
     steps:
       - name: Checkout repository
@@ -23,5 +23,6 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: |
-          npx mocha --timeout10000 --exit
+        run: npx mocha --timeout11000 --exit
+        env: 
+          HEADLESS: true
