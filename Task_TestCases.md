@@ -52,6 +52,7 @@ Cart icon shows badge with "1"
 
 - [ ] Refactore code
 <details><summary>✅ Refactored:</summary>
+
 ![title](https://img.shields.io/badge/Refactore%20code-Done-green)
 
 **Links of the Refactored code:**
@@ -66,3 +67,5 @@ Cart icon shows badge with "1"
 
 - [ ] Run tests remotely via GitHub Actions
 - [x]  [![Has remotely run Mocha tests via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
+
+- [ ] Runt tests on different OS

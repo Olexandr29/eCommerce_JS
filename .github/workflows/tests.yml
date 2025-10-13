@@ -1,4 +1,4 @@
-name: Run Mocha tests remotely via GitHub Actions (Windows)
+name: Run Mocha tests remotely via GitHub Actions (multy OS)
 
 on:
     workflow_dispatch:
@@ -6,8 +6,11 @@ on:
  
 jobs:
   test:
-    runs-on: windows-latest
-
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    name: Mocha tests (${{ matrix.os }})
     timeout-minutes: 3
 
     steps:
