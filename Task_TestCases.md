@@ -64,11 +64,11 @@ Cart icon shows badge with "1"
 
 [![titles](https://img.shields.io/badge/some-titles-blue)](https://github.com/Olexandr29/Automation/tree/main/titles) 
 [![pages](https://img.shields.io/badge/folder-pages-yellow)](https://github.com/Olexandr29/Automation/tree/main/pages)
-[![testData](https://img.shields.io/badge/isolated-testData-blue)](https://github.com/Olexandr29/Automation/tree/main/data/testData.js)
+[![testData](https://img.shields.io/badge/isolated-testData-blue)](https://github.com/Olexandr29/eCommerce_JS/commit/39ffbe492f442c0f0b563c047ea96a5e0f503c9c)
 
 
 - [ ] Add testing framework Mocha
 [![title](https://img.shields.io/badge/Mocha-Done-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
 
 - [ ] Run tests remotely via GitHub Actions
-- [x] [![Remotely run tests via GitHub Actions on Windows](https://github.com/Olexandr29/eCommerce_JS/blob/main/.github/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/blob/main/.github/workflows/tests.yml)
+- [x]  [![Run Mocha tests remotely via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
