@@ -50,25 +50,22 @@ Cart icon shows badge with "1"
 </details>
 
 
-
-
 <br>
 - [ ] Refactore code
+<details><summary>✅ Refactored:</summary>
 
 ![title](https://img.shields.io/badge/Refactore%20code-Done-green)
 
-![Refactored](https://img.shields.io/badge/framework-[testData](https://github.com/Olexandr29/eCommerce_JS/commit/39ffbe492f442c0f0b563c047ea96a5e0f503c9c)_[pages](https://github.com/Olexandr29/eCommerce_JS/commit/3f91fc8c3162a5e17bd1585a2927e5b1f3bfdb94)_[titles](https://github.com/Olexandr29/eCommerce_JS/commit/dd5741214c91e409f6c5062654e7f6277552082c)-green)
+**Links of the Refactored code:**
 
-
-**Refactored:**
-
-[![titles](https://img.shields.io/badge/some-titles-blue)](https://github.com/Olexandr29/Automation/tree/main/titles) 
-[![pages](https://img.shields.io/badge/folder-pages-yellow)](https://github.com/Olexandr29/Automation/tree/main/pages)
+[![titles](https://img.shields.io/badge/some-titles-blue)](https://github.com/Olexandr29/eCommerce_JS/commit/dd5741214c91e409f6c5062654e7f6277552082c) 
+[![pages](https://img.shields.io/badge/folder-pages-yellow)](https://github.com/Olexandr29/eCommerce_JS/commit/3f91fc8c3162a5e17bd1585a2927e5b1f3bfdb94)
 [![testData](https://img.shields.io/badge/isolated-testData-blue)](https://github.com/Olexandr29/eCommerce_JS/commit/39ffbe492f442c0f0b563c047ea96a5e0f503c9c)
+</details>
 
 
-- [ ] Add testing framework Mocha
-[![title](https://img.shields.io/badge/Mocha-Done-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
+- [ ] Add testing framework Mocha - ✅ Added [![title](https://img.shields.io/badge/Framework-Mocha-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
+- [x] Added [![title](https://img.shields.io/badge/Framework-Mocha-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
 
 - [ ] Run tests remotely via GitHub Actions
-- [x]  [![Run Mocha tests remotely via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
+- [x]  [![Has remotely run Mocha tests via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
