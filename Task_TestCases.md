@@ -50,10 +50,8 @@ Cart icon shows badge with "1"
 </details>
 
 
-<br>
 - [ ] Refactore code
 <details><summary>✅ Refactored:</summary>
-
 ![title](https://img.shields.io/badge/Refactore%20code-Done-green)
 
 **Links of the Refactored code:**
@@ -63,8 +61,7 @@ Cart icon shows badge with "1"
 [![testData](https://img.shields.io/badge/isolated-testData-blue)](https://github.com/Olexandr29/eCommerce_JS/commit/39ffbe492f442c0f0b563c047ea96a5e0f503c9c)
 </details>
 
-
-- [ ] Add testing framework Mocha - ✅ Added [![title](https://img.shields.io/badge/Framework-Mocha-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
+- [ ] Add testing framework Mocha 
 - [x] Added [![title](https://img.shields.io/badge/Framework-Mocha-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
 
 - [ ] Run tests remotely via GitHub Actions
