@@ -71,12 +71,11 @@ Cart icon shows badge with "1"
 - [ ] Runt tests on different OS
 <details> <summary>✅ Done</summary>
 
-|OS|     Status|
-|--|-----|
-|Windows|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
-|Linux|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(ubuntu-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
-|MacOS|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(macos-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
-
+|OS|     Status|Test duration|
+|---|-----|---|
+|Windows|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest)&label=Windows&logo=windows&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?label=Duration&logo=clockify&style=flat-square)|
+|Linux|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(ubuntu-latest)&label=Ubuntu&logo=linux&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![Ubuntu Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?job=Mocha%20tests%20(ubuntu-latest)&style=flat-square)|
+|MacOS|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(macos-latest)&label=macOS&logo=apple&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![MacOS Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?job=Mocha%20tests%20(macos-latest)&style=flat-square)|
 
 
 </details>
