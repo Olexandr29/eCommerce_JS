@@ -1,4 +1,4 @@
-name: Run Mocha tests remotely via GitHub Actions (multy OS)
+name: Run Mocha tests remotely via GitHub Actions (multi-OS)
 
 on:
     workflow_dispatch:
@@ -14,6 +14,11 @@ jobs:
     timeout-minutes: 3
 
     steps:
+      - name: Start timer
+        id: start
+        shell: bash
+        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -29,3 +34,17 @@ jobs:
         run: npx mocha --timeout 21000 --exit
         env: 
           HEADLESS: true
+      
+      - name: Calculate total duration
+        id: duration
+        shell: bash
+        run: |
+          end_time=$(date +%s)
+          duration=$((end_time - start_time))
+          echo "duration=$duration" >> $GITHUB_ENV
+          echo "Total duration: ${duration}s"
+
+      - name: Upload test summary
+        if: always()
+        run: echo " Workflow on ${{ matrix.os }} took ${duration}s" >> $GITHUB_STEP_SUMMARY
+      

@@ -69,3 +69,14 @@ Cart icon shows badge with "1"
 - [x]  [![Has remotely run Mocha tests via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
 
 - [ ] Runt tests on different OS
+<details> <summary>✅ Done</summary>
+
+|OS|     Status|
+|--|-----|
+|Windows|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
+|Linux|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(ubuntu-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
+|MacOS|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(macos-latest))](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|
+
+
+
+</details>
