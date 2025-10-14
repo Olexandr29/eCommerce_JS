@@ -46,6 +46,7 @@ jobs:
 
       - name: Update duration in Gist
         if: always()
+        shell: bash
         env:
           GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
           GIST_ID: 60e8687e89821ca943a0a79c2c2e77a8
