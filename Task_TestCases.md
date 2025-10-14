@@ -68,7 +68,7 @@ Cart icon shows badge with "1"
 - [ ] Run tests remotely via GitHub Actions
 - [x]  [![Has remotely run Mocha tests via GitHub Actions (Windows)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
 
-- [ ] Runt tests on different OS
+- [ ] Run tests on different OS
 <details> <summary>✅ Done</summary>
 
 |OS|     Status|Test duration|
@@ -76,6 +76,16 @@ Cart icon shows badge with "1"
 |Windows|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest)&label=Windows&logo=windows&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?label=Duration&logo=clockify&style=flat-square)|
 |Linux|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(ubuntu-latest)&label=Ubuntu&logo=linux&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![Ubuntu Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?job=Mocha%20tests%20(ubuntu-latest)&style=flat-square)|
 |MacOS|[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(macos-latest)&label=macOS&logo=apple&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)|![MacOS Duration](https://img.shields.io/github/actions/duration/Olexandr29/eCommerce_JS/main?job=Mocha%20tests%20(macos-latest)&style=flat-square)|
+
+
+| OS | Status | Duration | Last run |
+|----|--------|-----------|-----------|
+| 🪟 **Windows** | [![Windows](https://img.shields.io/github/actions/workflow/status/Olexandr29/eCommerce_JS/tests.yml?branch=main&job=Mocha%20tests%20(windows-latest)&label=Windows&logo=windows&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml) | ![Duration](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Olexandr29/60e8687e89821ca943a0a79c2c2e77a8/raw/windows-duration.json&logo=clockify&label=Duration&style=flat-square) | ![Last Run](https://img.shields.io/github/last-commit/Olexandr29/eCommerce_JS/main?logo=git&label=Last%20run&style=flat-square) |
+| 🐧 **Ubuntu** | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/Olexandr29/eCommerce_JS/tests.yml?branch=main&job=Mocha%20tests%20(ubuntu-latest)&label=Ubuntu&logo=linux&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml) | ![Duration](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Olexandr29/60e8687e89821ca943a0a79c2c2e77a8/raw/ubuntu-duration.json&logo=clockify&label=Duration&style=flat-square) | ![Last Run](https://img.shields.io/github/last-commit/Olexandr29/eCommerce_JS/main?logo=git&label=Last%20run&style=flat-square) |
+| 🍎 **macOS** | [![macOS](https://img.shields.io/github/actions/workflow/status/Olexandr29/eCommerce_JS/tests.yml?branch=main&job=Mocha%20tests%20(macos-latest)&label=macOS&logo=apple&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml) | ![Duration](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Olexandr29/60e8687e89821ca943a0a79c2c2e77a8/raw/macos-duration.json&logo=clockify&label=Duration&style=flat-square) | ![Last Run](https://img.shields.io/github/last-commit/Olexandr29/eCommerce_JS/main?logo=git&label=Last%20run&style=flat-square) |
+
+
+
 
 
 </details>
