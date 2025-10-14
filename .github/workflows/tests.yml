@@ -17,7 +17,9 @@ jobs:
       - name: Start timer
         id: start
         shell: bash
-        run: echo "start_time=$(date +%s)" >> $GITHUB_ENV
+        run: |
+          start_time=$(date +%s)
+          echo "start_time=$start_time" >> $GITHUB_ENV
 
       - name: Checkout repository
         uses: actions/checkout@v4
