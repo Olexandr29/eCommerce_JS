@@ -86,6 +86,7 @@ Cart icon shows badge with "1"
 | **Linux** | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/Olexandr29/eCommerce_JS/tests.yml?branch=main&job=Mocha%20tests%20(ubuntu-latest)&label=Ubuntu&logo=linux&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml) | ![Duration](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Olexandr29/60e8687e89821ca943a0a79c2c2e77a8/raw/ubuntu-duration.json&logo=clockify&label=Duration&style=flat-square) |
 | **MacOS** | [![macOS](https://img.shields.io/github/actions/workflow/status/Olexandr29/eCommerce_JS/tests.yml?branch=main&job=Mocha%20tests%20(macos-latest)&label=macOS&logo=apple&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml) | ![Duration](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Olexandr29/60e8687e89821ca943a0a79c2c2e77a8/raw/macos-duration.json&logo=clockify&label=Duration&style=flat-square) |
 
-
-
 </details>
+
+- [ ] Create Mochawesome report
+ 
