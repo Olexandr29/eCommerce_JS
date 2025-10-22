@@ -92,3 +92,5 @@ Cart icon shows badge with "1"
 - [x] 
  [Mochawesom report has created](https://github.com/Olexandr29/eCommerce_JS/blob/main/reports/mochawesomeReport/mochawesom.png)
 <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/reports/mochawesomeReport/mochawesom.png" alt="Mochawesom report" width="75"/>
+
+- [ ] Create Allure report

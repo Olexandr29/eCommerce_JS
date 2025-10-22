@@ -1,0 +1,11 @@
+{
+    "reporterEnabled": "mochawesome", "mocha-allure-reporter",
+    "mochawesomeReporterOptions": {
+        "reportDir": "reports/mochawesome",
+        "reportFileName": "mochawesome",
+        "quiet": true
+    },
+    "mochaAllureReporterOptions": {
+        "targetDir": "reports/allure/allure-results"
+    }
+}
