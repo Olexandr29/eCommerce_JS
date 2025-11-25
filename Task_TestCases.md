@@ -90,8 +90,8 @@ Cart icon shows badge with "1"
 
 - [ ] Create Mochawesome report
 - [x] 
- [Mochawesom report has created](https://github.com/Olexandr29/eCommerce_JS/blob/cc739568ffe82085adb685881c6b7844b412a6a5/reports/mochawesomeReport/mochawesom.png) <img src="https://github.com/Olexandr29/eCommerce_JS/blob/cc739568ffe82085adb685881c6b7844b412a6a5/reports/mochawesomeReport/mochawesom.png" alt="Mochawesom report" width="25"/>
+ [Mochawesom report has created](https://github.com/Olexandr29/eCommerce_JS/blob/cc739568ffe82085adb685881c6b7844b412a6a5/reports/mochawesomeReport/mochawesom.png) 
 
 - [ ] Create Allure report
 - [x] 
-[Allure report has created](https://github.com/Olexandr29/eCommerce_JS/blob/main/pictures/allure-report.png) <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/pictures/allure-report.png" alt="Allure report should be here" width="25">
+[Allure report has created](https://github.com/Olexandr29/eCommerce_JS/blob/a3b8802776932f57f910d3deba2207d973a21867/utils/pictures/allure-report.png)

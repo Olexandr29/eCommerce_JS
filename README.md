@@ -24,9 +24,9 @@ project-root/
 ├── pages/                # Page Object files
 ├── config/               # Configuration settings (baseUrl), credentials, test data, environment settings
 ├── utils/                # Reusable helper functions (custom waits, screenshots, actions, wrappers)
-└── .gitignore            # List of folders and files that will not be commited on GitHub
+├── .gitignore            # List of folders and files that will not be commited on GitHub
 ├── package.json          # json file with scripts and dependencies
-└── README.md             # Description of the project
+├── README.md             # Description of the project
 └── Task_TestCases.md     # List of implemented test cases (Smoke, Sanity, Functional, etc.) and other tasks with status 
 
 
@@ -57,6 +57,5 @@ Mocha will run any test inside `/tests`.
 <br>
 Additional Information:
 
-Project organized using SCRUM methodology (weekly sprints). 
-
-Task management performed using Trello Kanban board
+- Project organized using SCRUM methodology (weekly sprints).
+- Task management performed using Trello Kanban board
