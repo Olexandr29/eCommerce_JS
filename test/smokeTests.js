@@ -8,12 +8,10 @@ const TestData = require('../config/testData');
 const { step, attachment } = require("allure-js-commons");
 
 describe("Smoke tests", function () {
-    this.timeout(21000);
     let driver;
     let loginPage;
 
     this.beforeEach(async function () {
-        this.timeout(19000);
 
         let options = new chrome.Options();
         options.addArguments("--incognito");
