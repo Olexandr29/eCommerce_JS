@@ -3,35 +3,38 @@ const { By, until } = require("selenium-webdriver");
 class InventoryPage {
     constructor(driver) {
         this.driver = driver;
+   
+        this.locators = {
+            inventTitle: By.className("title"),
+            burgerMenu: By.id("react-burger-menu-btn"),
+            logOutBtn: By.id("logout_sidebar_link"),
+            products: By.className("inventory_item"), 
+            names: By.className("inventory_item_name "),
+            prices: By.className("inventory_item_price"),
+            addToCartBtns: By.xpath("//button[text()='Add to cart']"), 
+            cartBadge: By.className("shopping_cart_badge")
+        }
     }
 
-    get burgerMenuEl() { return this.driver.findElement(By.id("react-burger-menu-btn")) }
-    get logOutBtnEl() { return this.driver.findElement(By.id("logout_sidebar_link")) }
-    get addToCartBtnEl_s() { return this.driver.findElements(By.xpath("//button[text()='Add to cart']")) }
-    get cartBadgeEl() { return this.driver.findElement(By.className("shopping_cart_badge")) }
-    get inventTitleEl() { return this.driver.findElement(By.className("title")) }
-    get productEl_s() { return this.driver.findElements(By.className("inventory_item")) }
-    nameEl = By.className("inventory_item_name ")
-    priceEl = By.className("inventory_item_price")
-
     async getInventoryHeader() {
-        let actualInventoryHeader = await this.inventTitleEl.getText();
+        let webElement = await this.driver.findElement(this.locators.inventTitle);
+        let actualInventoryHeader = await webElement.getText();
         return actualInventoryHeader;
     }
 
     async hasMultipleProducts() {
-        let products = await this.productEl_s;
-        // console.log("typeof products =", typeof products);
-        // console.log("products.length =", products.length)
-        return products.length > 1;
+        let webElementsProduct = await this.driver.findElements(this.locators.products)
+        // console.log("typeof webElementsProduct =", typeof webElementsProduct);
+        // console.log("webElementsProduct.length =", webElementsProduct.length)
+        return webElementsProduct.length > 1;
     }
 
     async allProductsHaveNameAndPrice() {
         let isAllProdContainsN_P;
-        let productsArr = await this.productEl_s;
+        let productsArr = await this.driver.findElements(this.locators.products);
         for (let i = 0; i < productsArr.length; i++) {
-            let name = await productsArr[i].findElement(this.nameEl).getText()
-            let price = await productsArr[i].findElement(this.priceEl).getText()
+            let name = await productsArr[i].findElement(this.locators.names).getText()
+            let price = await productsArr[i].findElement(this.locators.prices).getText()
             // console.log(`productsArr${i + 1} has the name ${name} and price ${price}`)
             if (!name || !price) {
                 isAllProdContainsN_P = false;
@@ -44,19 +47,25 @@ class InventoryPage {
     }
 
     async logOut() {
-        await this.burgerMenuEl.click();
-        await this.driver.wait(until.elementIsVisible(await this.logOutBtnEl), 5000)
-        await this.logOutBtnEl.click();
+        await this.driver.findElement(this.locators.burgerMenu).click();
+        let logOutEl = await this.driver.wait(until.elementLocated(this.locators.logOutBtn), 5000, "Logout button not found");
+        await this.driver.wait(until.elementIsVisible(logOutEl), 5000, "LogOut button not visible");
+        await logOutEl.click();
     }
 
     async addOneItemToCart() {
-        let itemsArray = await this.addToCartBtnEl_s
+        let itemsArray = await this.driver.findElements(this.locators.addToCartBtns);
+        // console.log("itemsArray.length =", itemsArray.length)
+        if (itemsArray.length === 0) {
+            throw new Error("The 'Add to cart' button isn't found on the page")
+        }
         await itemsArray[0].click()
     }
 
     async isCartEmpty() {
         let empty;
-        let cartBadgeText = await this.cartBadgeEl.getText();
+        let cartBadgeEl = await this.driver.findElement(this.locators.cartBadge);
+        let cartBadgeText = await cartBadgeEl.getText();
         if (!cartBadgeText) {
             empty = true;
         } else {
@@ -64,7 +73,7 @@ class InventoryPage {
 
         }
         // console.log("empty =", empty)
-        // console.log("textEmaunt =", textEmaunt)
+        // console.log("CartTextAmount =", cartBadgeText)
         return empty;
     }
 

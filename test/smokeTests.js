@@ -3,11 +3,12 @@ const chrome = require("selenium-webdriver/chrome");
 const assert = require("assert");
 const LoginPage = require("../pages/loginPage");
 const InventoryPage = require("../pages/inventoryPage");
-const TestData = require('../data/testData');
+const TestData = require('../config/testData');
 // const { allure } = require("allure-mocha/runtime");
 const { step, attachment } = require("allure-js-commons");
 
 describe("Smoke tests", function () {
+    this.timeout(21000);
     let driver;
     let loginPage;
 
@@ -44,6 +45,7 @@ describe("Smoke tests", function () {
                         Buffer.from(img, "base64"), "image/png");
                 } catch (err) {
                     console.error("Error taking screenshot:", err);
+                     throw error;
                 }
             }
             await driver.quit();
@@ -63,6 +65,7 @@ describe("Smoke tests", function () {
                 assert.strictEqual(actualErrMsgForLockedU, TestData.errors.lockedUserError, "The error message is not the same as specified in the requirements")
             } catch (error) {
                 console.log("The error happened - ", error);
+                 throw error;
             }
         });
 
@@ -74,6 +77,7 @@ describe("Smoke tests", function () {
                 assert.strictEqual(await inventoryPage.allProductsHaveNameAndPrice(), true, "some product doesn't contain name and price");
             } catch (error) {
                 console.log("the error is -", error)
+                 throw error;
             }
         });
 
@@ -86,6 +90,7 @@ describe("Smoke tests", function () {
                 // await driver.sleep(50)
             } catch (error) {
                 console.log("error = ", error);
+                throw error;
             }
         });
 
@@ -97,6 +102,7 @@ describe("Smoke tests", function () {
                 assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Cart is empty and the product is not added to cart")
             } catch (error) {
                 console.log("error is - ", error);
+                 throw error;
             }
         });
 

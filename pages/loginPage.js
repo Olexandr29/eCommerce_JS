@@ -1,27 +1,30 @@
 const { By, until } = require("selenium-webdriver");
-const TestData = require('../data/testData');
+const TestData = require('../config/testData');
 
 class LoginPage {
   constructor(driver) {
     this.driver = driver;
+  
+    this.locators = {
+    username: By.id("user-name"),
+    password: By.id("password"),
+    loginBtn: By.id("login-button"),
+    errLoginMsg: By.xpath("//h3[@data-test='error']")
+    }
   }
 
-  get usernameEl() { return this.driver.findElement(By.id("user-name")) }
-  get passwordEl() { return this.driver.findElement(By.id("password")) }
-  get loginBtnEl() { return this.driver.findElement(By.id("login-button")) }
-  get errLoginEl() { return this.driver.findElement(By.xpath("//h3[@data-test='error']")) }
- 
    async login(username, password) {
     await this.driver.get(TestData.baseUrl);
-    await this.driver.wait(until.elementIsVisible(this.usernameEl), 4000);
-    await this.usernameEl.sendKeys(username)
-    await this.passwordEl.sendKeys(password)
-    await this.loginBtnEl.click()
+    await this.driver.wait(until.elementLocated(this.locators.username), 5000);
+    await this.driver.findElement(this.locators.username).sendKeys(username);
+    await this.driver.findElement(this.locators.password).sendKeys(password);
+    await this.driver.findElement(this.locators.loginBtn).click();
   }
 
   async loginWithInvalidCredentials(username, password) {
     await this.login(username, password);
-    let errorMessage = await this.errLoginEl.getText();
+    await this.driver.wait(until.elementsLocated(this.locators.errLoginMsg), 5000);
+    let errorMessage = await this.driver.findElement(this.locators.errLoginMsg).getText();
     return errorMessage;
   }
 }
