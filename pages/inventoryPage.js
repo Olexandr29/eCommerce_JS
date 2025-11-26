@@ -1,8 +1,9 @@
-const { By, until } = require("selenium-webdriver");
+const { By } = require("selenium-webdriver");
+const BasePage = require("./basePage");
 
-class InventoryPage {
+class InventoryPage extends BasePage {
     constructor(driver) {
-        this.driver = driver;
+        super(driver);
    
         this.locators = {
             inventTitle: By.className("title"),
@@ -17,13 +18,13 @@ class InventoryPage {
     }
 
     async getInventoryHeader() {
-        let webElement = await this.driver.findElement(this.locators.inventTitle);
+        let webElement = await this.findElement(this.locators.inventTitle);
         let actualInventoryHeader = await webElement.getText();
         return actualInventoryHeader;
     }
 
     async hasMultipleProducts() {
-        let webElementsProduct = await this.driver.findElements(this.locators.products)
+        let webElementsProduct = await this.findElements(this.locators.products);
         // console.log("typeof webElementsProduct =", typeof webElementsProduct);
         // console.log("webElementsProduct.length =", webElementsProduct.length)
         return webElementsProduct.length > 1;
@@ -31,7 +32,7 @@ class InventoryPage {
 
     async allProductsHaveNameAndPrice() {
         let isAllProdContainsN_P;
-        let productsArr = await this.driver.findElements(this.locators.products);
+        let productsArr = await this.findElements(this.locators.products);
         for (let i = 0; i < productsArr.length; i++) {
             let name = await productsArr[i].findElement(this.locators.names).getText()
             let price = await productsArr[i].findElement(this.locators.prices).getText()
@@ -47,14 +48,13 @@ class InventoryPage {
     }
 
     async logOut() {
-        await this.driver.findElement(this.locators.burgerMenu).click();
-        let logOutEl = await this.driver.wait(until.elementLocated(this.locators.logOutBtn), 5000, "Logout button not found");
-        await this.driver.wait(until.elementIsVisible(logOutEl), 5000, "LogOut button not visible");
+        await this.click(this.locators.burgerMenu);
+        let logOutEl = await this.waitForVisible(this.locators.logOutBtn);
         await logOutEl.click();
     }
 
     async addOneItemToCart() {
-        let itemsArray = await this.driver.findElements(this.locators.addToCartBtns);
+        let itemsArray = await this.findElements(this.locators.addToCartBtns);
         // console.log("itemsArray.length =", itemsArray.length)
         if (itemsArray.length === 0) {
             throw new Error("The 'Add to cart' button isn't found on the page")
@@ -64,7 +64,7 @@ class InventoryPage {
 
     async isCartEmpty() {
         let empty;
-        let cartBadgeEl = await this.driver.findElement(this.locators.cartBadge);
+        let cartBadgeEl = await this.findElement(this.locators.cartBadge);
         let cartBadgeText = await cartBadgeEl.getText();
         if (!cartBadgeText) {
             empty = true;
