@@ -49,9 +49,8 @@ class InventoryPage extends BasePage {
     }
 
     async logOut() {
-        await this.click(this.locators.burgerMenu);
-        let logOutEl = await this.waitForClickable(this.locators.logOutBtn);
-        await logOutEl.click();
+        await this.safeClick(this.locators.burgerMenu);
+        await this.safeClick(this.locators.logOutBtn);
     }
 
     async addOneItemToCart() {

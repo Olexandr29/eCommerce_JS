@@ -56,7 +56,7 @@ class BasePage {
         await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
-    async safeCkick(locator) {
+    async safeClick(locator) {
         await this.scrollIntoView(locator);
         const element = await this.waitForClickable(locator);
         await element.click();

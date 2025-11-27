@@ -1,7 +1,6 @@
 const { By } = require("selenium-webdriver");
 const BasePage = require("./basePage");
 const TestData = require('../config/testData');
-const testData = require("../config/testData");
 
 class LoginPage extends BasePage {
   constructor(driver) {
@@ -27,7 +26,7 @@ class LoginPage extends BasePage {
     let errorMessage = await this.waitAndGetText(this.locators.errLoginMsg);
     return errorMessage;
   }
-  
+
 }
 
 module.exports = LoginPage;
