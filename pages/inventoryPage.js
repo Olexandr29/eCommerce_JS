@@ -18,9 +18,10 @@ class InventoryPage extends BasePage {
     }
 
     async getInventoryHeader() {
-        let webElement = await this.findElement(this.locators.inventTitle);
-        let actualInventoryHeader = await webElement.getText();
-        return actualInventoryHeader;
+        const actualInventoryHeader = await this.waitAndGetText(this.locators.inventTitle);
+        // console.log("actualInventoryHeader =", actualInventoryHeader);
+        return  actualInventoryHeader;
+
     }
 
     async hasMultipleProducts() {
@@ -49,7 +50,7 @@ class InventoryPage extends BasePage {
 
     async logOut() {
         await this.click(this.locators.burgerMenu);
-        let logOutEl = await this.waitForVisible(this.locators.logOutBtn);
+        let logOutEl = await this.waitForClickable(this.locators.logOutBtn);
         await logOutEl.click();
     }
 

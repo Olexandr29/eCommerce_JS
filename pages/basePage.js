@@ -1,4 +1,4 @@
-const { By, util } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 
 class BasePage {
     constructor(driver) {
@@ -28,17 +28,39 @@ class BasePage {
         await element.sendKeys(text);
     }
 
+    async waitForLocated(locator, timeout = 5000) {
+        return await this.driver.wait(until.elementLocated(locator), timeout);
+    }
+
     async waitForVisible(locator, timeout = 5000) {
         const element = await this.driver.wait(until.elementLocated(locator), timeout);
         await this.driver.wait(until.elementIsVisible(element), timeout);
         return element;
     }
 
-    async waitForLocated(locator, timeout = 5000) {
-        return await this.driver.wait(until.elementLocated(locator), timeout);
+    async waitForClickable(locator, timeout = 5000) {
+        const element = await this.waitForVisible(locator, timeout);
+        await this.driver.wait(until.elementIsEnabled(element), timeout);
+        return element;
     }
 
+    async waitAndGetText(locator, timeout = 5000) {
+        let actText = "";
+        const element = await this.waitForVisible(locator, timeout);
+        actText = await element.getText();
+        return actText;
+    }
 
+    async scrollIntoView(locator) {
+        const element = await this.findElement(locator);
+        await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    async safeCkick(locator) {
+        await this.scrollIntoView(locator);
+        const element = await this.waitForClickable(locator);
+        await element.click();
+    }
 }
 
 module.exports = BasePage;
