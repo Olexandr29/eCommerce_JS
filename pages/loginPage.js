@@ -1,5 +1,6 @@
 const { By } = require("selenium-webdriver");
-const BasePage = require("./basePage");
+const BasePage = require("./BasePage");
+
 const TestData = require('../config/testData');
 
 class LoginPage extends BasePage {

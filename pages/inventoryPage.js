@@ -1,5 +1,5 @@
 const { By } = require("selenium-webdriver");
-const BasePage = require("./basePage");
+const BasePage = require("./BasePage");
 
 class InventoryPage extends BasePage {
     constructor(driver) {

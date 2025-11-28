@@ -1,8 +1,8 @@
 const { Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const assert = require("assert");
-const LoginPage = require("../pages/loginPage");
-const InventoryPage = require("../pages/inventoryPage");
+const LoginPage = require("../pages/LoginPage");
+const InventoryPage = require("../pages/InventoryPage");
 const TestData = require('../config/testData');
 // const { allure } = require("allure-mocha/runtime");
 const { step, attachment } = require("allure-js-commons");
