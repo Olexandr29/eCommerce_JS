@@ -6,6 +6,8 @@ const InventoryPage = require("../pages/InventoryPage");
 const TestData = require('../config/testData');
 // const { allure } = require("allure-mocha/runtime");
 const { step, attachment } = require("allure-js-commons");
+const Logger = require("../utils/logger");
+const {testCases} = require("../config/testData");
 
 describe("Smoke tests", function () {
     let driver;
@@ -51,11 +53,14 @@ describe("Smoke tests", function () {
     });
 
     it("TC-001: Successful login with valid credentials", async function testLoginSuccess() {    
-            await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
+        const testCaseId = "TC001";
+        Logger.start(testCaseId);
+        await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
             const inventoryPage = new InventoryPage(driver);
             assert.strictEqual(await driver.getCurrentUrl(), TestData.expected.inventoryPageUrl, "user was not redirected to the inventory page");
             assert.strictEqual(await inventoryPage.getInventoryHeader(), TestData.expected.inventoryHeading, "the inventory header is not 'Products'");
-    });
+        Logger.end(testCaseId)
+        });
 
         it("TC-002: Unsuccessful login with locked user", async function testLoginFailure() {
             try {

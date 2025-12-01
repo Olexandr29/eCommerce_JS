@@ -10,5 +10,11 @@ module.exports = {
     },
     errors: {
         lockedUserError: "Epic sadface: Sorry, this user has been locked out."
+    },
+    testCases: {
+        TC001: "TC001",
+        TC002: "TC002",
+        TC003: "TC003"
     }
+    
 }
