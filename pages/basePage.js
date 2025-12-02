@@ -19,9 +19,23 @@ class BasePage {
     async findElements(locator) {
         return await this.driver.findElements(locator);
     }
+
+    async safeFindElement(locator, timeout = 5000) {
+    try {
+        await this.driver.wait(until.elementLocated(locator), timeout);
+        return await this.driver.findElement(locator);
+    } catch (err) {
+        Logger.warning(`Element NOT FOUND: ${locator}`);
+        return null;
+    }
+    }
     
     async click(locator) {
         const element = await this.findElement(locator);
+        if (!element) {
+            Logger.warning(`Click aborted. Missing element: ${locator}`);
+            return;
+        }
         await element.click();
     }
 
@@ -51,10 +65,15 @@ class BasePage {
 
     async waitAndGetText(locator, timeout = 5000) {
         Logger.info(`Getting text from: ${locator}`);
-        let actText = "";
-        const element = await this.waitForVisible(locator, timeout);
-        actText = await element.getText();
-        return actText;
+        try {
+            let actText = "";
+            const element = await this.waitForVisible(locator, timeout);
+            actText = await element.getText();
+            return actText;
+        } catch (err) {
+            Logger.warning(`Cannot get TEXT - element missing or invisible: ${locator}`);
+            return null;
+        }
     }
 
     async scrollIntoView(locator) {
