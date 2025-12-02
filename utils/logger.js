@@ -1,18 +1,21 @@
 class Logger {
-    static start(testCaseId) {
-        console.log(`[${testCaseId}] STARTED`);
-    }
 
-    static end(testCaseId) {
-        console.log(`[${testCaseId}] COMPLETED`);
+    static info(message) {
+        console.log(`[INFO] ${message}`);
     }
-
-    static checkpoint(message) {
-        console.log(`[CHECKPOINT] ${message}`);
-    }
-
+   
     static warning(message) {
         console.warn(`[WARNING] ${message}`);
+    }
+
+    static error(message) {
+        console.error(`[ERROR] ${message}`);
+    }
+
+    static debug(message) {
+        if (process.env.DEBUG === "true") {
+            console.log(`[DEBUG] ${message}`);
+        }
     }
 }
 
