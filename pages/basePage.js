@@ -88,6 +88,8 @@ class BasePage {
         const element = await this.waitForClickable(locator);
         await element.click();
     }
+
+    
 }
 
 module.exports = BasePage;

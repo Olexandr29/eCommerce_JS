@@ -49,10 +49,10 @@ TC-005: Add item to cart and check badge
 Cart icon shows badge with "1"
 </details>
 
+---
 
 - [ ] Refactore code
 <details><summary>✅ Refactored:</summary>
-
 ![title](https://img.shields.io/badge/Refactore%20code-Done-green)
 
 **Links of the Refactored code:**
@@ -62,23 +62,32 @@ Cart icon shows badge with "1"
 [![testData](https://img.shields.io/badge/isolated-testData-blue)](https://github.com/Olexandr29/eCommerce_JS/commit/39ffbe492f442c0f0b563c047ea96a5e0f503c9c)
 </details>
 
+---
+
 - [ ] Add testing framework Mocha 
+<details><summary>✅ Done</summary>
+
 - [x] Added [![title](https://img.shields.io/badge/Framework-Mocha-green)](https://github.com/Olexandr29/eCommerce_JS/commit/c76f77cba982e43cda830e8c71f9d7ee01990e9c)
+</details>
+
+---
 
 - [ ] Run tests remotely via GitHub Actions
+<details><summary>✅ Done</summary>
+
 - [x] Has 
 ![Run remotely Mocha tests via GitHub Actions](https://img.shields.io/badge/Run_remotely_Mocha_tests_via_GitHub_Actions_Windows-passing-2ea44f?&logo=github&style=flat-square)
 <!---(https://github.com/Olexandr29/eCommerce_JS/actions/runs/18462858294/workflow)--->
 
+
+..............................................................................................................................................................
+
+
 - [ ] Edit yml file and Run tests on different OS
-<details> <summary>
-✅ Done
+- [x]
+ Has [![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest)&label=Windows&logo=windows&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
 
-</summary>
-
-[![Run Mocha tests remotely via GitHub Actions (multy OS)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg?branch=main&job=Mocha%20tests%20(windows-latest)&label=Windows&logo=windows&style=flat-square)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
-
-⬇️ **Details per OS**
+<details><summary>⬇️ Details per OS</summary>
 
 | OS | Status | Duration |
 |----|--------|----------|
@@ -88,10 +97,56 @@ Cart icon shows badge with "1"
 
 </details>
 
+</details>
+
+---
+
+
 - [ ] Create Mochawesome report
 - [x] 
  [Mochawesom report has created](https://github.com/Olexandr29/eCommerce_JS/blob/cc739568ffe82085adb685881c6b7844b412a6a5/reports/mochawesomeReport/mochawesom.png) 
 
+ ---
+ 
 - [ ] Create Allure report
 - [x] 
 [Allure report has created](https://github.com/Olexandr29/eCommerce_JS/blob/a3b8802776932f57f910d3deba2207d973a21867/utils/pictures/allure-report.png)
+
+---
+
+- [ ] Automate tests @Sanity (tc006-013)
+<details><summary>✅ Automated (tc006-008)</summary>
+TC-006: Successful login as performance_glitch_user
+
+Preconditions: The website saucedemo.com is open
+
+Steps:
+- Enter performance_glitch_user in the Username field.
+- Enter secret_sauce in the Password field.
+- Click the Login button.
+
+Expected Result: The user is redirected to the products page (/inventory.html) with the heading "Products".
+
+TC-007: Unsuccessful login with empty fields
+
+Preconditions: The website saucedemo.com is open
+Steps:
+- Leave both Username and Password fields empty.
+- Click the Login button.
+
+Expected Result: An error message "Username is required" is displayed.
+
+TC-008: Unsuccessful login with non-existent user
+
+Preconditions: The website saucedemo.com is open
+
+Steps:
+- Enter fake_user in the Username field.
+- Enter fake_password in the Password field.
+- Click the Login button.
+
+Expected Result: An error message "Username and password do not match any user" is displayed.
+
+</details>
+
+---

@@ -11,7 +11,7 @@ class LoginPage extends BasePage {
     username: By.id("user-name"),
     password: By.id("password"),
     loginBtn: By.id("login-button"),
-    errLoginMsg: By.xpath("//h3[@data-test='error']")
+    errLoginMsg: By.css("[data-test='error']"),
     }
   }
 
@@ -26,6 +26,14 @@ class LoginPage extends BasePage {
     await this.login(username, password);
     let errorMessage = await this.waitAndGetText(this.locators.errLoginMsg);
     return errorMessage;
+  }
+
+  async attemptTologinWithEmptyFields() {
+    Logger.info("Attempt login with empty fields");
+    await this.open(TestData.baseUrl);
+    await this.safeClick(this.locators.loginBtn);
+    const emptyFieldsErrMsg = await this.waitAndGetText(this.locators.errLoginMsg);
+    return emptyFieldsErrMsg;
   }
 
 }

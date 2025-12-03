@@ -13,7 +13,9 @@ class InventoryPage extends BasePage {
             names: By.className("inventory_item_name "),
             prices: By.className("inventory_item_price"),
             addToCartBtns: By.xpath("//button[text()='Add to cart']"), 
-            cartBadge: By.className("shopping_cart_badge")
+            cartBadge: By.className("shopping_cart_badge"),
+            cartIcon: By.css('[data-test="shopping-cart-link"]')
+
         }
     }
 
@@ -76,6 +78,10 @@ class InventoryPage extends BasePage {
         // console.log("CartTextAmount =", cartBadgeText)
         return empty;
     }
+
+      async openCart() {
+            return this.safeClick(cartIcon);
+        }
 
 }
 

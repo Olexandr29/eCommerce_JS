@@ -1,63 +1,32 @@
-const { Builder } = require("selenium-webdriver");
-const chrome = require("selenium-webdriver/chrome");
 const assert = require("assert");
+const BaseTest = require("../test/baseTest");
 const LoginPage = require("../pages/LoginPage");
 const InventoryPage = require("../pages/InventoryPage");
 const TestData = require('../config/testData');
-// const { allure } = require("allure-mocha/runtime");
-const { step, attachment } = require("allure-js-commons");
 const Logger = require("../utils/logger");
 
 describe("Smoke tests", function () {
+    let base;
     let driver;
     let loginPage;
 
-    this.beforeEach(async function () {
-        console.log(`[TEST STARTED] ${this.currentTest.title}`);
-
-        let options = new chrome.Options();
-        options.addArguments("--incognito");
-
-        if (process.env.HEADLESS === "true") {
-            options.addArguments("--headless=new");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--window-size=1920,1080");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
-
-        driver = await new Builder()
-            .forBrowser("chrome")
-            .setChromeOptions(options)
-            .build();
+    beforeEach(async function() {
+        base = new BaseTest();
+        await base.setup();
+        driver = base.driver;
 
         loginPage = new LoginPage(driver);
     });
 
-    this.afterEach(async function () {
-        console.log(`[TEST COMPLETED] ${this.currentTest.title}`);
-        this.timeout(5000);
-        
-        if (driver) {
-            if (this.currentTest.state === "failed") {
-                try {
-                    const img = await driver.takeScreenshot();
-                    attachment("Screenshot on failure", 
-                        Buffer.from(img, "base64"), "image/png");
-                } catch (err) {
-                    console.error("Error taking screenshot:", err);
-                     throw err;
-                }
-            }
-            await driver.quit();
-        }
+    afterEach(async function () {
+        await base.tearDown(this.currentTest); 
     });
 
     it("TC-001: Successful login with valid credentials", async function testLoginSuccess() {    
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
-            const inventoryPage = new InventoryPage(driver);
-            assert.strictEqual(await driver.getCurrentUrl(), TestData.expected.inventoryPageUrl, "user was not redirected to the inventory page");
-            assert.strictEqual(await inventoryPage.getInventoryHeader(), TestData.expected.inventoryHeading, "the inventory header is not 'Products'");
+        const inventoryPage = new InventoryPage(driver);
+        assert.strictEqual(await driver.getCurrentUrl(), TestData.expected.inventoryPageUrl, "user was not redirected to the inventory page");
+        assert.strictEqual(await inventoryPage.getInventoryHeader(), TestData.expected.inventoryHeading, "the inventory header is not 'Products'");
         });
 
         it("TC-002: Unsuccessful login with locked user", async function testLoginFailure() {
