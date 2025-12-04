@@ -4,6 +4,11 @@ const Logger = require("../utils/logger");
 class BasePage {
     constructor(driver) {
         this.driver = driver;
+    
+    this.common = {
+        cartBadge: By.css("[data-test='shopping-cart-badge']"),
+        cartIcon: By.css('[data-test="shopping-cart-link"]'),
+    }
     }
 
     async open(url) {
@@ -89,7 +94,47 @@ class BasePage {
         await element.click();
     }
 
-    
+    async getCurrentUrl() {
+        return this.driver.getCurrentUrl();
+    }
+
+    async openCart() {
+        Logger.info("Opening cart");
+        return this.safeClick(this.common.cartIcon);
+        }
+
+        async isCartEmpty() {
+        let empty;
+        const cartBadgeEl = await this.findElement(this.common.cartBadge);
+        const cartBadgeText = await cartBadgeEl.getText();
+        if (!cartBadgeText) {
+            empty = true;
+        } else {
+            empty = false;
+        }
+        // console.log("empty =", empty)
+        // console.log("CartTextAmount =", cartBadgeText)
+        return empty;
+    }
+
+    async isCartBadgePresent(timeout = 2000) {
+    Logger.info("Checking if cart badge is present");
+    const element = await this.safeFindElement(this.common.cartBadge, timeout);
+    if (!element) {
+        Logger.info("Cart badge is NOT present");
+        return false;
+    }
+    try {
+        const isDisplayed = await element.isDisplayed();
+        Logger.info("Cart badge is present");
+        return isDisplayed;
+    } catch (err) {
+        Logger.warning("Cart badge element disappeared after locating");
+        return false;
+    }
+}
+
+
 }
 
 module.exports = BasePage;

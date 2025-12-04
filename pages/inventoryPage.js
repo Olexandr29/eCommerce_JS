@@ -1,5 +1,6 @@
 const { By } = require("selenium-webdriver");
 const BasePage = require("./BasePage");
+const Logger = require("../utils/logger");
 
 class InventoryPage extends BasePage {
     constructor(driver) {
@@ -13,9 +14,7 @@ class InventoryPage extends BasePage {
             names: By.className("inventory_item_name "),
             prices: By.className("inventory_item_price"),
             addToCartBtns: By.xpath("//button[text()='Add to cart']"), 
-            cartBadge: By.className("shopping_cart_badge"),
-            cartIcon: By.css('[data-test="shopping-cart-link"]')
-
+           
         }
     }
 
@@ -51,6 +50,7 @@ class InventoryPage extends BasePage {
     }
 
     async logOut() {
+        Logger.info("Logout");
         await this.safeClick(this.locators.burgerMenu);
         await this.safeClick(this.locators.logOutBtn);
     }
@@ -64,24 +64,6 @@ class InventoryPage extends BasePage {
         await itemsArray[0].click()
     }
 
-    async isCartEmpty() {
-        let empty;
-        let cartBadgeEl = await this.findElement(this.locators.cartBadge);
-        let cartBadgeText = await cartBadgeEl.getText();
-        if (!cartBadgeText) {
-            empty = true;
-        } else {
-            empty = false;
-
-        }
-        // console.log("empty =", empty)
-        // console.log("CartTextAmount =", cartBadgeText)
-        return empty;
-    }
-
-      async openCart() {
-            return this.safeClick(cartIcon);
-        }
 
 }
 

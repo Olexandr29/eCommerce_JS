@@ -23,6 +23,7 @@ class LoginPage extends BasePage {
   }
 
   async loginWithInvalidCredentials(username, password) {
+    Logger.info("Attempt login with invalid credentials");
     await this.login(username, password);
     let errorMessage = await this.waitAndGetText(this.locators.errLoginMsg);
     return errorMessage;

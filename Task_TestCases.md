@@ -115,7 +115,7 @@ Cart icon shows badge with "1"
 ---
 
 - [ ] Automate tests @Sanity (tc006-013)
-<details><summary>✅ Automated (tc006-008)</summary>
+<details><summary>✅ Automated (tc006-011)</summary>
 TC-006: Successful login as performance_glitch_user
 
 Preconditions: The website saucedemo.com is open
@@ -146,6 +146,42 @@ Steps:
 - Click the Login button.
 
 Expected Result: An error message "Username and password do not match any user" is displayed.
+
+TC-009: Navigate to the cart page
+
+Preconditions: The user is logged in as standard_user
+
+Step: Click the shopping cart icon in the top-right corner.
+
+Expected Result: The user is redirected to /cart.html and sees the contents of the cart.
+
+TC-010: Remove item from the cart
+
+Preconditions: The user is logged in as standard_user and has added one item to the cart
+
+Step: Click the "Remove" button next to the added item.
+
+Expected Result: The item is removed from the cart and the cart badge disappears.
+
+TC-011: Proceed to checkout
+
+Preconditions: The user is logged in as standard_user and has at least one item in the cart
+
+Steps:
+- Navigate to the cart page.
+- Click the "Checkout" button.
+
+Expected Result: The user is redirected to /checkout-step-one.html.
+
+TC-012: Fill in user information at the checkout
+
+Preconditions: The user is on the /checkout-step-one.html page
+
+Steps:
+- Enter First Name, Last Name, and Zip/Postal Code.
+- Click the "Continue" button.
+
+Expected Result: The user is redirected to /checkout-step-two.html.
 
 </details>
 
