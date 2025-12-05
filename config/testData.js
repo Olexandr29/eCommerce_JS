@@ -16,10 +16,10 @@ module.exports = {
         zip: "123456789",
     },
 
-    random() {
+    randomCheckout() {
         return {
         firstName: random.randomFirstName(),
-        lastName: random.randomLastName,
+        lastName: random.randomLastName(),
         zip: random.randomZip(),
     };
 },
