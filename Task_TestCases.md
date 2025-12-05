@@ -115,7 +115,7 @@ Cart icon shows badge with "1"
 ---
 
 - [ ] Automate tests @Sanity (tc006-013)
-<details><summary>✅ Automated (tc006-011)</summary>
+<details><summary>✅ Automated</summary>
 TC-006: Successful login as performance_glitch_user
 
 Preconditions: The website saucedemo.com is open
@@ -182,6 +182,16 @@ Steps:
 - Click the "Continue" button.
 
 Expected Result: The user is redirected to /checkout-step-two.html.
+
+TC-013: Cancel from the overview page
+
+Preconditions: The user is on the /checkout-step-two.html page
+
+Step: 
+- Navigate to checkout1 with some added product.
+- Click the "Cancel" button.
+
+Expected Result: The user is redirected back to the inventory page (/inventory.html).
 
 </details>
 

@@ -83,11 +83,26 @@ it("TC-012: Fill in user information at the checkout", async function testFillCh
     const cartPage = new CartPage(driver);
     await cartPage.openCheckout();
     const checkoutPage1 = new CheckoutPage1(driver);
-    const data = TestData.random();
-     Logger.info(`Generated random customer: ${data.firstName} ${data.lastName}, zip: ${data.zip}`)
-    await checkoutPage1.fillCheckout1(data.firstName, data.lastName, data.zip);
+    // const data = TestData.random();
+    // Logger.info(`Generated random customer: ${data.firstName} ${data.lastName}, zip: ${data.zip}`)
+    // await checkoutPage1.fillCheckout1(data.firstName, data.lastName, data.zip);
+    await checkoutPage1.fillCheckout1(TestData.infoForCheckout1.firstName, TestData.infoForCheckout1.lastName, TestData.infoForCheckout1.zip);
     const checkoutPage2 = new CheckoutPage2(driver);
     assert.strictEqual(await checkoutPage2.getCurrentUrl(), TestData.expected.checkoutPage1Ur2, "user was not redirected to the checkout step 2 page");
+}),
+
+it("TC-013: Cancel from the overview page", async function testNavigateBackToInventory() {
+    await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
+    const inventoryPage = new InventoryPage(driver);
+    await inventoryPage.addOneItemToCart();
+    await inventoryPage.openCart();
+    const cartPage = new CartPage(driver);
+    await cartPage.openCheckout();
+    const checkoutPage1 = new CheckoutPage1(driver);
+    await checkoutPage1.fillCheckout1(TestData.infoForCheckout1.firstName, TestData.infoForCheckout1.lastName, TestData.infoForCheckout1.zip);
+    const checkoutPage2 = new CheckoutPage2(driver);
+    assert.strictEqual(await checkoutPage2.navigateBackToInventory(),
+    TestData.expected.inventoryPageUrl, "user was not redirected back to inventory page");
 })
 
 })

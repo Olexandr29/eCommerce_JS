@@ -21,5 +21,6 @@ class CheckoutPage1 extends BasePage {
         await this.type(this.locators.zipField, zip);
         await this.safeClick(this.locators.continueBtn);
     }
+
 }
 module.exports = CheckoutPage1;

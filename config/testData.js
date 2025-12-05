@@ -10,6 +10,12 @@ module.exports = {
         fake: {username: "fake_user", password: "fake_password"},
     },
 
+    infoForCheckout1: {
+        firstName: "John",
+        lastName: "Smith",
+        zip: "123456789",
+    },
+
     random() {
         return {
         firstName: random.randomFirstName(),

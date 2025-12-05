@@ -8,6 +8,8 @@ class BasePage {
     this.common = {
         cartBadge: By.css("[data-test='shopping-cart-badge']"),
         cartIcon: By.css('[data-test="shopping-cart-link"]'),
+        cancelBtn: By.css("button[data-test='cancel']"),
+
     }
     }
 
@@ -95,6 +97,7 @@ class BasePage {
     }
 
     async getCurrentUrl() {
+        console.log("CurrentUrl is ", await this.driver.getCurrentUrl());
         return this.driver.getCurrentUrl();
     }
 

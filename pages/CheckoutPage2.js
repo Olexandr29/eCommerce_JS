@@ -10,5 +10,11 @@ class CheckoutPage2 extends BasePage {
 
         }
     }
+
+    async navigateBackToInventory() {
+        Logger.info("Navigate back to Inventory");
+        await this.safeClick(this.common.cancelBtn);
+        return this.getCurrentUrl();
+    }
 }
 module.exports = CheckoutPage2;
