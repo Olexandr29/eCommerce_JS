@@ -106,6 +106,12 @@ class BasePage {
         return this.safeClick(this.common.cartIcon);
         }
 
+    async navigateToOtherPage() {
+        Logger.info("Navigaition for other page");
+        this.safeClick(locator);
+        return this.getCurrentUrl();
+    }    
+
         async isCartEmpty() {
         let empty;
         const cartBadgeEl = await this.findElement(this.common.cartBadge);

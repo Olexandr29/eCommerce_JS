@@ -114,6 +114,7 @@ Cart icon shows badge with "1"
 
 ---
 
+
 - [ ] Automate tests @Sanity (tc006-013)
 <details><summary>✅ Automated</summary>
 TC-006: Successful login as performance_glitch_user
@@ -196,3 +197,22 @@ Expected Result: The user is redirected back to the inventory page (/inventory.h
 </details>
 
 ---
+
+- [] Automate tests @Functional 
+
+<details><summary>✅Automated (tc014)</summary>
+
+*Products Page*
+
+TC-014: Sort products by price (low to high)
+
+Preconditions: User is logged in as standard_user, on /inventory.html
+
+Step: Select "Price (low to high)"
+
+Expected Result: Items sorted correctly from cheapest to most expensive
+
+</details>
+
+---
+

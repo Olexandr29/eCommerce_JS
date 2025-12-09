@@ -14,7 +14,11 @@ class InventoryPage extends BasePage {
             names: By.className("inventory_item_name "),
             prices: By.className("inventory_item_price"),
             addToCartBtns: By.xpath("//button[text()='Add to cart']"), 
-           
+            sortContainer: By.css("select[data-test='product-sort-container']"),
+            optionNameAsc: By.css("select[data-test='product-sort-container'] option[value='az']"),
+            optionNameDesc: By.css("select[data-test='product-sort-container'] option[value='za']"),
+            optionPriceAsc: By.css("select[data-test='product-sort-container'] option[value='lohi']"),
+            optionPriceDesc: By.css("select[data-test='product-sort-container'] option[value='hilo']"),
         }
     }
 
@@ -62,6 +66,34 @@ class InventoryPage extends BasePage {
             throw new Error("The 'Add to cart' button isn't found on the page")
         }
         await itemsArray[0].click()
+    }
+
+    // async sortProducts() {
+    // const select = await this.safeClick(this.locators.sortContainer);
+    // const option = await select.safeClick(this.locators.optionNameA_Z);
+    // }
+
+     async sortByPriceAsc() {
+        Logger.info("Sorting: Price low → high");
+        await this.safeClick(this.locators.sortContainer);
+        await this.safeClick(this.locators.optionPriceAsc);
+        await this.driver.sleep(500);
+        return true;
+    }
+
+    async getProductPrices() {
+        const priceElements = await this.driver.findElements(By.css(".inventory_item_price"));
+        const prices = [];
+        for (const el of priceElements) {
+            const text = await el.getText(); // "$29.99"
+            prices.push(parseFloat(text.replace("$", "")));
+        }
+        return prices;
+    }
+
+    async isNumbersAsc(list) {
+        const sorted = [...list].sort((a, b) => a - b);
+        return JSON.stringify(list) === JSON.stringify(sorted);
     }
 
 
