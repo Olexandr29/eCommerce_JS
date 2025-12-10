@@ -4,13 +4,13 @@ const Logger = require("../utils/logger");
 class BasePage {
     constructor(driver) {
         this.driver = driver;
-    
-    this.common = {
-        cartBadge: By.css("[data-test='shopping-cart-badge']"),
-        cartIcon: By.css('[data-test="shopping-cart-link"]'),
-        cancelBtn: By.css("button[data-test='cancel']"),
 
-    }
+        this.common = {
+            cartBadge: By.css("[data-test='shopping-cart-badge']"),
+            cartIcon: By.css('[data-test="shopping-cart-link"]'),
+            cancelBtn: By.css("button[data-test='cancel']"),
+
+        }
     }
 
     async open(url) {
@@ -28,15 +28,15 @@ class BasePage {
     }
 
     async safeFindElement(locator, timeout = 5000) {
-    try {
-        await this.driver.wait(until.elementLocated(locator), timeout);
-        return await this.driver.findElement(locator);
-    } catch (err) {
-        Logger.warning(`Element NOT FOUND: ${locator}`);
-        return null;
+        try {
+            await this.driver.wait(until.elementLocated(locator), timeout);
+            return await this.driver.findElement(locator);
+        } catch (err) {
+            Logger.warning(`Element NOT FOUND: ${locator}`);
+            return null;
+        }
     }
-    }
-    
+
     async click(locator) {
         const element = await this.findElement(locator);
         if (!element) {
@@ -104,15 +104,15 @@ class BasePage {
     async openCart() {
         Logger.info("Opening cart");
         return this.safeClick(this.common.cartIcon);
-        }
+    }
 
     async navigateToOtherPage() {
         Logger.info("Navigaition for other page");
         this.safeClick(locator);
         return this.getCurrentUrl();
-    }    
+    }
 
-        async isCartEmpty() {
+    async isCartEmpty() {
         let empty;
         const cartBadgeEl = await this.findElement(this.common.cartBadge);
         const cartBadgeText = await cartBadgeEl.getText();
@@ -127,21 +127,28 @@ class BasePage {
     }
 
     async isCartBadgePresent(timeout = 2000) {
-    Logger.info("Checking if cart badge is present");
-    const element = await this.safeFindElement(this.common.cartBadge, timeout);
-    if (!element) {
-        Logger.info("Cart badge is NOT present");
-        return false;
+        Logger.info("Checking if cart badge is present");
+        const element = await this.safeFindElement(this.common.cartBadge, timeout);
+        if (!element) {
+            Logger.info("Cart badge is NOT present");
+            return false;
+        }
+        try {
+            const isDisplayed = await element.isDisplayed();
+            Logger.info("Cart badge is present");
+            return isDisplayed;
+        } catch (err) {
+            Logger.warning("Cart badge element disappeared after locating");
+            return false;
+        }
     }
-    try {
-        const isDisplayed = await element.isDisplayed();
-        Logger.info("Cart badge is present");
-        return isDisplayed;
-    } catch (err) {
-        Logger.warning("Cart badge element disappeared after locating");
-        return false;
+
+    async getCartBadgeNum() {
+        const cartBadgeEl = await this.findElement(this.common.cartBadge);
+        const cartBadgeText = await cartBadgeEl.getText();
+        const cartBadgeNum = parseInt(cartBadgeText)
+        return await cartBadgeNum;
     }
-}
 
 
 }

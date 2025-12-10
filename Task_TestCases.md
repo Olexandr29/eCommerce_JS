@@ -200,7 +200,7 @@ Expected Result: The user is redirected back to the inventory page (/inventory.h
 
 - [] Automate tests @Functional 
 
-<details><summary>✅Automated (tc014)</summary>
+<details><summary>✅Automated (tc014-018)</summary>
 
 *Products Page*
 
@@ -211,6 +211,44 @@ Preconditions: User is logged in as standard_user, on /inventory.html
 Step: Select "Price (low to high)"
 
 Expected Result: Items sorted correctly from cheapest to most expensive
+
+TC-015: Sort products by name (Z to A)
+
+Preconditions: User is logged in as standard_user, on /inventory.html
+
+Step: Select "Name (Z to A)"
+
+Expected Result: Items sorted in reverse alphabetical order
+
+TC-016: Product details view
+
+Preconditions: User is logged in as standard_user, on /inventory.html
+
+Step: Click on product name
+
+Expected Result: New page shows full info: image, name, description, price
+
+</br>
+
+*Cart Functionality*
+
+TC-017: Add multiple items to cart
+
+Preconditions: User is logged in as standard_user, on /inventory.html
+
+Step: Add 3 different products
+
+Expected Result: Cart badge shows "3"
+
+TC-018: Remove one item from cart
+
+Preconditions: Logged in as standard_user, 3 items already added
+
+Steps:
+- Navigate to cart
+- Click "Remove" for one item
+
+Expected Result: Badge shows "2", only 2 items remain
 
 </details>
 

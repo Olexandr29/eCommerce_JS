@@ -30,6 +30,8 @@ module.exports = {
         cartPageUrl: "https://www.saucedemo.com/cart.html",
         checkoutPage1Url: "https://www.saucedemo.com/checkout-step-one.html",
         checkoutPage1Ur2: "https://www.saucedemo.com/checkout-step-two.html",
+        productDetailsPageUrl: "https://www.saucedemo.com/inventory-item.html?id=",
+
     },
 
     errors: {

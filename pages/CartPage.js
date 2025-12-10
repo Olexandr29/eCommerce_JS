@@ -14,7 +14,7 @@ class CartPage extends BasePage {
     }
 
       async cartHasProduct() {
-        let webElementsProduct = await this.findElements(this.locators.productContainer);
+        const webElementsProduct = await this.findElements(this.locators.productContainer);
         // console.log("typeof webElementsProduct =", typeof webElementsProduct);
         console.log("webElementsProduct.length =", webElementsProduct.length);
         return webElementsProduct.length >= 1;
@@ -29,6 +29,14 @@ class CartPage extends BasePage {
         Logger.info("Open/navigate to checkout page");
         await this.safeClick(this.locators.checkoutBtn);
     } 
+
+    async remove1OfItemsFromCart() {
+        const removeBtns = await this.findElements(this.locators.removeBtn);
+        for (let i = 0; i < removeBtns.length; i++) {
+            removeBtns[i].click();
+            break;
+        }
+    }
 
 
         }
