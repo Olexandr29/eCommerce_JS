@@ -1,5 +1,5 @@
 const { By } = require("selenium-webdriver");
-const BasePage = require("./BasePage");
+const BasePage = require("./renameBasePage");
 const Logger = require("../utils/logger");
 
 class CartPage extends BasePage {

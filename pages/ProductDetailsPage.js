@@ -1,5 +1,5 @@
 const {By, Builder} = require("selenium-webdriver");
-const BasePage = require("../pages/BasePage");
+const BasePage = require("./renameBasePage");
 const InventoryPage = require("../pages/InventoryPage");
 
 class ProductDetailsPage extends BasePage {
