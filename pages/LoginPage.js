@@ -1,5 +1,5 @@
 const { By } = require("selenium-webdriver");
-const BasePage = require("./renameBasePage");
+const BasePage = require("./BasePage");
 const Logger = require("../utils/logger");
 const TestData = require('../config/testData');
 
