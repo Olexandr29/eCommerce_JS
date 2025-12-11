@@ -146,7 +146,7 @@ class BasePage {
     async getCartBadgeNum() {
         const cartBadgeEl = await this.findElement(this.common.cartBadge);
         const cartBadgeText = await cartBadgeEl.getText();
-        const cartBadgeNum = parseInt(cartBadgeText)
+        const cartBadgeNum = parseInt(cartBadgeText, 10)
         return await cartBadgeNum;
     }
 

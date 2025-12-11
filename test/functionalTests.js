@@ -8,7 +8,7 @@ const testData = require("../config/testData");
 const assert = require("assert");
 const CartPage = require("../pages/CartPage");
 
-describe("Functional tests", function () {
+describe("@Functional tests", function () {
 
     let base;
     let driver;
@@ -26,7 +26,7 @@ describe("Functional tests", function () {
         await base.tearDown(this.currentTest);
     });
 
-    it("TC-014: Sort products by price(low to high)", async function testSortByPriceAscending () {
+    it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending () {
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.sortByPriceAsc();

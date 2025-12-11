@@ -1,4 +1,4 @@
-name: Run Mocha tests remotely via GitHub Actions (multi-OS)
+name: Run Tests
 
 on:
     workflow_dispatch:
@@ -6,21 +6,8 @@ on:
  
 jobs:
   test:
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    name: Mocha tests (${{ matrix.os }})
-    timeout-minutes: 3
-
+    runs-on: ubuntu-latest
     steps:
-      - name: Start timer
-        id: start
-        shell: bash
-        run: |
-          start_time=$(date +%s)
-          echo "start_time=$start_time" >> $GITHUB_ENV
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -37,35 +24,4 @@ jobs:
         env: 
           HEADLESS: true
       
-      - name: Calculate total duration
-        id: duration
-        shell: bash
-        run: |
-          end_time=$(date +%s)
-          duration=$((end_time - start_time))
-          echo "duration=$duration" >> $GITHUB_ENV
-          echo "Total duration: ${duration}s"
-
-      - name: Update duration in Gist
-        if: always()
-        shell: bash
-        env:
-          GIST_TOKEN: ${{ secrets.GIST_TOKEN }}
-          GIST_ID: 60e8687e89821ca943a0a79c2c2e77a8
-        run: |
-          json="{\"duration\": \"${duration}s\", \"os\": \"${{ matrix.os }}\", \"timestamp\": \"$(date -u +'%Y-%m-%dT%H:%M:%SZ')\"}"
-          case "${{ matrix.os }}" in
-            "ubuntu-latest") file="ubuntu-duration.json" ;;
-            "windows-latest") file="windows-duration.json" ;;
-            "macos-latest") file="macos-duration.json" ;;
-          esac
-          curl -s -X PATCH "https://api.github.com/gists/$GIST_ID" \
-            -H "Authorization: token $GIST_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "{\"files\": {\"$file\": {\"content\": \"$json\"}}}"
-
-      
-      - name: Upload test summary
-        if: always()
-        run: echo " Workflow on ${{ matrix.os }} took ${duration}s" >> $GITHUB_STEP_SUMMARY
       
