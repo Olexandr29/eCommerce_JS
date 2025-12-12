@@ -250,6 +250,26 @@ Steps:
 
 Expected Result: Badge shows "2", only 2 items remain
 
+TC-019: Cart state persists across navigation
+
+Preconditions: Logged in as standard_user, 1 item added to cart
+
+Step: Navigate to another page (e.g. product detail) and return
+
+Expected Result: Cart badge is preserved, item still in cart
+
+</br>
+*Checkout Flow*
+
+TC-020: Full purchase flow
+
+Preconditions: Logged in as standard_user, on /inventory.html
+
+Steps: 
+- Add product → Go to cart → Checkout → Fill info → Finish
+
+Expected Result: Confirmation page with "Thank you for your order!"
+
 </details>
 
 ---

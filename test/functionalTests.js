@@ -7,6 +7,10 @@ const ProductDetailsPage = require("../pages/ProductDetailsPage");
 const testData = require("../config/testData");
 const assert = require("assert");
 const CartPage = require("../pages/CartPage");
+const { step } = require("allure-js-commons");
+const CheckoutPage1 = require("../pages/CheckoutPage1");
+const CheckoutPage2 = require("../pages/CheckoutPage2");
+const ConfirmationPage = require("../pages/ConfirmationPage");
 
 describe("@Functional tests", function () {
 
@@ -72,5 +76,35 @@ describe("@Functional tests", function () {
         await cartPage.remove1OfItemsFromCart();
         assert.strictEqual(await cartPage.getCartBadgeNum(), 2, "Cart Badge should show that only 2 items remain");
     })
+
+    it("TC-019: Cart state persists across navigation", async function testPersitCartState() {
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+        const inventoryPage = new InventoryPage(driver);
+        await inventoryPage.addOneItemToCart();
+        assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Added product is not displayed in the cart");
+        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 1, "The wrong number is displayed in the cart badge");
+        const productDetailsPage = new ProductDetailsPage(driver);
+   
+        assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
+        // assert.ok(await inventoryPage.openProductDetailsPage().startsWith(testData.expected.productDetailsPageUrl), `User was not redirected to PDP`);
+        assert.strictEqual(await productDetailsPage.getCartBadgeNum(), 1, "Cart state is not persist across navigation, and cart badge is not 1 now");
+
+})
+    
+     it("TC-020: Full purchase flow", async function testFullPurchaseFlow() {
+        await loginPage.login(testData.users.standard.username, testData.password);
+        const inventoryPage = new InventoryPage(driver);
+        await inventoryPage.addOneItemToCart();
+        const cartPage = new CartPage(driver);
+        await inventoryPage.openCart();
+        const checkoutPage1 = new CheckoutPage1(driver);
+        await cartPage.openCheckout();
+        await checkoutPage1.fillCheckout1();
+        const checkoutPage2 = new CheckoutPage2(driver);
+        const confirmationPage = new ConfirmationPage(driver);
+        assert.strictEqual(await checkoutPage2.openConfirmationPage(), testData.expected.confirmationPageUrl, "User is not redirected to the Confirmation page")
+        assert.strictEqual(await confirmationPage.getConfirmationText(), testData.messages.confirmationPageText, "Confirmation page does not contain the text 'Thank you for your order!'");
+     })
+
 
 })

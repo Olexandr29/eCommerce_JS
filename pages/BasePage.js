@@ -1,5 +1,7 @@
 const { By, until } = require("selenium-webdriver");
 const Logger = require("../utils/logger");
+// const { step } = require("allure-js-commons");
+const { allure } = require("allure-mocha/runtime");
 
 class BasePage {
     constructor(driver) {
@@ -13,21 +15,34 @@ class BasePage {
         }
     }
 
+    async logStep(name, body) {
+        Logger.info(name);
+        // return await step(name, async () => {
+        return await allure.step(name, async () => {
+            return await body()
+    });
+    }
+
     async open(url) {
-        Logger.info(`Opening URL: ${url}`);
-        await this.driver.get(url);
+        return await this.logStep(`Opening URL: ${url}`, async () => {
+        return await this.driver.get(url);
+        });
     }
 
     async findElement(locator) {
-        Logger.debug(`findElement: ${locator}`);
+        return await this.logStep(`findElement: ${locator}`, async () => {
         return await this.driver.findElement(locator);
+        })
     }
 
     async findElements(locator) {
+        return await this.logStep(`Find elements: ${locator}`, async () => {
         return await this.driver.findElements(locator);
+        })
     }
 
     async safeFindElement(locator, timeout = 5000) {
+        return await this.logStep(`Safe find element: ${locator}`, async ()=> {      
         try {
             await this.driver.wait(until.elementLocated(locator), timeout);
             return await this.driver.findElement(locator);
@@ -35,43 +50,52 @@ class BasePage {
             Logger.warning(`Element NOT FOUND: ${locator}`);
             return null;
         }
+        });
     }
 
     async click(locator) {
+        return await this.logStep(`Click element ${locator}`, async ()=> {     
         const element = await this.findElement(locator);
-        if (!element) {
-            Logger.warning(`Click aborted. Missing element: ${locator}`);
-            return;
-        }
+        // if (!element) {
+        //     Logger.warning(`Click aborted. Missing element: ${locator}`);
+        //     return;
+        // }
         await element.click();
+        });
     }
 
     async type(locator, text) {
+        return await this.logStep(`Type into element: ${locator}`, async ()=> {
         const element = await this.waitForVisible(locator);
         await element.clear();
         await element.sendKeys(text);
+        });
     }
-
+    
     async waitForLocated(locator, timeout = 5000) {
+        return await this.logStep(`Wait for element located: ${locator}`, async () => {
         return await this.driver.wait(until.elementLocated(locator), timeout);
+        });
     }
 
     async waitForVisible(locator, timeout = 5000) {
-        Logger.debug(`Waiting for visible: ${locator}`);
+        return await this.logStep(`Waiting for visible: ${locator}`, async () => {
         const element = await this.driver.wait(until.elementLocated(locator), timeout);
         await this.driver.wait(until.elementIsVisible(element), timeout);
         return element;
+        });
     }
 
     async waitForClickable(locator, timeout = 5000) {
-        Logger.info(`Waiting for clickable: ${locator}`);
+        return await this.logStep(`Waiting for clickable: ${locator}`, async () => {
         const element = await this.waitForVisible(locator, timeout);
         await this.driver.wait(until.elementIsEnabled(element), timeout);
         return element;
+        });
     }
 
     async waitAndGetText(locator, timeout = 5000) {
-        Logger.info(`Getting text from: ${locator}`);
+        return await this.logStep(`Getting text from: ${locator}`, async () => {
         try {
             let actText = "";
             const element = await this.waitForVisible(locator, timeout);
@@ -81,25 +105,34 @@ class BasePage {
             Logger.warning(`Cannot get TEXT - element missing or invisible: ${locator}`);
             return null;
         }
+        });
     }
 
     async scrollIntoView(locator) {
-        Logger.info(`Scrolling into view: ${locator}`);
+        return await this.logStep(`Scrolling into view: ${locator}`, async ()=> {
         const element = await this.findElement(locator);
-        await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
+        return await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
+        });
     }
 
     async safeClick(locator) {
-        Logger.info(`Safe clicking: ${locator}`);
+        return await this.logStep(`Safe clicking: ${locator}`, async () => {
         await this.scrollIntoView(locator);
         const element = await this.waitForClickable(locator);
         await element.click();
+        });
     }
 
     async getCurrentUrl() {
-        console.log("CurrentUrl is ", await this.driver.getCurrentUrl());
+        return await this.logStep("Get current URL", async () => {
         return this.driver.getCurrentUrl();
+        }); 
     }
+
+    // async getCurrentUrl() {
+    //     console.log("CurrentUrl is ", await this.driver.getCurrentUrl());
+    //     return this.driver.getCurrentUrl();
+    // }
 
     async openCart() {
         Logger.info("Opening cart");
@@ -144,10 +177,12 @@ class BasePage {
     }
 
     async getCartBadgeNum() {
+        return await this.logStep("Getcart badge", async () => {
         const cartBadgeEl = await this.findElement(this.common.cartBadge);
         const cartBadgeText = await cartBadgeEl.getText();
         const cartBadgeNum = parseInt(cartBadgeText, 10)
         return await cartBadgeNum;
+        });
     }
 
 

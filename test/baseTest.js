@@ -1,6 +1,7 @@
 const {Builder} = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
-const {attachment} = require("allure-js-commons");
+// const {attachment} = require("allure-js-commons");
+const { allure } = require("allure-mocha/runtime");
 
 class BaseTest {
     driver = null;
@@ -27,10 +28,15 @@ class BaseTest {
         }
         if (test.state === "failed") {
             const img = await this.driver.takeScreenshot();
-            attachment(
-                "Failure screenshot",
-                Buffer.from(img, "base64"),
-                "imae/png"
+            // attachment(
+            //     "Failure screenshot",
+            //     Buffer.from(img, "base64"),
+            //     "image/png"
+            // );
+            await allure.attachment(
+            "Failure screenshot",
+            Buffer.from(img, "base64"),
+            "image/png"
             );
         }
 

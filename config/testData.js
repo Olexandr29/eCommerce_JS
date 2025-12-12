@@ -31,7 +31,11 @@ module.exports = {
         checkoutPage1Url: "https://www.saucedemo.com/checkout-step-one.html",
         checkoutPage1Ur2: "https://www.saucedemo.com/checkout-step-two.html",
         productDetailsPageUrl: "https://www.saucedemo.com/inventory-item.html?id=",
+        confirmationPageUrl: "https://www.saucedemo.com/checkout-complete.html",
+    },
 
+    messages: {
+        confirmationPageText: "Thank you for your order!",
     },
 
     errors: {
