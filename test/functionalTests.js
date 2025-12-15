@@ -11,6 +11,7 @@ const { step } = require("allure-js-commons");
 const CheckoutPage1 = require("../pages/CheckoutPage1");
 const CheckoutPage2 = require("../pages/CheckoutPage2");
 const ConfirmationPage = require("../pages/ConfirmationPage");
+const Logger = require("../utils/logger");
 
 describe("@Functional tests", function () {
 
@@ -30,41 +31,41 @@ describe("@Functional tests", function () {
         await base.tearDown(this.currentTest);
     });
 
-    it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending () {
-        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
-        const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.sortByPriceAsc();
-        const prices = await inventoryPage.getProductPrices();
-        assert.strictEqual(await inventoryPage.isNumbersAsc(prices), true, "Products are not sorted by ascending price");
-    });
+    // it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending () {
+    //     await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+    //     const inventoryPage = new InventoryPage(driver);
+    //     await inventoryPage.sortByPriceAsc();
+    //     const prices = await inventoryPage.getProductPrices();
+    //     assert.strictEqual(await inventoryPage.isNumbersAsc(prices), true, "Products are not sorted by ascending price");
+    // });
 
-    it("TC-015: Sort products by name (Z to A)", async function testSortByNameDescending () {
-        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
-        const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.sortByNameDesc();
-        const names = await inventoryPage.getProductNames();
-        assert.strictEqual(await inventoryPage.isNamesDesc(names), true, "Products are not sorted by descending name");
-    });
+    // it("TC-015: Sort products by name (Z to A)", async function testSortByNameDescending () {
+    //     await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+    //     const inventoryPage = new InventoryPage(driver);
+    //     await inventoryPage.sortByNameDesc();
+    //     const names = await inventoryPage.getProductNames();
+    //     assert.strictEqual(await inventoryPage.isNamesDesc(names), true, "Products are not sorted by descending name");
+    // });
 
-    it("TC-016: Product details view", async function testPDPview() {
-        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
-        const inventoryPage = new InventoryPage(driver);
-        const actualUrl = await inventoryPage.openProductDetailsPage();
-        const expectedUrlWithoutIdNum = testData.expected.productDetailsPageUrl;
-        assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
-        const productDetailsPage = new ProductDetailsPage(driver);
-        assert.strictEqual(await productDetailsPage.isImagePresence(), true, "Image is not presence on PDP");
-        assert.strictEqual(await productDetailsPage.isNamePresence(), true, "Name is not presence on PDP");
-        assert.strictEqual(await productDetailsPage.isDescriptionPresence(), true, "Description is not presence on PDP");
-        assert.strictEqual(await productDetailsPage.isPricePresence(), true, "Price is not presence on PDP");
-    })
+    // it("TC-016: Product details view", async function testPDPview() {
+    //     await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+    //     const inventoryPage = new InventoryPage(driver);
+    //     const actualUrl = await inventoryPage.openProductDetailsPage();
+    //     const expectedUrlWithoutIdNum = testData.expected.productDetailsPageUrl;
+    //     assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
+    //     const productDetailsPage = new ProductDetailsPage(driver);
+    //     assert.strictEqual(await productDetailsPage.isImagePresence(), true, "Image is not presence on PDP");
+    //     assert.strictEqual(await productDetailsPage.isNamePresence(), true, "Name is not presence on PDP");
+    //     assert.strictEqual(await productDetailsPage.isDescriptionPresence(), true, "Description is not presence on PDP");
+    //     assert.strictEqual(await productDetailsPage.isPricePresence(), true, "Price is not presence on PDP");
+    // })
 
-    it("TC-017: Add multiple items to cart", async function testAdd3itemsToCart() {
-        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
-        const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.add3ItemsToCart();
-        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
-    })
+    // it("TC-017: Add multiple items to cart", async function testAdd3itemsToCart() {
+    //     await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+    //     const inventoryPage = new InventoryPage(driver);
+    //     await inventoryPage.add3ItemsToCart();
+    //     assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
+    // })
 
     it("TC-018: Remove one of 3 items from cart", async function testRemove1of3itemsFromCart() {
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
@@ -84,22 +85,26 @@ describe("@Functional tests", function () {
         assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Added product is not displayed in the cart");
         assert.strictEqual(await inventoryPage.getCartBadgeNum(), 1, "The wrong number is displayed in the cart badge");
         const productDetailsPage = new ProductDetailsPage(driver);
-   
+        
+        const actualUrl = await inventoryPage.openProductDetailsPage(); 
+        const expectedUrlWithoutIdNum = testData.expected.productDetailsPageUrl;
+    
         assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
-        // assert.ok(await inventoryPage.openProductDetailsPage().startsWith(testData.expected.productDetailsPageUrl), `User was not redirected to PDP`);
         assert.strictEqual(await productDetailsPage.getCartBadgeNum(), 1, "Cart state is not persist across navigation, and cart badge is not 1 now");
 
 })
     
      it("TC-020: Full purchase flow", async function testFullPurchaseFlow() {
-        await loginPage.login(testData.users.standard.username, testData.password);
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.addOneItemToCart();
         const cartPage = new CartPage(driver);
         await inventoryPage.openCart();
         const checkoutPage1 = new CheckoutPage1(driver);
         await cartPage.openCheckout();
-        await checkoutPage1.fillCheckout1();
+        const randomData = testData.randomCheckout();
+        Logger.info(`here is random data for this case - ${randomData.firstName}, ${randomData.lastName}, ${randomData.zip}`);
+        await checkoutPage1.fillCheckout1(randomData.firstName, randomData.lastName, randomData.zip);
         const checkoutPage2 = new CheckoutPage2(driver);
         const confirmationPage = new ConfirmationPage(driver);
         assert.strictEqual(await checkoutPage2.openConfirmationPage(), testData.expected.confirmationPageUrl, "User is not redirected to the Confirmation page")

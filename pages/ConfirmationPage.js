@@ -13,7 +13,7 @@ class ConfirmationPage extends BasePage {
     }
 
     async getConfirmationText() {
-        await waitAndGetText(this.locators.confirmText);
+        return await this.waitAndGetText(this.locators.confirmText);
     }
 }
 

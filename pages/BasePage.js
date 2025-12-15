@@ -76,6 +76,7 @@ class BasePage {
             let actText = "";
             const element = await this.waitForVisible(locator, timeout);
             actText = await element.getText();
+            Logger.info(`Actual text is ${actText}`);
             return actText;
         } catch (err) {
             Logger.warning(`Cannot get TEXT - element missing or invisible: ${locator}`);
