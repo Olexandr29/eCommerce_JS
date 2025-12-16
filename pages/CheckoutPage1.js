@@ -15,11 +15,12 @@ class CheckoutPage1 extends BasePage {
     }
 
     async fillCheckout1(firstName, lastName, zip) {
-        Logger.info("Fill user info on the Checkout1");
+        return await this.logStep("Fill user info on the Checkout step 1", async () => {
         await this.type(this.locators.firstnameField, firstName);
         await this.type(this.locators.lastnameField, lastName);
         await this.type(this.locators.zipField, zip);
         await this.safeClick(this.locators.continueBtn);
+        });
     }
 
 }

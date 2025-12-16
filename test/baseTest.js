@@ -2,6 +2,7 @@ const {Builder} = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 // const {attachment} = require("allure-js-commons");
 const { allure } = require("allure-mocha/runtime");
+const allureSeverity = require("../utils/allureSeverity");
 
 class BaseTest {
     driver = null;

@@ -36,6 +36,17 @@ class ProductDetailsPage extends BasePage {
         return await priceEl.isDisplayed();
     }
 
+    async verifyProducDetails() {
+        return await this.logStep("Verify that PDP display full product info", async () => {
+            return (
+                await this.isImagePresence() &&
+                await this.isNamePresence() &&
+                await this.isDescriptionPresence() &&
+                await this.isPricePresence()
+            );
+        });
+    }
+    
 
 }
 

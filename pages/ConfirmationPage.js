@@ -13,8 +13,11 @@ class ConfirmationPage extends BasePage {
     }
 
     async getConfirmationText() {
+        return await this.logStep("Finish purchase and get confirmation text", async () => {
         return await this.waitAndGetText(this.locators.confirmText);
+    });
     }
+
 }
 
 module.exports = ConfirmationPage;

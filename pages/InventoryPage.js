@@ -1,6 +1,7 @@
 const { By } = require("selenium-webdriver");
 const BasePage = require("./BasePage");
 const Logger = require("../utils/logger");
+const { step } = require("allure-js-commons");
 
 class InventoryPage extends BasePage {
     constructor(driver) {
@@ -30,13 +31,16 @@ class InventoryPage extends BasePage {
     }
 
     async hasMultipleProducts() {
+        return await this.logStep("Verify that multiple products are displayed on Inventory page", async () => {
         let webElementsProduct = await this.findElements(this.locators.products);
         // console.log("typeof webElementsProduct =", typeof webElementsProduct);
         // console.log("webElementsProduct.length =", webElementsProduct.length)
         return webElementsProduct.length > 1;
+        });
     }
 
     async allProductsHaveNameAndPrice() {
+        return await this.logStep("Verify that Inventory page contain pruoducts with name and price", async () => {
         let isAllProdContainsN_P;
         let productsArr = await this.findElements(this.locators.products);
         for (let i = 0; i < productsArr.length; i++) {
@@ -51,37 +55,42 @@ class InventoryPage extends BasePage {
         }
         // console.log("isAllProdContainsN_P = ", isAllProdContainsN_P)
         return isAllProdContainsN_P;
+        });
     }
 
     async logOut() {
-        Logger.info("Logout");
+        return await this.logStep("Logout", async () => {
         await this.safeClick(this.locators.burgerMenu);
         await this.safeClick(this.locators.logOutBtn);
+        });
     }
 
     async addOneItemToCart() {
+        return await this.logStep("Add one item to cart", async () => {
         let itemsArray = await this.findElements(this.locators.addToCartBtns);
-        // console.log("itemsArray.length =", itemsArray.length)
         if (itemsArray.length === 0) {
             throw new Error("The 'Add to cart' button isn't found on the page")
         }
-        await itemsArray[0].click()
+        await itemsArray[0].click();
+         });
     }
 
      async sortByPriceAsc() {
-        Logger.info("Sorting: Price low → high");
+        return await this.logStep("Sort by Price from Low to High", async () => {
         await this.safeClick(this.locators.sortContainer);
         await this.safeClick(this.locators.optionPriceAsc);
         await this.driver.sleep(500);
         return true;
+        });
     }
 
     async sortByNameDesc() {
-        Logger.info("Sorting: Name Z → A ");
+        return await this.logStep("Sort by Name from Z to A", async () => {
         await this.safeClick(this.locators.sortContainer);
         await this.safeClick(this.locators.optionNameDesc);
         await this.driver.sleep(500);
         return true;
+        });
     }
 
     async getProductPrices() {
@@ -115,20 +124,23 @@ class InventoryPage extends BasePage {
     }
 
     async openProductDetailsPage() {
+        return await this.logStep("Open Product Details Page (PDP)", async () => {
         const namesEl = await this.driver.findElements(this.locators.names);
         await namesEl[0].click();
         const currentUrl = await this.getCurrentUrl();
         return currentUrl;
+        });
     }
 
     async add3ItemsToCart() {
+        return await this.logStep("Add 3 products to cart", async () => {
         const itemsArray = await this.findElements(this.locators.addToCartBtns);
         for(let i = 0; i < 3; i++) {
             await itemsArray[i].click();
         }
+        });
         }
 
-   
 
 }
 

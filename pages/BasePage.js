@@ -1,5 +1,6 @@
 const { By, until } = require("selenium-webdriver");
 const Logger = require("../utils/logger");
+const { step } = require("allure-js-commons");
 
 class BasePage {
     constructor(driver) {
@@ -11,15 +12,29 @@ class BasePage {
             cancelBtn: By.css("button[data-test='cancel']"),
 
         }
+
     }
 
+    async logStep(name, body) {
+        Logger.info(name);
+        return await step(name, async () => {
+            return await body();
+        });
+    }
+
+    //  async step(name, action) {
+    //         return step(name, async() => {
+    //             return await action();
+    //         })
+    //     }
+
     async open(url) {
-        Logger.info(`Opening URL: ${url}`);
+        return await this.logStep(`Open page: ${url}`, async() => {
         await this.driver.get(url);
+           });
     }
 
     async findElement(locator) {
-        Logger.debug(`findElement: ${locator}`);
         return await this.driver.findElement(locator);
     }
 
@@ -32,7 +47,7 @@ class BasePage {
             await this.driver.wait(until.elementLocated(locator), timeout);
             return await this.driver.findElement(locator);
         } catch (err) {
-            Logger.warning(`Element NOT FOUND: ${locator}`);
+            Logger.debug(`Element NOT FOUND: ${locator}`);
             return null;
         }
     }
@@ -57,44 +72,47 @@ class BasePage {
     }
 
     async waitForVisible(locator, timeout = 5000) {
-        Logger.debug(`Waiting for visible: ${locator}`);
+        try {
         const element = await this.driver.wait(until.elementLocated(locator), timeout);
         await this.driver.wait(until.elementIsVisible(element), timeout);
         return element;
+        } catch (err) {
+            Logger.error(`Element with locator ${locator} is not visible`);
+        }
     }
 
     async waitForClickable(locator, timeout = 5000) {
-        Logger.info(`Waiting for clickable: ${locator}`);
         const element = await this.waitForVisible(locator, timeout);
         await this.driver.wait(until.elementIsEnabled(element), timeout);
         return element;
     }
 
     async waitAndGetText(locator, timeout = 5000) {
-        Logger.info(`Getting text from: ${locator}`);
         try {
             let actText = "";
             const element = await this.waitForVisible(locator, timeout);
             actText = await element.getText();
-            Logger.info(`Actual text is ${actText}`);
             return actText;
         } catch (err) {
-            Logger.warning(`Cannot get TEXT - element missing or invisible: ${locator}`);
-            return null;
+            Logger.error(`Failed to get text located on the locator ${locator}`);
+            return err;
         }
     }
 
     async scrollIntoView(locator) {
-        Logger.info(`Scrolling into view: ${locator}`);
         const element = await this.findElement(locator);
         return await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
     async safeClick(locator) {
-        Logger.info(`Safe clicking: ${locator}`);
+        try{
         await this.scrollIntoView(locator);
         const element = await this.waitForClickable(locator);
-        await element.click();
+        await element.click(); 
+         } catch(err) {
+            Logger.error(`Click the ${locator} failed`);
+            throw err;
+         }
     }
 
     async getCurrentUrl() {
@@ -103,8 +121,9 @@ class BasePage {
     }
 
     async openCart() {
-        Logger.info("Opening cart");
+        return await this.logStep("Open cart", async () => {
         return this.safeClick(this.common.cartIcon);
+        });
     }
 
     async navigateToOtherPage() {
@@ -122,22 +141,17 @@ class BasePage {
         } else {
             empty = false;
         }
-        // console.log("empty =", empty)
-        // console.log("CartTextAmount =", cartBadgeText)
         return empty;
     }
 
     async isCartBadgePresent(timeout = 2000) {
-        Logger.info("Checking if cart badge is present");
         const element = await this.safeFindElement(this.common.cartBadge, timeout);
         if (!element) {
-            Logger.info("Cart badge is NOT present");
+            Logger.debug("Cart badge is NOT present");
             return false;
         }
         try {
-            const isDisplayed = await element.isDisplayed();
-            Logger.info("Cart badge is present");
-            return isDisplayed;
+            return await element.isDisplayed();
         } catch (err) {
             Logger.warning("Cart badge element disappeared after locating");
             return false;

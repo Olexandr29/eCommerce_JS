@@ -13,32 +13,34 @@ class CartPage extends BasePage {
         }
     }
 
-      async cartHasProduct() {
+    async cartHasProduct() {
         const webElementsProduct = await this.findElements(this.locators.productContainer);
-        // console.log("typeof webElementsProduct =", typeof webElementsProduct);
-        console.log("webElementsProduct.length =", webElementsProduct.length);
         return webElementsProduct.length >= 1;
     }
 
     async removeProduct() {
-        Logger.info("Remove product");
-        await this.safeClick(this.locators.removeBtn);
+        return await this.logStep("Remove product", async () => {
+            await this.safeClick(this.locators.removeBtn);
+        });
     }
 
     async openCheckout() {
-        Logger.info("Open/navigate to checkout page");
-        await this.safeClick(this.locators.checkoutBtn);
-    } 
+        return await this.logStep("Open Checkout page", async () => {
+            await this.safeClick(this.locators.checkoutBtn);
+        });
+    }
 
     async remove1OfItemsFromCart() {
-        const removeBtns = await this.findElements(this.locators.removeBtn);
-        for (let i = 0; i < removeBtns.length; i++) {
-            removeBtns[i].click();
-            break;
-        }
+        return await this.logStep("Remove 1 product from cart", async () => {
+            const removeBtns = await this.findElements(this.locators.removeBtn);
+            for (let i = 0; i < removeBtns.length; i++) {
+                removeBtns[i].click();
+                break;
+            }
+        });
     }
 
 
-        }
+}
 
 module.exports = CartPage;
