@@ -19,9 +19,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npx mocha --timeout 21000 --exit
+      - name: Run tests with Allure
+        run: npm test
         env: 
           HEADLESS: true
+          ALLURE_RESULTS_DIR: allure-results
+        
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
       
       
