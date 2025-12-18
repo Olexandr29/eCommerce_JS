@@ -15,23 +15,45 @@ class BasePage {
 
     }
 
-    async logStep(name, body) {
+     async logStep(name, body) {
         Logger.info(name);
-        return await step(name, async () => {
-            return await body();
-        });
+
+        const step = global.step;
+        if (step && typeof step === "function") {
+            return await step(name, async () => {
+                try {
+                    const result = await body();
+                    return result;
+                } catch (err) {
+                    throw err;
+                }
+            });
+        }
+
+        return await body();
     }
 
-    //  async step(name, action) {
-    //         return step(name, async() => {
-    //             return await action();
-    //         })
+    // async logStep(name, body) {
+    //     Logger.info(name);
+    //     if (step?.testRuntime) { 
+    //         return await step(name, body);
     //     }
+    //         return await body();
+    // }
+
+
+    //  async logStep(name, body) {
+    //     Logger.info(name);
+    //     return await step(name, async () => {
+    //         return await body();
+    //     });
+    // }
+    
 
     async open(url) {
-        return await this.logStep(`Open page: ${url}`, async() => {
+        // return await this.logStep(`Open page: ${url}`, async() => {
         await this.driver.get(url);
-           });
+        //    });
     }
 
     async findElement(locator) {

@@ -43,6 +43,7 @@ module.exports = {
         emptyUsernameField: "Epic sadface: Username is required",
         emptyPasswordField: "Epic sadface: Password is required",
         notExistedUser: "Epic sadface: Username and password do not match any user in this service",
+        checkout1FirstName: "Error: First Name is required",
     }
 
     }

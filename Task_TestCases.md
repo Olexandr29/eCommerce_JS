@@ -200,7 +200,7 @@ Expected Result: The user is redirected back to the inventory page (/inventory.h
 
 - [] Automate tests @Functional 
 
-<details><summary>✅Automated (tc014-018)</summary>
+<details><summary>✅Automated (tc014-021)</summary>
 
 *Products Page*
 
@@ -269,6 +269,17 @@ Steps:
 - Add product → Go to cart → Checkout → Fill info → Finish
 
 Expected Result: Confirmation page with "Thank you for your order!"
+
+TC-021: Checkout form validation
+
+Preconditions: Logged in as standard_user, in checkout step one
+
+Steps:
+- Leave fields empty
+- Click Continue
+
+Expected Result: Error like "First Name is required"
+
 
 </details>
 

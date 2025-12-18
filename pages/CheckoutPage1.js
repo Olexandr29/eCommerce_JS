@@ -11,6 +11,7 @@ class CheckoutPage1 extends BasePage {
         lastnameField: By.css("input[data-test='lastName']"),
         zipField: By.css("input[data-test='postalCode']"),
         continueBtn: By.css("input[data-test='continue']"),
+        errText: By.css("h3[data-test='error']"),
     }
     }
 
@@ -20,6 +21,14 @@ class CheckoutPage1 extends BasePage {
         await this.type(this.locators.lastnameField, lastName);
         await this.type(this.locators.zipField, zip);
         await this.safeClick(this.locators.continueBtn);
+        });
+    }
+
+    async fillCheckout1WithEmptyFields() {
+        await this.safeClick(this.locators.continueBtn);
+        const errorText = await this.waitAndGetText(this.locators.errText);
+        return await this.logStep(`Fill Checkout1 with empty fields and get ${errorText}`, async () => {
+            return errorText;
         });
     }
 

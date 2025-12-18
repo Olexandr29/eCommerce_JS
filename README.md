@@ -8,7 +8,7 @@ This project aims to build a scalable and maintainable **UI automation framework
 - WebDriver (Selenium WebDriver)
 - [Page Object Model (POM)](#page-object-model-pom-conventions)
 - GitHub Actions for CI/CD
-- [Reporting tools](#reporting-tools-allure--mochawesome) ([Allure](#2-Allure-Reporting-Documentation-Level)/[Mochawesome](#1-Mochawesome-Reporting-Execution-Level))
+- [Reporting tools(Allure/Mochawesome)](#reporting-tools-allure--mochawesome)
 
 The goal is to create a professional-grade automation environment that demonstrates real industry practices and allows running automated tests locally and remotely.
 
@@ -174,27 +174,27 @@ Mocha will run any test inside `/test`.
 
 Mochawesome is used as a Mocha reporter to provide structured execution reports in addition to console output.
 
-**Purpose**
+#### Purpose
 
 - Visualize test execution results
 - Analyze passed/failed tests
 - Review execution duration
 - Useful for engineering debugging and CI artifacts
 
-**Characteristics**
+#### Characteristics
 
 - Based on Mocha test structure
 - Does not understand Page Objects or business steps
 - Focused on test execution, not documentation
 
-**Typical Output**
+#### Typical Output
 
 - Test name
 - Status (passed / failed)
 - Execution time
 - Stack traces on failure
 
-**Example (console output):**
+#### Example (console output):
 ```test
 ✔ TC-020: Full purchase flow (4200ms)
 20 passing (1m)
@@ -223,31 +223,32 @@ An example of this implementation is provided in the **Allure Reporting** sectio
 
 Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution.
 
-**Purpose**
+#### Purpose
+
 - Represent automated tests as living documentation
 - Bridge manual test cases and automation
 - Provide business-readable reports
 
-**What Allure can add**
+#### What Allure can add
 - Steps (step)
 - Descriptions (description)
 - Severity levels (severity)
 - Labels, features, stories
 - Attachments (screenshots, logs)
 
-**Design Principles**
+#### Design Principles
+
 - One logical user action = one Allure step
 - Reusable actions (e.g. login) are documented once
 - Avoid step noise and duplication
 
-
-**Example (Test Metadata)**
+#### Example (Test Metadata)
 ```js
 description(this.test.title);
 severity(AllureSeverity.CRITICAL);
 ```
 
-**Example (Page-Level Step)**
+#### Example (Page-Level Step)
 ```js
 return this.logStep("Perform Login", async () => {
     await this.open(baseUrl);
@@ -260,7 +261,7 @@ return this.logStep("Perform Login", async () => {
 Allure reports are generated separately and viewed as an HTML dashboard.
 
 
-**Running Tests with Allure**
+#### Running Tests with Allure
 
 Run tests with Allure reporting enabled:
 ```bash
@@ -277,20 +278,21 @@ Open report:
 npm run allure:open
 ```
 
-**Running Tests with Allure via Batch Script**
+#### Running Tests with Allure via Batch Script
 
 For convenience during local development, the three Allure-related commands were grouped into a single Windows batch script.
 
-**Script name:** [run-allure-tests.bat](https://github.com/Olexandr29/eCommerce_JS/blob/main/run-allure-tests.bat) 
+#### Script name:  [run-allure-tests.bat](https://github.com/Olexandr29/eCommerce_JS/blob/main/run-allure-tests.bat) 
 
-**Purpose:** Run tests, generate the Allure report, and open it in a browser with a single command.
+#### Purpose: 
+Run tests, generate the Allure report, and open it in a browser with a single command.
 
 To execute the script manually, simply run:
 ```bash
 ./run-allure-tests.bat
 ```
 
-**Test Organization**
+#### Test Organization
 - Tests are grouped by purpose:
   -  @Smoke
   - @Sanity

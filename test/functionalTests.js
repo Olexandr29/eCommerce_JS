@@ -1,4 +1,4 @@
-const {By, Builder} = require("selenium-webdriver");
+const { By, Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const BaseTest = require("./baseTest");
 const LoginPage = require("../pages/LoginPage");
@@ -32,7 +32,7 @@ describe("@Functional tests", function () {
         await base.tearDown(this.currentTest);
     });
 
-    it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending () {
+    it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
@@ -42,7 +42,7 @@ describe("@Functional tests", function () {
         assert.strictEqual(await inventoryPage.isNumbersAsc(prices), true, "Products are not sorted by ascending price");
     });
 
-    it("TC-015: Sort products by name (Z to A)", async function testSortByNameDescending () {
+    it("TC-015: Sort products by name (Z to A)", async function testSortByNameDescending() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
@@ -99,15 +99,15 @@ describe("@Functional tests", function () {
         assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Added product is not displayed in the cart");
         assert.strictEqual(await inventoryPage.getCartBadgeNum(), 1, "The wrong number is displayed in the cart badge");
         const productDetailsPage = new ProductDetailsPage(driver);
-        
-        const actualUrl = await inventoryPage.openProductDetailsPage(); 
+
+        const actualUrl = await inventoryPage.openProductDetailsPage();
         const expectedUrlWithoutIdNum = testData.expected.productDetailsPageUrl;
-    
+
         assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
         assert.strictEqual(await productDetailsPage.getCartBadgeNum(), 1, "Cart state is not persist across navigation, and cart badge is not 1 now");
-})
-    
-     it("TC-020: Full purchase flow", async function testFullPurchaseFlow() {
+    })
+
+    it("TC-020: Full purchase flow", async function testFullPurchaseFlow() {
         description(this.test.title);
         severity(AllureSeverity.BLOCKER);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
@@ -124,7 +124,21 @@ describe("@Functional tests", function () {
         const confirmationPage = new ConfirmationPage(driver);
         assert.strictEqual(await checkoutPage2.openConfirmationPage(), testData.expected.confirmationPageUrl, "User is not redirected to the Confirmation page")
         assert.strictEqual(await confirmationPage.getConfirmationText(), testData.messages.confirmationPageText, "Confirmation page does not contain the text 'Thank you for your order!'");
-     })
+    })
+
+    it("TC-021: Checkout form validation", async function testCheckoutFormValidation() {
+        description(this.test.title);
+        severity(AllureSeverity.NORMAL);
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+        const inventoryPage = new InventoryPage(driver);
+        await inventoryPage.addOneItemToCart();
+        await inventoryPage.openCart();
+        const cartPage = new CartPage(driver);
+        await cartPage.openCheckout();
+        const checkoutPage1 = new CheckoutPage1(driver);
+        assert.strictEqual(await checkoutPage1.fillCheckout1WithEmptyFields(), testData.errors.checkout1FirstName, "The error message is not correct");
+    })
+
 
 
 })
