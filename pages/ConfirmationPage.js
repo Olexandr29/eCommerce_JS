@@ -1,6 +1,6 @@
 const {By, Builder} = require("selenium-webdriver");
 const BasePage = require("../pages/BasePage");
-
+const Logger = require("../utils/logger");
 
 class ConfirmationPage extends BasePage {
     constructor(driver) {
@@ -18,6 +18,8 @@ class ConfirmationPage extends BasePage {
     });
     }
 
-}
+   
 
+}
+ 
 module.exports = ConfirmationPage;

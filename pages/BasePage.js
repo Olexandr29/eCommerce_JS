@@ -1,6 +1,10 @@
 const { By, until } = require("selenium-webdriver");
 const Logger = require("../utils/logger");
-const { step } = require("allure-js-commons");
+// const { step } = require("allure-js-commons");
+let step;
+if(process.env.ALLURE === "true") {
+    ({step} = require("allure-js-commons"));
+}
 
 class BasePage {
     constructor(driver) {
@@ -15,30 +19,34 @@ class BasePage {
 
     }
 
-     async logStep(name, body) {
+    async logStep(name, body) {
         Logger.info(name);
 
-        const step = global.step;
-        if (step && typeof step === "function") {
-            return await step(name, async () => {
-                try {
-                    const result = await body();
-                    return result;
-                } catch (err) {
-                    throw err;
-                }
-            });
+        if(!step) {
+            return await body();
         }
 
-        return await body();
+        return await step(name, async () => {
+            return await body();
+        });
     }
 
-    // async logStep(name, body) {
+    //  async logStep(name, body) {
     //     Logger.info(name);
-    //     if (step?.testRuntime) { 
-    //         return await step(name, body);
+
+    //     const step = global.step;
+    //     if (step && typeof step === "function") {
+    //         return await step(name, async () => {
+    //             try {
+    //                 const result = await body();
+    //                 return result;
+    //             } catch (err) {
+    //                 throw err;
+    //             }
+    //         });
     //     }
-    //         return await body();
+
+    //     return await body();
     // }
 
 
@@ -185,6 +193,14 @@ class BasePage {
         const cartBadgeText = await cartBadgeEl.getText();
         const cartBadgeNum = parseInt(cartBadgeText, 10)
         return await cartBadgeNum;
+    }
+
+    async goBackAndWait(expectedUrlPart, timeout = 5000) {
+        return await this.logStep("Browser back", async () => {
+            await this.driver.navigate().back();
+            await this.driver.wait(until.urlContains(expectedUrlPart), timeout);
+            return await this.driver.getCurrentUrl();
+        });
     }
 
 

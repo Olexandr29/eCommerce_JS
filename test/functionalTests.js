@@ -126,7 +126,7 @@ describe("@Functional tests", function () {
         assert.strictEqual(await confirmationPage.getConfirmationText(), testData.messages.confirmationPageText, "Confirmation page does not contain the text 'Thank you for your order!'");
     })
 
-    it("TC-021: Checkout form validation", async function testCheckoutFormValidation() {
+    it("TC-021:Checkout form validation", async function testCheckoutFormValidation() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
@@ -139,6 +139,45 @@ describe("@Functional tests", function () {
         assert.strictEqual(await checkoutPage1.fillCheckout1WithEmptyFields(), testData.errors.checkout1FirstName, "The error message is not correct");
     })
 
+    it("TC-022: Total price with tax is calculated correctly", async function testCheckCalculations() {
+        description(this.test.title);
+        severity(AllureSeverity.BLOCKER);
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+        const inventoryPage = new InventoryPage(driver);
+        await inventoryPage.add3ItemsToCart();
+        await inventoryPage.openCart();
+        const cartPage = new CartPage(driver);
+        await cartPage.openCheckout();
+        const checkoutPage1 = new CheckoutPage1(driver);
+        const randomData = testData.randomCheckout();
+        await checkoutPage1.fillCheckout1(randomData.firstName, randomData.lastName, randomData.zip);
+        const checkoutPage2 = new CheckoutPage2(driver);
+        const subTotalBill = await checkoutPage2.getSubtotalPrices();
+        const recalculatedSubtotal = await checkoutPage2.getPricesSum();
+        assert.strictEqual(subTotalBill, recalculatedSubtotal,"The subtotal price is not correct");
+        await checkoutPage2.getTax();
+        assert.strictEqual(await checkoutPage2.getTotal(), await checkoutPage2.getSumOfSubtotalAndTax(), "The sum of Subtotal and Tax is not equal to Total");
+    });
+
+    it("TC-023: Back from product detail to product list", async function testBackToPLP() {
+        description(this.test.title);
+        severity(AllureSeverity.NORMAL);
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+        const inventoryPage = new InventoryPage(driver);
+        const productDetailsPage = new ProductDetailsPage(driver);
+        const actualUrl = await inventoryPage.openProductDetailsPage();
+        const expectedUrlWithoutIdNum = testData.expected.productDetailsPageUrl;
+        assert.ok(actualUrl.startsWith(expectedUrlWithoutIdNum), `User was not redirected to PDP ${expectedUrlWithoutIdNum}, and actual now ${actualUrl}`);
+        assert.strictEqual(await productDetailsPage.returnBackToPLP(), testData.expected.inventoryPageUrl, "navigation back to inventory page is not successful");
+    });
+
+    it("TC-024: Use browser back button from product detail", async function testBrowserBacktoPLP() {
+        await loginPage.login(testData.users.standard.username, testData.users.standard.password);
+        const inventoryPage = new InventoryPage(driver);
+        const productDetailsPage = new ProductDetailsPage(driver);
+        await inventoryPage.openProductDetailsPage();
+        assert.strictEqual(await productDetailsPage.goBackAndWait(testData.expected.inventoryPageUrl), testData.expected.inventoryPageUrl, "user is not redirected back to Inventory page via browser back button");
+    });
 
 
 })

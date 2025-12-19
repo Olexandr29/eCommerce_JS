@@ -12,6 +12,8 @@ class ProductDetailsPage extends BasePage {
             description: By.css("div[data-test='inventory-item-desc']"),
             price: By.css("div[data-test='inventory-item-price']"),
             addToCartBtn: By.css("button[data-test='add-to-cart']"),
+            backToProductsBtn: By.id("back-to-products"),
+            // backToProductsBtn: By.css("button[data-test='back-to-products']"),
 
         }
     }
@@ -47,7 +49,14 @@ class ProductDetailsPage extends BasePage {
         });
     }
     
+    async returnBackToPLP() {
+        return await this.logStep("Navigate back to PLP(Inventory page", async () => {
+        await this.safeClick(this.locators.backToProductsBtn);
+        return await this.getCurrentUrl();
+        });
+    }
 
+    
 }
 
 module.exports = ProductDetailsPage;

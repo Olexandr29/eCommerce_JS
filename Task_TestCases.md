@@ -198,9 +198,9 @@ Expected Result: The user is redirected back to the inventory page (/inventory.h
 
 ---
 
-- [] Automate tests @Functional 
+- [] Automate tests @Functional (tc014-024)
 
-<details><summary>✅Automated (tc014-021)</summary>
+<details><summary>✅Automated </summary>
 
 *Products Page*
 
@@ -259,6 +259,7 @@ Step: Navigate to another page (e.g. product detail) and return
 Expected Result: Cart badge is preserved, item still in cart
 
 </br>
+
 *Checkout Flow*
 
 TC-020: Full purchase flow
@@ -280,6 +281,33 @@ Steps:
 
 Expected Result: Error like "First Name is required"
 
+TC-022: Total price with tax is calculated correctly
+
+Preconditions: Logged in, 2+ known items added, in checkout overview
+
+Step: Observe item prices, subtotal, tax, and total
+
+Expected Result: Subtotal + Tax = Total (matches UI values)
+
+</br>
+
+*Navigation*
+
+TC-023: Back from product detail to product list
+
+Preconditions: Logged in as standard_user, on product detail page
+
+Step: Click “Back to products”
+
+Expected Result: Return to /inventory.html
+
+TC-024: Use browser back button from product detail
+
+Preconditions: Logged in as standard_user, on product detail page
+
+Step: Press browser back
+
+Expected Result: Returns to /inventory.html
 
 </details>
 
