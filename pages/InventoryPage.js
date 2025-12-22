@@ -10,6 +10,7 @@ class InventoryPage extends BasePage {
         this.locators = {
             logo: By.css("div[class='app_logo']"),
             header: By.css("div[data-test*='header']"),
+            inventoryList: By.css(".inventory_list"),
             inventTitle: By.css("span[data-test='title']"),
             burgerMenu: By.id("react-burger-menu-btn"),
             logOutBtn: By.id("logout_sidebar_link"),
@@ -144,9 +145,30 @@ class InventoryPage extends BasePage {
         }
 
     async areLogoAndHeaderVisible() {
-        const logoEl = await this.waitForVisible(this.locators.logo);
-        const headerEl = await this.waitForVisible(this.locators.header);
-        return (await logoEl.isDisplayed() ) && (await headerEl.isDisplayed() );
+        const logo = await this.waitForVisible(this.locators.logo);
+        const header = await this.waitForVisible(this.locators.header);
+        return (await logo.isDisplayed() ) && (await header.isDisplayed() );
+    }
+
+    async isLayoutCorrect() {
+        const logo = await this.waitForVisible(this.locators.logo);
+        const header = await this.waitForVisible(this.locators.header);
+        const inventoryList = await this.waitForVisible(this.locators.inventoryList);
+        const cartIcon = await this.waitForVisible(this.common.cartIcon);
+
+        // console.log(
+        //     `await logo.isDisplayed(),  ${await logo.isDisplayed()},
+        //     await header.isDisplayed(), ${await header.isDisplayed() },
+        //     await inventoryList.isDisplayed(), ${await inventoryList.isDisplayed() },
+        //     await cartIcon.isDisplayed(), ${await cartIcon.isDisplayed() }`
+        // );
+
+        return (
+            await logo.isDisplayed() &&
+            await header.isDisplayed() &&
+            await inventoryList.isDisplayed() &&
+            await cartIcon.isDisplayed()
+        );
     }
 
 

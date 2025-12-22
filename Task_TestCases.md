@@ -314,15 +314,24 @@ Expected Result: Returns to /inventory.html
 ---
 
 - [ ] Automate @UI/UX & Negative tests (tc025-030)
-<details><summary>✅ Automated tc025</summary>
+<details><summary>✅ Automated tc025-026</summary>
 
 TC-025: Logo and header visibility
+- Preconditions: User is logged in as standard_user, on /inventory.html
 
-Preconditions: User is logged in as standard_user, on /inventory.html
+- Step: 1. Observe top of the page
 
-Step: 1. Observe top of the page
+- Expected Result: Logo + "Products" heading visible
 
-Expected Result: Logo + "Products" heading visible
+
+TC-026: Browser window resizing
+
+- Preconditions: User is logged in as standard_user, on /inventory.html
+
+- Step: 1. Resize browser window (e.g. shrink, expand)
+
+- Expected Result: Layout adjusts responsively, no broken layout
+
 </details>
 
 ---

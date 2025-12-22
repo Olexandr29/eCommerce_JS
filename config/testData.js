@@ -44,6 +44,27 @@ module.exports = {
         emptyPasswordField: "Epic sadface: Password is required",
         notExistedUser: "Epic sadface: Username and password do not match any user in this service",
         checkout1FirstName: "Error: First Name is required",
-    }
+    },
+
+    windowSize: {
+        mobile: {
+            name: "Mobile",
+            width: 375,
+            height: 667
+        },
+
+        tablet: {
+            name: "Tablet",
+            width: 768,
+            height: 1024
+        },
+
+        desktop: {
+            name: "Desctop",
+            width: 1440,
+            height: 900
+        }
+    },
+
 
     }

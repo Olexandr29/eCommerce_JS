@@ -203,6 +203,9 @@ class BasePage {
         });
     }
 
+    async resizeWindow(width, height) {
+        await this.driver.manage().window().setRect({width, height});
+    }
 
 }
 
