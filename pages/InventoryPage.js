@@ -8,6 +8,8 @@ class InventoryPage extends BasePage {
         super(driver);
    
         this.locators = {
+            logo: By.css("div[class='app_logo']"),
+            header: By.css("div[data-test*='header']"),
             inventTitle: By.css("span[data-test='title']"),
             burgerMenu: By.id("react-burger-menu-btn"),
             logOutBtn: By.id("logout_sidebar_link"),
@@ -140,6 +142,12 @@ class InventoryPage extends BasePage {
         }
         });
         }
+
+    async areLogoAndHeaderVisible() {
+        const logoEl = await this.waitForVisible(this.locators.logo);
+        const headerEl = await this.waitForVisible(this.locators.header);
+        return (await logoEl.isDisplayed() ) && (await headerEl.isDisplayed() );
+    }
 
 
 }
