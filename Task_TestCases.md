@@ -313,8 +313,8 @@ Expected Result: Returns to /inventory.html
 
 ---
 
-- [ ] Automate @UI/UX & Negative tests (tc025-030)
-<details><summary>✅ Automated tc025-027</summary>
+- [ ] Automate @UI/UX tests (tc025-027)
+<details><summary>✅ Automated</summary>
 
 TC-025: Logo and header visibility
 - Preconditions: User is logged in as standard_user, on /inventory.html
@@ -345,3 +345,22 @@ TC-027: Button state change on interaction
 </details>
 
 ---
+
+- [ ] Automate @Negative tests (tc028-030)
+<details><summary>✅ Automated tc028</summary>
+
+TC-028: Entering SQL Injection in Username
+
+- Preconditions: User is on the login page: https://www.saucedemo.com/
+
+- Steps:
+1. Enter admin' OR '1'='1 into the Username field
+2. Enter any password
+3. Click the Login button
+
+- Expected Result: Login is rejected, and an error message is shown
+
+</details>
+
+---
+

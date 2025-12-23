@@ -10,6 +10,8 @@ module.exports = {
         fake: {username: "fake_user", password: "fake_password"},
     },
 
+    sqlInjectionUserName: "admin' OR '1'='1",
+
     infoForCheckout1: {
         firstName: "John",
         lastName: "Smith",
