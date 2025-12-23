@@ -314,7 +314,7 @@ Expected Result: Returns to /inventory.html
 ---
 
 - [ ] Automate @UI/UX & Negative tests (tc025-030)
-<details><summary>✅ Automated tc025-026</summary>
+<details><summary>✅ Automated tc025-027</summary>
 
 TC-025: Logo and header visibility
 - Preconditions: User is logged in as standard_user, on /inventory.html
@@ -331,6 +331,16 @@ TC-026: Browser window resizing
 - Step: 1. Resize browser window (e.g. shrink, expand)
 
 - Expected Result: Layout adjusts responsively, no broken layout
+
+
+TC-027: Button state change on interaction
+
+- Preconditions: User is logged in as standard_user, on /inventory.html
+- Steps:
+1. Click “Add to cart”
+2. Observe button changes
+3. Click “Remove”
+- Expected Result: Button text/color changes appropriately at each step
 
 </details>
 

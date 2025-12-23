@@ -45,4 +45,42 @@ describe("@UI/UX and Negative tests", function () {
         assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${testData.windowSize.desktop.name} (${testData.windowSize.desktop.width}x${testData.windowSize.desktop.height})`);
     });
 
-})
+    it("TC-027: Button state change on interaction", async function testButtonInteraction() {
+        description(this.test.title);
+        severity(AllureSeverity.BLOCKER);
+        const inventoryPage = new InventoryPage(driver);
+
+         await inventoryPage.logStep("Validate initial button state", async () => {
+        const text = await inventoryPage.getActionButtonText();
+        assert.strictEqual(text, "Add to cart");
+    });
+
+    await inventoryPage.logStep("Perform triggering action", async () => {
+        await inventoryPage.clickAddToCart();
+    });
+
+    await inventoryPage.logStep("Verify updated button state", async () => {
+        const text = await inventoryPage.getActionButtonText();
+        assert.strictEqual(text, "Remove");
+    });
+
+    await inventoryPage.clickRemove();
+
+    const finalText = await inventoryPage.getActionButtonText();
+    assert.strictEqual(finalText, "Add to cart");
+
+});
+
+
+    })
+
+
+
+//     TC-027: Button state change on interaction
+
+// Preconditions: User is logged in as standard_user, on /inventory.html
+// Steps:
+// Click “Add to cart”
+// Observe button changes
+// Click “Remove”
+// Expected Result: Button text/color changes appropriately at each step

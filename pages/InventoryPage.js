@@ -23,6 +23,7 @@ class InventoryPage extends BasePage {
             optionNameDesc: By.css("select[data-test='product-sort-container'] option[value='za']"),
             optionPriceAsc: By.css("select[data-test='product-sort-container'] option[value='lohi']"),
             optionPriceDesc: By.css("select[data-test='product-sort-container'] option[value='hilo']"),
+            removeBtn: By.css("button[data-test^='remove']"),
         }
     }
 
@@ -172,6 +173,25 @@ class InventoryPage extends BasePage {
     }
 
 
+    async clickAddToCart() {
+        await this.safeClick(this.locators.addToCartBtns);
+    }
+
+    async clickRemove() {
+        await this.safeClick(this.locators.removeBtn);
+    }
+
+    async getActionButtonText() {
+        if (await this.safeFindElement(this.locators.removeBtn, 1000)) {
+            return await (await this.findElement(this.locators.removeBtn)).getText();
+        }
+        if (await this.safeFindElement(this.locators.addToCartBtns, 1000)) {
+            return await (await this.findElement(this.locators.addToCartBtns)).getText();
+        }
+        throw new Error("No action button (Add to cart / Remove) found on Inventory page");
+    }
+
+    
 }
 
 module.exports = InventoryPage;
