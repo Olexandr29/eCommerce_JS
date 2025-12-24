@@ -26,21 +26,39 @@ class LoginPage extends BasePage {
   }
 
   async loginWithInvalidCredentials(username, password) {
-        await this.login(username, password);
-        return await this.logStep("Login with invalid credentials and get error", async () => {
-        let errorMessage = await this.waitAndGetText(this.locators.errLoginMsg);
-        return errorMessage;
+    await this.login(username, password);
+    return await this.logStep("Login with invalid credentials and get error", async () => {
+      let errorMessage = await this.waitAndGetText(this.locators.errLoginMsg);
+      // console.log("errorMessage=", errorMessage)
+      return errorMessage;
     });
   }
 
   async attemptTologinWithEmptyFields() {
     return await this.logStep("Login with empty fields and get error", async () => {
-    await this.open(TestData.baseUrl);
-    await this.safeClick(this.locators.loginBtn);
-    const emptyFieldsErrMsg = await this.waitAndGetText(this.locators.errLoginMsg);
-    return emptyFieldsErrMsg;
-  });
+      await this.open(TestData.baseUrl);
+      await this.safeClick(this.locators.loginBtn);
+      const emptyFieldsErrMsg = await this.waitAndGetText(this.locators.errLoginMsg);
+      return emptyFieldsErrMsg;
+    });
   }
+
+  async attemptToLogin(username, password) {
+    return await this.logStep(
+      "Attempt login with long username and analyze rejection behavior",
+      async () => {
+        await this.login(username, password);
+        const errorEl = await this.safeFindElement(this.locators.errLoginMsg, 2000);
+        const usernameInput = await this.findElement(this.locators.username)
+        const usernameValue = await usernameInput.getAttribute("value");
+        return {
+          errorMessage: errorEl ? await errorEl.getText() : null,
+          actualUsernameLength: usernameValue.length
+        };
+      });
+  }
+
+
 
 
 }

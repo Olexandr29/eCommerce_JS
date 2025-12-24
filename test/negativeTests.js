@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { step, label, description, severity } = require("allure-js-commons");
+const { step, label, description, severity, logStep } = require("allure-js-commons");
 const BaseTest = require("./baseTest");
 const BasePage = require("../pages/BasePage");
 const LoginPage = require("../pages/LoginPage");
@@ -25,9 +25,26 @@ describe("@Negative tests", function () {
     it("TC-028: Entering SQL Injection in Username", async function testSQLinjection() {
         description(this.test.title);
         severity(allureSeverity.CRITICAL);
-        loginPage = new LoginPage(driver);
+        const loginPage = new LoginPage(driver);
         assert.strictEqual(await loginPage.loginWithInvalidCredentials(testData.sqlInjectionUserName, testData.users.standard.password),
         testData.errors.notExistedUser, "Error message for SQL injection for username is not correct");
+    });
+
+    it("TC-029: Long Value in Username Field", async function testLongUsername() {
+        description(this.test.title);
+        severity(allureSeverity.NORMAL);
+        const loginPage = new LoginPage(driver);
+        const result = await loginPage.attemptToLogin(testData.longName500, 
+            testData.users.standard.password);
+
+        assert.ok(
+            result.errorMessage === testData.errors.notExistedUser ||
+            result.actualUsernameLength < testData.longName500.length,
+            `Login was not rejected correctly for long username.
+            Expected: error message OR trunced input.
+            Actual: errorMessage=${result.errorMessage}, actualUsernameLength=${result.actualUsernameLength}`
+        );
+        
     })
 
 

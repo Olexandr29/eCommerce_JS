@@ -155,7 +155,8 @@ Clean, maintainable test structure
 
 ## Local Test Execution
 
-Run all tests:
+<details><summary>Run all tests:
+</summary>
 
 ```
 
@@ -163,7 +164,49 @@ npm test
 
 ```
 
-Mocha will run any test inside `/test`.
+By default, Mocha will run all test files inside `/test` directory (based on the configured test command).
+
+</details>
+
+<details><summary>Run a specific test suite or test case</summary>
+
+- **Run a single test suit (file)**
+
+Temprorary modify the `describe` block in your test file
+
+from:
+```js
+describe("@Negative tests", function () {
+
+```
+to:
+```js
+describe.only("@Negative tests", function () {
+
+```
+
+- **Run a single test case**
+
+Temprorary modify `it` block in your test file
+
+from:
+```js
+it("TC-029: Long Value in Username Field", async function testLongUsername() {
+```
+to:
+```js
+it.only("TC-029: Long Value in Username Field", async function testLongUsername() {
+```
+
+Then run:
+```
+npm test
+```
+
+*Important*
+
+Always remove `.only` before commit changes to the repository.
+</details>
 
 ---
 

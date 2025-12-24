@@ -11,6 +11,7 @@ module.exports = {
     },
 
     sqlInjectionUserName: "admin' OR '1'='1",
+    longName500: "a".repeat(500),
 
     infoForCheckout1: {
         firstName: "John",

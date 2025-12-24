@@ -347,9 +347,9 @@ TC-027: Button state change on interaction
 ---
 
 - [ ] Automate @Negative tests (tc028-030)
-<details><summary>✅ Automated tc028</summary>
+<details><summary> ✅  Automated tc028-029</summary>
 
-TC-028: Entering SQL Injection in Username
+###### TC-028: Entering SQL Injection in Username
 
 - Preconditions: User is on the login page: https://www.saucedemo.com/
 
@@ -359,6 +359,17 @@ TC-028: Entering SQL Injection in Username
 3. Click the Login button
 
 - Expected Result: Login is rejected, and an error message is shown
+
+
+###### TC-029: Long Value in Username Field
+
+- Preconditions: User is on the login page
+
+- Steps:
+1. Enter a string of 500 characters (e.g., "a" × 500) into the Username field
+2. Enter any password
+3. Click the Login button
+- Expected Result: Login fails, either due to an error message or input being truncated
 
 </details>
 
