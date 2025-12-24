@@ -347,7 +347,7 @@ TC-027: Button state change on interaction
 ---
 
 - [ ] Automate @Negative tests (tc028-030)
-<details><summary> ✅  Automated tc028-029</summary>
+<details><summary> ✅  Automated</summary>
 
 ###### TC-028: Entering SQL Injection in Username
 
@@ -371,7 +371,17 @@ TC-027: Button state change on interaction
 3. Click the Login button
 - Expected Result: Login fails, either due to an error message or input being truncated
 
+###### TC-030: Login with Leading/Trailing Spaces in Username
+
+- Preconditions: User is on the login page
+
+- Steps:
+
+1. Enter standard_user (with spaces before and after) in the Username field
+2. Enter the correct password
+3. Click the Login button
+- Expected Result: Login fails because the spaces are treated as part of the username
+
 </details>
 
 ---
-

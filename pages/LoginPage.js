@@ -17,12 +17,12 @@ class LoginPage extends BasePage {
   }
 
   async login(username, password) {
-    return await this.logStep("Perform login", async () => {
+    // return await this.logStep("Perform login", async () => {
       await this.open(TestData.baseUrl);
       await this.type(this.locators.username, username);
       await this.type(this.locators.password, password);
       await this.click(this.locators.loginBtn);
-    });
+    // });
   }
 
   async loginWithInvalidCredentials(username, password) {
@@ -44,18 +44,14 @@ class LoginPage extends BasePage {
   }
 
   async attemptToLogin(username, password) {
-    return await this.logStep(
-      "Attempt login with long username and analyze rejection behavior",
-      async () => {
-        await this.login(username, password);
-        const errorEl = await this.safeFindElement(this.locators.errLoginMsg, 2000);
-        const usernameInput = await this.findElement(this.locators.username)
-        const usernameValue = await usernameInput.getAttribute("value");
-        return {
-          errorMessage: errorEl ? await errorEl.getText() : null,
-          actualUsernameLength: usernameValue.length
-        };
-      });
+    await this.login(username, password);
+    const errorEl = await this.safeFindElement(this.locators.errLoginMsg, 2000);
+    const usernameInput = await this.findElement(this.locators.username)
+    const usernameValue = await usernameInput.getAttribute("value");
+    return {
+      errorMessage: errorEl ? await errorEl.getText() : null,
+      actualUsernameLength: usernameValue.length
+    };
   }
 
 

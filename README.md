@@ -352,6 +352,7 @@ To execute the script manually, simply run:
 - Project organized using SCRUM methodology (2-week sprints)
 
 - Tasks tracked via Kanban board
+- Starting from Sprint 4, task management is migrated to GitHub Projects → https://github.com/users/Olexandr29/projects/1
 - Incremental implementation:
   - feature → test → reporting → refactoring
 
