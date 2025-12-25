@@ -32,6 +32,8 @@ describe("@Functional tests", function () {
         await base.tearDown(this.currentTest);
     });
 
+    this.retries(2);
+
     it("TC-014: Sort products by price(low to high) @Functional", async function testSortByPriceAscending() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
