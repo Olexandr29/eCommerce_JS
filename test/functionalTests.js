@@ -41,7 +41,9 @@ describe("@Functional tests", function () {
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.sortByPriceAsc();
         const prices = await inventoryPage.getProductPrices();
-        assert.strictEqual(await inventoryPage.isNumbersAsc(prices), true, "Products are not sorted by ascending price");
+        assert.strictEqual(await inventoryPage.isNumbersAsc(prices), 
+         true,
+         "Products are not sorted by ascending price");
     });
 
     it("TC-015: Sort products by name (Z to A)", async function testSortByNameDescending() {

@@ -37,7 +37,9 @@ describe("@Smoke tests", function () {
             description(this.test.title);
             severity(AllureSeverity.CRITICAL);
             try {
-                const actualErrMsgForLockedU = await loginPage.loginWithInvalidCredentials(TestData.users.locked.username, TestData.users.locked.password);
+                // const actualErrMsgForLockedU = await loginPage.loginWithInvalidCredentials(TestData.users.locked.username, TestData.users.locked.password);
+                   const actualErrMsgForLockedU = await loginPage.loginWithInvalidCredentials(TestData.users.locked.username, TestData.users.locked.password);
+
                 assert.strictEqual(actualErrMsgForLockedU, TestData.errors.lockedUserError, "The error message is not the same as specified in the requirements")
             } catch (error) {
                 console.log("The error happened - ", error);

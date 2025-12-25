@@ -27,7 +27,8 @@ project-root/
 ├── test/                 # Mocha test file/s
 │   └── smokeTests.js
 ├── config/               # Configuration settings (baseUrl), credentials, test data, environment settings
-│   └── testData.js
+│   └── users.json        # Test users credentials
+│   └── testData.js       # Shared test data and helpers
 ├── utils/                # Reusable helper functions (custom waits, screenshots, actions, wrappers)
 ├── .gitignore            # List of folders and files that will not be commited on GitHub
 ├── package.json          # json file with scripts and dependencies
@@ -39,6 +40,7 @@ The project follows a modular POM structure, where each UI page has its own clas
 - locators
 - helper methods
 - reusable page-specific actions
+
 </details>
 
 ---
@@ -346,6 +348,19 @@ To execute the script manually, simply run:
 </details>
 
 ---
+
+### Retry Strategy
+
+- Retry logic is enabled only for Functional test suites
+- Max retries: 2
+- Smoke, Negative and UI/UX tests are excluded
+- Retries are visible in Allure and Mochawesome reports
+- Deterministic failures are not masked (Deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
+Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
+Allure report shows multiple failed retries with final FAILED status)
+
+
+
 
 ## Process & Methodology
 

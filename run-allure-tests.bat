@@ -1,6 +1,6 @@
 @echo off
 echo Running tests with Allure ...
-call npm run test:allure
+call npm run test
 
 echo Generating Allure report ...
 call npm run allure:generate

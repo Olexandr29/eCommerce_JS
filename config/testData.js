@@ -1,15 +1,11 @@
+const users = require("./users.json");
 const random = require("../utils/randomData");
 
 module.exports = {
     baseUrl: "https://www.saucedemo.com/",
 
-    users: {
-        standard: {username: "standard_user", password: "secret_sauce"},
-        locked: {username: "locked_out_user", password: "secret_sauce"},
-        performance_glitch: {username: "performance_glitch_user", password: "secret_sauce"},
-        fake: {username: "fake_user", password: "fake_password"},
-    },
-
+    users,
+    
     sqlInjectionUserName: "admin' OR '1'='1",
     longName500: "a".repeat(500),
 
