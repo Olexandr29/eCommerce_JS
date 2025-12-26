@@ -68,7 +68,7 @@ this.locators = {
 
 Named in verb-based camelCase:
 - Page actions → verbs:
-login(), logOut(), addOneItemToCart()
+login(), logOut(), addProductToCartById()
 - Helpers → descriptive names:
 waitForVisible(), waitAndGetText(), safeClick()
 

@@ -13,9 +13,11 @@ const CheckoutPage2 = require("../pages/CheckoutPage2");
 const ConfirmationPage = require("../pages/ConfirmationPage");
 const Logger = require("../utils/logger");
 const AllureSeverity = require("../utils/allureSeverity");
+const DataHelper = require("../utils/dataHelper");
 
 describe("@Functional tests", function () {
-
+    let product;
+    let products;
     let base;
     let driver;
     let loginPage;
@@ -26,6 +28,9 @@ describe("@Functional tests", function () {
         driver = base.driver;
 
         loginPage = new LoginPage(driver);
+        product = DataHelper.getRandomProduct();
+        products = DataHelper.getRandomProducts(3);
+
     });
 
     afterEach(async function () {
@@ -77,7 +82,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.CRITICAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.add3ItemsToCart();
+        await inventoryPage.addProductsToCart(products);
         assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
     })
 
@@ -86,7 +91,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.NORMAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.add3ItemsToCart();
+        await inventoryPage.addProductsToCart(products);
         assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
@@ -99,7 +104,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.CRITICAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Added product is not displayed in the cart");
         assert.strictEqual(await inventoryPage.getCartBadgeNum(), 1, "The wrong number is displayed in the cart badge");
         const productDetailsPage = new ProductDetailsPage(driver);
@@ -116,7 +121,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.BLOCKER);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         const cartPage = new CartPage(driver);
         await inventoryPage.openCart();
         const checkoutPage1 = new CheckoutPage1(driver);
@@ -135,7 +140,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.NORMAL);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.openCheckout();
@@ -148,7 +153,7 @@ describe("@Functional tests", function () {
         severity(AllureSeverity.BLOCKER);
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.add3ItemsToCart();
+        await inventoryPage.addProductsToCart(products);
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.openCheckout();

@@ -2,6 +2,7 @@ const { By } = require("selenium-webdriver");
 const BasePage = require("./BasePage");
 const Logger = require("../utils/logger");
 const { step } = require("allure-js-commons");
+const DataHelper = require("../utils/dataHelper");
 
 class InventoryPage extends BasePage {
     constructor(driver) {
@@ -24,6 +25,9 @@ class InventoryPage extends BasePage {
             optionPriceAsc: By.css("select[data-test='product-sort-container'] option[value='lohi']"),
             optionPriceDesc: By.css("select[data-test='product-sort-container'] option[value='hilo']"),
             removeBtn: By.css("button[data-test^='remove']"),
+            addToCartBtnById: function (productId) {
+                return By.id(`add-to-cart-${productId}`);
+            }
         }
     }
 
@@ -69,13 +73,12 @@ class InventoryPage extends BasePage {
         });
     }
 
-    async addOneItemToCart() {
-        return await this.logStep("Add one item to cart", async () => {
-        let itemsArray = await this.findElements(this.locators.addToCartBtns);
-        if (itemsArray.length === 0) {
-            throw new Error("The 'Add to cart' button isn't found on the page")
-        }
-        await itemsArray[0].click();
+    async addProductToCartById(productId) {
+        return await this.logStep(`Add product to cart: ${productId}`, async () => {
+        const button = await this.findElement(
+            this.locators.addToCartBtnById(productId)
+        );
+        await button.click();
          });
     }
 
@@ -136,11 +139,10 @@ class InventoryPage extends BasePage {
         });
     }
 
-    async add3ItemsToCart() {
-        return await this.logStep("Add 3 products to cart", async () => {
-        const itemsArray = await this.findElements(this.locators.addToCartBtns);
-        for(let i = 0; i < 3; i++) {
-            await itemsArray[i].click();
+    async addProductsToCart(products) {
+        return await this.logStep(`Add ${products.length} products to cart`, async () => {
+        for(const product of products) {
+            await this.addProductToCartById(product.id);
         }
         });
         }

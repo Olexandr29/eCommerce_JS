@@ -11,13 +11,16 @@ const TestData = require('../config/testData');
 const { step, attachment, description, severity } = require("allure-js-commons");
 const Logger = require("../utils/logger");
 const AllureSeverity = require("../utils/allureSeverity");
+const DataHelper = require("../utils/dataHelper");
 
 describe("@Sanity tests", function () {
     let base;
     let driver;
     let loginPage;
+    let product;
 
     beforeEach(async function () {
+        product = DataHelper.getRandomProduct();
         base = new BaseTest();
         await base.setup();
         driver = base.driver;
@@ -65,7 +68,7 @@ describe("@Sanity tests", function () {
         severity(AllureSeverity.NORMAL);
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         assert.strictEqual(await inventoryPage.isCartEmpty(), false, "Cart is empty and the product is not added to cart")
         const cartPage = new CartPage(driver);
         await inventoryPage.openCart();
@@ -80,7 +83,7 @@ describe("@Sanity tests", function () {
         severity(AllureSeverity.BLOCKER)
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.openCheckout();
@@ -93,7 +96,7 @@ describe("@Sanity tests", function () {
         severity(AllureSeverity.BLOCKER);
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.openCheckout();
@@ -113,7 +116,7 @@ describe("@Sanity tests", function () {
         severity(AllureSeverity.NORMAL);
         await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.addOneItemToCart();
+        await inventoryPage.addProductToCartById(product.id);
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.openCheckout();
