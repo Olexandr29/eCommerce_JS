@@ -360,8 +360,6 @@ Test failed consistently across all retry attempts, confirming that retries do n
 Allure report shows multiple failed retries with final FAILED status)
 
 
-
-
 ## Process & Methodology
 
 - Project organized using SCRUM methodology (2-week sprints)

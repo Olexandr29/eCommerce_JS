@@ -204,102 +204,108 @@ Expected Result: The user is redirected back to the inventory page (/inventory.h
 
 *Products Page*
 
-TC-014: Sort products by price (low to high)
+##### TC-014: Sort products by price (low to high)
 
-Preconditions: User is logged in as standard_user, on /inventory.html
+- Preconditions: User is logged in as standard_user, on /inventory.html
 
-Step: Select "Price (low to high)"
+- Step: Select "Price (low to high)"
 
-Expected Result: Items sorted correctly from cheapest to most expensive
+- Expected Result: Items sorted correctly from cheapest to most expensive
 
-TC-015: Sort products by name (Z to A)
+##### TC-015: Sort products by name (Z to A)
 
-Preconditions: User is logged in as standard_user, on /inventory.html
+- Preconditions: User is logged in as standard_user, on /inventory.html
 
-Step: Select "Name (Z to A)"
+- Step: Select "Name (Z to A)"
 
-Expected Result: Items sorted in reverse alphabetical order
+- Expected Result: Items sorted in reverse alphabetical order
 
-TC-016: Product details view
+##### TC-016: Product details view
 
-Preconditions: User is logged in as standard_user, on /inventory.html
+- Preconditions: User is logged in as standard_user, on /inventory.html
 
-Step: Click on product name
+- Step: Click on product name
 
-Expected Result: New page shows full info: image, name, description, price
+- Expected Result: New page shows full info: image, name, description, price
 
 </br>
 
 *Cart Functionality*
 
-TC-017: Add multiple items to cart
+##### TC-017: Add multiple items to cart
 
-Preconditions: User is logged in as standard_user, on /inventory.html
+- Preconditions: User is logged in as standard_user, on /inventory.html
 
-Step: Add 3 different products
+- Step: Add 3 different products
 
-Expected Result: Cart badge shows "3"
+- Expected Result: Cart badge shows "3"
 
-TC-018: Remove one item from cart
+##### TC-018: Remove one item from cart
 
-Preconditions: Logged in as standard_user, 3 items already added
+- Preconditions: Logged in as standard_user, 3 items already added
 
-Steps:
-- Navigate to cart
-- Click "Remove" for one item
+- Steps:
+  
+  1. Navigate to cart
+  
+  2. Click "Remove" for one item
 
-Expected Result: Badge shows "2", only 2 items remain
+- Expected Result: Badge shows "2", only 2 items remain
 
-TC-019: Cart state persists across navigation
+##### TC-019: Cart state persists across navigation
 
-Preconditions: Logged in as standard_user, 1 item added to cart
+- Preconditions: Logged in as standard_user, 1 item added to cart
 
-Step: Navigate to another page (e.g. product detail) and return
+- Step: Navigate to another page (e.g. product detail) and return
 
-Expected Result: Cart badge is preserved, item still in cart
+- Expected Result: Cart badge is preserved, item still in cart
 
 </br>
 
 *Checkout Flow*
 
-TC-020: Full purchase flow
+##### TC-020: Full purchase flow
 
-Preconditions: Logged in as standard_user, on /inventory.html
+- Preconditions: Logged in as standard_user, on /inventory.html
 
-Steps: 
-- Add product → Go to cart → Checkout → Fill info → Finish
+- Steps: 
+  1. Add a product
+  2. Go to cart
+  3. Go to Checkout
+  4. Fill info
+  5. Click Finish
 
-Expected Result: Confirmation page with "Thank you for your order!"
+- Expected Result: Confirmation page with "Thank you for your order!"
 
-TC-021: Checkout form validation
+##### TC-021: Checkout form validation
 
-Preconditions: Logged in as standard_user, in checkout step one
+- Preconditions: Logged in as standard_user, in checkout step one
 
-Steps:
-- Leave fields empty
-- Click Continue
+- Steps:
+  1. Leave fields empty
+  2. Click Continue
 
-Expected Result: Error like "First Name is required"
+- Expected Result: Error like "First Name is required"
 
-TC-022: Total price with tax is calculated correctly
+##### TC-022: Total price with tax is calculated correctly
 
-Preconditions: Logged in, 2+ known items added, in checkout overview
+- Preconditions: Logged in, 2+ known items added, in checkout overview
 
-Step: Observe item prices, subtotal, tax, and total
+- Step: Observe item prices, subtotal, tax, and total
 
-Expected Result: Subtotal + Tax = Total (matches UI values)
+- Expected Result: Subtotal + Tax = Total (matches UI values)
 
 </br>
 
 *Navigation*
 
-TC-023: Back from product detail to product list
+##### TC-023: Back from product detail to product list
 
-Preconditions: Logged in as standard_user, on product detail page
+- Preconditions: Logged in as standard_user, on product detail page
 
-Step: Click “Back to products”
+- Step: Click “Back to products”
 
-Expected Result: Return to /inventory.html
+- Expected Result: Return to /inventory.html
 
 TC-024: Use browser back button from product detail
 
