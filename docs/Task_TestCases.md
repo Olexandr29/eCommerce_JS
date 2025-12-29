@@ -295,13 +295,13 @@ Cart icon shows badge with "1"
 
 - Expected Result: Return to /inventory.html
 
-TC-024: Use browser back button from product detail
+##### TC-024: Use browser back button from product detail
 
-Preconditions: Logged in as standard_user, on product detail page
+- Preconditions: Logged in as standard_user, on product detail page
 
-Step: Press browser back
+- Step: Press browser back
 
-Expected Result: Returns to /inventory.html
+- Expected Result: Returns to /inventory.html
 
 </details>
 
@@ -310,30 +310,30 @@ Expected Result: Returns to /inventory.html
 - [ ] Automate @UI/UX tests (tc025-027)
 <details><summary>✅ Automated</summary>
 
-TC-025: Logo and header visibility
+##### TC-025: Logo and header visibility
 - Preconditions: User is logged in as standard_user, on /inventory.html
 
-- Step: 1. Observe top of the page
+- Step: Observe top of the page
 
 - Expected Result: Logo + "Products" heading visible
 
 
-TC-026: Browser window resizing
+##### TC-026: Browser window resizing
 
 - Preconditions: User is logged in as standard_user, on /inventory.html
 
-- Step: 1. Resize browser window (e.g. shrink, expand)
+- Step: Resize browser window (e.g. shrink, expand)
 
 - Expected Result: Layout adjusts responsively, no broken layout
 
 
-TC-027: Button state change on interaction
+##### TC-027: Button state change on interaction
 
 - Preconditions: User is logged in as standard_user, on /inventory.html
 - Steps:
-1. Click “Add to cart”
-2. Observe button changes
-3. Click “Remove”
+  1. Click “Add to cart”
+  2. Observe button changes
+  3. Click “Remove”
 - Expected Result: Button text/color changes appropriately at each step
 
 </details>

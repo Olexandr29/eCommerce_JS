@@ -1,4 +1,4 @@
-# Manual -> Automated test Coverage Matrix (Smoke, Sanity, Functional)
+# Manual -> Automated test Coverage Matrix
 
 This document provides traceability between manual functional test cases and their corresponding automated tests.
 It helps track test coverage, automation status, and gaps between manual and automated testing.
@@ -30,3 +30,9 @@ It helps track test coverage, automation status, and gaps between manual and aut
 |TC-022|Total price with tax is calculated correctly|Functional|TC-022|Automated|Price calculation validation|
 |TC-023|Back from product detail to product list|Functional|TC-023|Automated|UI navigation|
 |TC-024|Use browser back button from product detail|Functional|TC-024|Automated|Browser navigation(history.back)|
+|TC-025|Logo and header visibility|UI/UX|TC-025|Automated|Logo and header visibility|
+|TC-026|Browser window resizing|UI/UX|TC-026|Automated|Responsive layout validation on window resize|
+|TC-027|Button state change on interaction|UI/UX|TC-027|Automated|Button state transition (Add → Remove)|
+|TC-028|Entering SQL Injection in Username|Negative|TC-028|Automated|Login, error validation|
+|TC-029|Long Value in Username Field|Negative|TC-029|Automated|Login, input length validation|
+|TC-030|Login with Leading/Trailing Spaces in Username|Negative|TC-030|Automated|Login, validation with leading/trailing spaces|
