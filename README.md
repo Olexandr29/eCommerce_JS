@@ -339,15 +339,30 @@ To execute the script manually, simply run:
 
 #### Test Organization
 - Tests are grouped by purpose:
-  -  @Smoke
+  - @Smoke
   - @Sanity
   - @Functional
+  - @UI/UX
+  - @Negative
 - Metadata (severity, description) is defined at test level
 - Steps are defined at page/action level
 
 </details>
 
 ---
+
+### Test Documentation & Traceability
+
+This project maintains a clear mapping between manual test cases and automated tests to ensure transparent test coverage for the -
+
+ `Smoke`, `Sanity`, `Functional`, `UI/UX` and `Negative` test types.
+
+Each automated test references its corresponding Manual TC ID, allowing easy validation of coverage and test intent.
+Where applicable, automation uses data-driven approaches and randomized product selection via `DataHelper` to reduce hardcoded dependencies and increase coverage.
+
+Related documentations - [Manual test cases](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/Task_TestCases.md), 
+[Automated tests](https://github.com/Olexandr29/eCommerce_JS/tree/main/test) and
+[Traceability matrix](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/manual-to-automation-traceability.md).
 
 ### Retry Strategy
 
