@@ -8,45 +8,47 @@ ___
 
 - [ ] Automate tests @Smoke (tc001-005)
 <details><summary>✅ Automated:</summary>
-TC-001: Successful login with valid credentials 
+
+##### TC-001: Successful login with valid credentials 
 
 - Preconditions: The website saucedemo.com is open 
 - Steps:
-1. Enter standard_user in the Username field.
-2. Enter secret_sauce in the Password field.
-3. Click the Login button. 
+  1. Enter standard_user in the Username field.
+  2. Enter secret_sauce in the Password field.
+  3. Click the Login button. 
 - Expected Result:
 The user is redirected to the products page (/inventory.html) with the heading "Products".
 
-TC-002: Unsuccessful login with locked user
+##### TC-002: Unsuccessful login with locked user
 - Preconditions: The website saucedemo.com is open 
 - Steps:
-1. Enter locked_out_user in Username
-2. Enter secret_sauce in Password
-3. Click Login
+  1. Enter locked_out_user in Username
+  2. Enter secret_sauce in Password
+  3. Click Login
 - Expected Result: 
 Error message "Sorry, this user has been locked out."
 
-TC-003: Check presence of product list after login
+##### TC-003: Check presence of product list after login
 - Preconditions: Login as standard_user
-- Step: 1. Verify that multiple products are displayed
+- Step: Verify that multiple products are displayed
 - Expected Result: Product list contains items with names and prices
 
-TC-004: Logout from application
+##### TC-004: Logout from application
 - Preconditions: Login as standard_user
 - Steps:
-1. Click the menu button
-2. Click Logout
+  1. Click the menu button
+  2. Click Logout
 - Expected Result: 
 User is redirected to login page
 
-TC-005: Add item to cart and check badge
+##### TC-005: Add item to cart and check badge
 - Preconditions: Login as standard_user
 - Steps: 
-1. Click "Add to cart" for any item
-2. Check the cart icon
+  1. Click "Add to cart" for any item
+  2. Check the cart icon
 - Expected Result: 
 Cart icon shows badge with "1"
+
 </details>
 
 ---
@@ -117,82 +119,68 @@ Cart icon shows badge with "1"
 
 - [ ] Automate tests @Sanity (tc006-013)
 <details><summary>✅ Automated</summary>
-TC-006: Successful login as performance_glitch_user
 
-Preconditions: The website saucedemo.com is open
+##### TC-006: Successful login as performance_glitch_user
 
-Steps:
-- Enter performance_glitch_user in the Username field.
-- Enter secret_sauce in the Password field.
-- Click the Login button.
+- Preconditions: The website saucedemo.com is open
+- Steps:
+  1. Enter performance_glitch_user in the Username field.
+  2. Enter secret_sauce in the Password field.
+  3. Click the Login button.
+- Expected Result: The user is redirected to the products page (/inventory.html) with the heading "Products".
 
-Expected Result: The user is redirected to the products page (/inventory.html) with the heading "Products".
+##### TC-007: Unsuccessful login with empty fields
 
-TC-007: Unsuccessful login with empty fields
+- Preconditions: The website saucedemo.com is open
+- Steps:
+  1. Leave both Username and Password fields empty.
+  2. Click the Login button.
+- Expected Result: An error message "Username is required" is displayed.
 
-Preconditions: The website saucedemo.com is open
-Steps:
-- Leave both Username and Password fields empty.
-- Click the Login button.
+##### TC-008: Unsuccessful login with non-existent user
 
-Expected Result: An error message "Username is required" is displayed.
+- Preconditions: The website saucedemo.com is open
+- Steps:
+  1. Enter fake_user in the Username field.
+  2. Enter fake_password in the Password field.
+  3. Click the Login button.
+- Expected Result: An error message "Username and password do not match any user" is displayed.
 
-TC-008: Unsuccessful login with non-existent user
+##### TC-009: Navigate to the cart page
 
-Preconditions: The website saucedemo.com is open
+- Preconditions: The user is logged in as standard_user
+- Step: Click the shopping cart icon in the top-right corner.
+- Expected Result: The user is redirected to /cart.html and sees the contents of the cart.
 
-Steps:
-- Enter fake_user in the Username field.
-- Enter fake_password in the Password field.
-- Click the Login button.
+##### TC-010: Remove item from the cart
 
-Expected Result: An error message "Username and password do not match any user" is displayed.
+- Preconditions: The user is logged in as standard_user and has added one item to the cart
+- Step: Click the "Remove" button next to the added item.
+- Expected Result: The item is removed from the cart and the cart badge disappears.
 
-TC-009: Navigate to the cart page
+##### TC-011: Proceed to checkout
 
-Preconditions: The user is logged in as standard_user
+- Preconditions: The user is logged in as standard_user and has at least one item in the cart
+- Steps:
+  1. Navigate to the cart page.
+  2. Click the "Checkout" button.
+- Expected Result: The user is redirected to /checkout-step-one.html.
 
-Step: Click the shopping cart icon in the top-right corner.
+##### TC-012: Fill in user information at the checkout
 
-Expected Result: The user is redirected to /cart.html and sees the contents of the cart.
+- Preconditions: The user is on the /checkout-step-one.html page
+- Steps:
+  1. Enter First Name, Last Name, and Zip/Postal Code.
+  2. Click the "Continue" button.
+- Expected Result: The user is redirected to /checkout-step-two.html.
 
-TC-010: Remove item from the cart
+##### TC-013: Cancel from the overview page
 
-Preconditions: The user is logged in as standard_user and has added one item to the cart
-
-Step: Click the "Remove" button next to the added item.
-
-Expected Result: The item is removed from the cart and the cart badge disappears.
-
-TC-011: Proceed to checkout
-
-Preconditions: The user is logged in as standard_user and has at least one item in the cart
-
-Steps:
-- Navigate to the cart page.
-- Click the "Checkout" button.
-
-Expected Result: The user is redirected to /checkout-step-one.html.
-
-TC-012: Fill in user information at the checkout
-
-Preconditions: The user is on the /checkout-step-one.html page
-
-Steps:
-- Enter First Name, Last Name, and Zip/Postal Code.
-- Click the "Continue" button.
-
-Expected Result: The user is redirected to /checkout-step-two.html.
-
-TC-013: Cancel from the overview page
-
-Preconditions: The user is on the /checkout-step-two.html page
-
-Step: 
-- Navigate to checkout1 with some added product.
-- Click the "Cancel" button.
-
-Expected Result: The user is redirected back to the inventory page (/inventory.html).
+- Preconditions: The user is on the /checkout-step-two.html page
+- Steps:
+  1. Navigate to checkout1 with some added product.
+  2. Click the "Cancel" button.
+- Expected Result: The user is redirected back to the inventory page (/inventory.html).
 
 </details>
 
