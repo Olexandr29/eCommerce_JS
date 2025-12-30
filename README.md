@@ -364,6 +364,8 @@ Related documentations - [Manual test cases](https://github.com/Olexandr29/eComm
 [Automated tests](https://github.com/Olexandr29/eCommerce_JS/tree/main/test) and
 [Traceability matrix](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/manual-to-automation-traceability.md).
 
+---
+
 ### Retry Strategy
 
 - Retry logic is enabled only for Functional test suites

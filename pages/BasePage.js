@@ -129,6 +129,14 @@ class BasePage {
         }
     }
 
+    async waitForTextToChange(locator, oldText, timeout = 5000) {
+        await this.driver.wait(async () => {
+            const element = await this.driver.findElement(locator);
+            const newText = await element.getText();
+            return newText !== oldText;
+        }, timeout);
+    }
+
     async scrollIntoView(locator) {
         const element = await this.findElement(locator);
         return await this.driver.executeScript("arguments[0].scrollIntoView(true);", element);

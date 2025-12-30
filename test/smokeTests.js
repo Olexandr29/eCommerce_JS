@@ -7,6 +7,7 @@ const Logger = require("../utils/logger");
 const { step, label, description, severity } = require("allure-js-commons");
 const AllureSeverity = require("../utils/allureSeverity");
 const DataHelper = require("../utils/dataHelper");
+const { until } = require("selenium-webdriver");
 
 describe("@Smoke tests", function () {
     let base;
@@ -69,8 +70,9 @@ describe("@Smoke tests", function () {
                 await loginPage.login(TestData.users.standard.username, TestData.users.standard.password);
                 const inventoryPage = new InventoryPage(driver);
                 await inventoryPage.logOut();
+                await driver.wait(until.urlIs(TestData.baseUrl), 5000)
                 assert.strictEqual(await driver.getCurrentUrl(), TestData.baseUrl, "redirection to home page after LogOut is not happened")
-                // await driver.sleep(50)
+
             } catch (error) {
                 console.log("error = ", error);
                 throw error;

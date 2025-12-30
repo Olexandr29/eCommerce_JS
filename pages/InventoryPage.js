@@ -27,7 +27,10 @@ class InventoryPage extends BasePage {
             removeBtn: By.css("button[data-test^='remove']"),
             addToCartBtnById: function (productId) {
                 return By.id(`add-to-cart-${productId}`);
-            }
+            },
+            firstItemPrice: By.css(".inventory_item_price"),
+            firstItemName: By.css(".inventory_item_name"),
+
         }
     }
 
@@ -82,20 +85,36 @@ class InventoryPage extends BasePage {
          });
     }
 
+    async getFirstItemPrice() {
+        const priceText = await this.waitAndGetText(this.locators.firstItemPrice);
+        return priceText;
+    }
+
+    async getFirstItemName() {
+        const nameText = await this.waitAndGetText(this.locators.firstItemName);
+        return nameText;
+    }
+
      async sortByPriceAsc() {
         return await this.logStep("Sort by Price from Low to High", async () => {
+        const firstPriceBefore = await this.getFirstItemPrice();
+        
         await this.safeClick(this.locators.sortContainer);
         await this.safeClick(this.locators.optionPriceAsc);
-        await this.driver.sleep(500);
+
+        await this.waitForTextToChange(this.locators.firstItemPrice, firstPriceBefore);
         return true;
         });
     }
 
     async sortByNameDesc() {
         return await this.logStep("Sort by Name from Z to A", async () => {
+        const firstNameBefore = await this.getFirstItemName();
+        
         await this.safeClick(this.locators.sortContainer);
         await this.safeClick(this.locators.optionNameDesc);
-        await this.driver.sleep(500);
+
+        await this.waitForTextToChange(this.locators.firstItemName, firstNameBefore);
         return true;
         });
     }
