@@ -20,26 +20,53 @@ The goal is to create a professional-grade automation environment that demonstra
 ```
 project-root/
 │
-├── pages/                # Page Object files
-│   ├── BasePage.js       # Parent class with UI helper methods
-│   ├── LoginPage.js      # POM: Login page
-│   └── InventoryPage.js  # POM: Inventory/products page
-├── test/                 # Mocha test file/s
-│   └── smokeTests.js
-├── config/               # Configuration settings (baseUrl), credentials, test data, environment settings
-│   └── users.json        # Test users credentials
-│   └── testData.js       # Shared test data and helpers
-├── utils/                # Reusable helper functions (custom waits, screenshots, actions, wrappers)
-├── .gitignore            # List of folders and files that will not be commited on GitHub
-├── package.json          # json file with scripts and dependencies
-├── README.md             # Description of the project
-└── Task_TestCases.md     # List of implemented test cases (Smoke, Sanity, Functional, etc.) and other tasks with status 
-
+├── pages/                      # Page Object files
+│   ├── BasePage.js             # Parent class with UI helper methods, explicit waits, safe actions, scrolling, logging and Allure step wrapper
+│   ├── LoginPage.js            # POM: Login page
+│   └── InventoryPage.js        # POM: Inventory/products page (PLP)
+│   └── ProductDetailsPage.js   # POM: Inventory item id page (PDP)
+│   └── CartPage.js             # POM: Cart page
+│   └── CheckoutPage1.js        # POM: Checkout step one page
+│   └── CheckoutPage2.js        # POM: Checkout step two page
+│   └── ConfirmationPage.js     # POM: Checkout complete page
+│
+├── test/                       # Automated test suite (Mocha)
+│   └── baseTest.js             # Test lifecycle management (WebDriver setup/teardown, screenshots on failure, Allure integration)
+│   └── smokeTests.js           # Smoke tests - verify app availability and critical user flow
+│   └── sanityTests.js          # Sanity tests - verify core features after changes or deployments
+│   └── functionalTests.js      # Functional tests - verify end-to-end business scenarios and user workflows
+│   └── uiUXtests.js            # UI/UX tests - verify UI behavior, state changes, navigation and visual interactions
+│   └── negativeTests.js        # Negative tests - verify system behavior for invalid inputs and edge cases
+│
+├── config/                     # Configuration settings (baseUrl), credentials, test data, environment settings
+│   └── users.json              # Test users credentials
+│   └── testData.js             # Shared test data and helpers
+│
+├── fixtures/                   # Static test fixtures and predefined datasets
+│   └── product.json            # Product-related test data used in cart and checkout tests
+│
+├── utils/                      # Cross-cutting utilities (logging, data generation, test helpers, Allure metadata)
+│   └── logger.js               # Centralized logging abstraction
+│   └── dataHelper.js           # Test data helpers (random product selection, etc.)
+│   └── randomData.js           # Randomized user/test data generation
+│   └── allureSeverity.js       # Allure severity enum mapping
+│
+├── docs/                       # Project documentation and QA artifacts
+│   └── Task_TestCases.md       # List of implemented test cases grouped by test type and other tasks with status 
+│   └── manual-to-automation-traceability.md      # Manual → Automated test coverage mapping (traceability matrix)
+│
+├── .gitignore                  # List of folders and files that will not be commited on GitHub
+├── package.json                # json file with scripts and dependencies
+├── README.md                   # Description of the project
+└── run-allure-tests.bat        # Helper script to run tests with Allure enabled and generate/open Allure report
 ```
 The project follows a modular POM structure, where each UI page has its own class containing:
 - locators
 - helper methods
 - reusable page-specific actions
+
+Common UI logic, explicit waits, safe actions and Allure step handling are centralized in BasePage.
+Test lifecycle management (driver setup/teardown, screenshots on failure) is handled by BaseTest.
 
 </details>
 

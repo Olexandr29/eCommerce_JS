@@ -15,7 +15,7 @@ const Logger = require("../utils/logger");
 const AllureSeverity = require("../utils/allureSeverity");
 const DataHelper = require("../utils/dataHelper");
 
-describe.only("@Functional tests", function () {
+describe("@Functional tests", function () {
     let product;
     let products;
     let base;
@@ -92,9 +92,7 @@ describe.only("@Functional tests", function () {
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.addProductsToCart(products);
-        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 15, "Added and displayed amount of items is not equal");
-                // assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
-
+        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
         await inventoryPage.openCart();
         const cartPage = new CartPage(driver);
         await cartPage.remove1OfItemsFromCart();
