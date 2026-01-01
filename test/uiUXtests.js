@@ -4,8 +4,8 @@ const AllureSeverity = require("../utils/allureSeverity");
 const InventoryPage = require("../pages/InventoryPage");
 const testData = require("../config/testData");
 const assert = require("assert");
-const { step, label, description, severity } = require("allure-js-commons");
-
+const { description, severity } = require("allure-js-commons");
+const { viewports } = require("../utils/viewportHelper");
 
 describe("@UI/UX tests", function () {
     let driver;
@@ -32,16 +32,16 @@ describe("@UI/UX tests", function () {
         assert.strictEqual(await inventoryPage.areLogoAndHeaderVisible(), true, "Logo and Header art not visible");
     });
 
-    it("TC-026: Browser window resizing", async function testResizing() {
+    it.only("TC-026: Browser window resizing", async function testResizing() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
         const inventoryPage = new InventoryPage(driver);
-        await inventoryPage.resizeWindow(testData.windowSize.mobile.width, testData.windowSize.mobile.height);
-        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${testData.windowSize.mobile.name} (${testData.windowSize.mobile.width}x${testData.windowSize.mobile.height})`);
-        await inventoryPage.resizeWindow(testData.windowSize.tablet.width, testData.windowSize.tablet.height);
-        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${testData.windowSize.tablet.name} (${testData.windowSize.tablet.width}x${testData.windowSize.tablet.height})`);
-        await inventoryPage.resizeWindow(testData.windowSize.desktop.width, testData.windowSize.desktop.height);
-        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${testData.windowSize.desktop.name} (${testData.windowSize.desktop.width}x${testData.windowSize.desktop.height})`);
+        await inventoryPage.setViewport(viewports.mobile);
+        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${viewports.mobile.name} (${viewports.mobile.width}x${viewports.mobile.height})`);
+        await inventoryPage.setViewport(viewports.tablet);
+        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${viewports.tablet.name} (${viewports.tablet.width}x${viewports.tablet.height})`);
+        await inventoryPage.setViewport(viewports.desktop);
+        assert.strictEqual(await inventoryPage.isLayoutCorrect(), true, `Layout is broken on ${viewports.desktop.name} (${viewports.desktop.width}x${viewports.desktop.height})`);
     });
 
     it("TC-027: Button state change on interaction", async function testButtonInteraction() {

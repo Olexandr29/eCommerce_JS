@@ -1,10 +1,10 @@
 const { By, until } = require("selenium-webdriver");
 const Logger = require("../utils/logger");
-// const { step } = require("allure-js-commons");
 let step;
 if(process.env.ALLURE === "true") {
     ({step} = require("allure-js-commons"));
 }
+const { setViewport } = require("../utils/viewportHelper");
 
 class BasePage {
     constructor(driver) {
@@ -211,9 +211,14 @@ class BasePage {
         });
     }
 
-    async resizeWindow(width, height) {
-        await this.driver.manage().window().setRect({width, height});
+    async setViewport(viewport) {
+        return await this.logStep(`Resize browser to ${viewport.name} (${viewport.width}x${viewport.height})`,
+            async () => {
+                return await setViewport(this.driver, viewport);
+            }
+        );
     }
+
 
 }
 

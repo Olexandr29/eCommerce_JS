@@ -50,6 +50,7 @@ project-root/
 │   └── dataHelper.js           # Test data helpers (random product selection, etc.)
 │   └── randomData.js           # Randomized user/test data generation
 │   └── allureSeverity.js       # Allure severity enum mapping
+│   └── viewportHelper.js       # Centralized viewport definitions and browser resizing helper for UI/UX tests
 │
 ├── docs/                       # Project documentation and QA artifacts
 │   └── Task_TestCases.md       # List of implemented test cases grouped by test type and other tasks with status 

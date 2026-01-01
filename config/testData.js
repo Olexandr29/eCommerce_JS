@@ -45,25 +45,5 @@ module.exports = {
         checkout1FirstName: "Error: First Name is required",
     },
 
-    windowSize: {
-        mobile: {
-            name: "Mobile",
-            width: 375,
-            height: 667
-        },
-
-        tablet: {
-            name: "Tablet",
-            width: 768,
-            height: 1024
-        },
-
-        desktop: {
-            name: "Desctop",
-            width: 1440,
-            height: 900
-        }
-    },
-
 
     }
