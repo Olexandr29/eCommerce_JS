@@ -1,3 +1,4 @@
+[![Run Tests](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
 # JavaScript UI Automation Framework (Mocha + WebDriver)
 
 ## 📌 Project Purpose

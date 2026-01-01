@@ -32,7 +32,7 @@ describe("@UI/UX tests", function () {
         assert.strictEqual(await inventoryPage.areLogoAndHeaderVisible(), true, "Logo and Header art not visible");
     });
 
-    it.only("TC-026: Browser window resizing", async function testResizing() {
+    it("TC-026: Browser window resizing", async function testResizing() {
         description(this.test.title);
         severity(AllureSeverity.NORMAL);
         const inventoryPage = new InventoryPage(driver);
