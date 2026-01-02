@@ -51,6 +51,7 @@ project-root/
 │   └── dataHelper.js           # Test data helpers (random product selection, etc.)
 │   └── randomData.js           # Randomized user/test data generation
 │   └── allureSeverity.js       # Allure severity enum mapping
+│   └── allureEnvironment.js    # Allure environment metadata such as execution (on local machine or CI pipeline), browser and base URL
 │   └── viewportHelper.js       # Centralized viewport definitions and browser resizing helper for UI/UX tests
 │
 ├── docs/                       # Project documentation and QA artifacts

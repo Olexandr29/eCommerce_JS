@@ -1,17 +1,15 @@
 const { Builder } = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
 const { allure } = require("allure-mocha/runtime");
-
-// const allureSeverity = require("../utils/allureSeverity");
-// let allure;
-// if (process.env.ALLURE === "true") {
-//     allure = require("allure-js-commons");
-// }
+const { writeAllureEnvironment } = require("../utils/allureEnvironment");
+const testData = require("../config/testData");
 
 class BaseTest {
     driver = null;
 
     async setup() {
+        writeAllureEnvironment();
+
         let options = new chrome.Options();
         options.addArguments("--incognito");
 
