@@ -9,7 +9,7 @@ const AllureSeverity = require("../utils/allureSeverity");
 const DataHelper = require("../utils/dataHelper");
 const { until } = require("selenium-webdriver");
 
-describe("@Smoke tests", function () {
+describe.only("@Smoke tests", function () {
     let base;
     let driver;
     let loginPage;
