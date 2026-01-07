@@ -26,21 +26,21 @@ jobs:
           path: previous-allure-report
         continue-on-error: true
 
-      - name: Restore Allure history
-        run: |
-          if [ -d "previous-allure-report/history" ]; then
-            mkdir -p allure-results/history
-            cp -r previous-allure-report/history/* allure-results/history/
-          fi 
+      - name: Clean allure-results
+        run: rm -rf allure-results
 
       - name: Run tests with Allure
         run: npm test
         env: 
           HEADLESS: true
           ALLURE_RESULTS_DIR: allure-results
-
-      - name: Debug allure-results
-        run: ls -la allure-results
+      
+      - name: Restore Allure history
+        run: |
+          if [ -d "previous-allure-report/history" ]; then
+            mkdir -p allure-results/history
+            cp -r previous-allure-report/history/* allure-results/history/
+          fi 
 
       - name: Generate Allure report
         run: npx allure generate allure-results --clean -o allure-report
