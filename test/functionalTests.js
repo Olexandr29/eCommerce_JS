@@ -15,7 +15,7 @@ const Logger = require("../utils/logger");
 const AllureSeverity = require("../utils/allureSeverity");
 const DataHelper = require("../utils/dataHelper");
 
-describe.only("@Functional tests", function () {
+describe("@Functional tests", function () {
     let product;
     let products;
     let base;

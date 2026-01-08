@@ -28,10 +28,15 @@ jobs:
 
       - name: Restore Allure history
         run: |
-          if [ -d "previous-allure-report/history" ]; then
+          if [ -d "previous-allure-report/allure-report/history" ]; then
             mkdir -p allure-results/history
-            cp -r previous-allure-report/history/* allure-results/history/  
+            cp -r previous-allure-report/allure-report/history/* allure-results/history/  
             fi 
+
+      - name: Debug downloaded artifact
+        run: |
+          echo "=== previous-allure-report ==="
+          ls -R previous-allure-report || true
 
       - name: Run tests with Allure
         run: npm test
@@ -49,3 +54,10 @@ jobs:
           name: allure-report
           path: allure-report
           if-no-files-found: warn
+
+      - name: Debug final structure
+        run: |
+          echo "=== Workspace root ==="; pwd; ls
+          echo "=== previous-allure-report ==="; ls -R previous-allure-report || true
+          echo "=== allure-results ==="; ls -R allure-results || true
+          echo "=== allure-report ==="; ls -R allure-report | head -n 50 || true
