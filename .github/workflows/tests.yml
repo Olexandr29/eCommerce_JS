@@ -28,13 +28,13 @@ jobs:
 
       - name: Restore Allure history
         run: |
-          if [ -d "previous-allure-report/history" ]; then
+          if [ -d "previous-allure-report/allure-report/history" ]; then
             echo "Restoring Allure history"
             mkdir -p allure-results/history
-            cp -r previous-allure-report/history/* allure-results/history/  
+            cp -r previous-allure-report/allure-report/history/* allure-results/history/
           else 
             echo "No previous Allure history found"
-          fi 
+          fi
 
       - name: Run tests with Allure
         run: npm test
