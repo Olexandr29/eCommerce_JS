@@ -13,7 +13,7 @@ const Logger = require("../utils/logger");
 const AllureSeverity = require("../utils/allureSeverity");
 const DataHelper = require("../utils/dataHelper");
 
-describe("@Sanity tests", function () {
+describe.only("@Sanity tests", function () {
     let base;
     let driver;
     let loginPage;
