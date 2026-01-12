@@ -10,13 +10,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-          path: gh-pages
-        continue-on-error: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -28,12 +21,13 @@ jobs:
 
       - name: Restore Allure history
         run: |
-          if [ -d gh-pages/history ]; then
-            echo "Restoring Allure history from gh-pages"
+          git fetch origin gh-pages || true
+          if git show-ref --quiet refs/remotes/origin/gh-pages; then
+            git checkout origin/gh-pages -- history || true
             mkdir -p allure-results/history
-            cp -R gh-pages/history/* allure-results/history/
+            cp -R history/* allure-results/history/ || true
           else
-            echo "No Allure history found on gh-pages"
+            echo "No gh-pages branch yet"
           fi
 
       - name: Run tests with Allure
@@ -48,12 +42,16 @@ jobs:
       - name: Publish Allure report to GitHub Pages
         if: always()
         run: |
-          rm -rf gh-pages/*
-          cp -R allure-report/* gh-pages
+          mkdir -p gh-pages
           cd gh-pages
+          git init
+          git checkout -B gh-pages
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          rm -rf *
+          cp -R ../allure-report/* .
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add .
           git commit -m "Update Allure report" || echo "No changes"
-          git push
+          git push -f origin gh-pages
      
