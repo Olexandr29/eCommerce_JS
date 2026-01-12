@@ -10,6 +10,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+        continue-on-error: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -19,21 +26,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Download previous Allure report
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-report
-          path: previous-allure-report
-        continue-on-error: true
-
       - name: Restore Allure history
         run: |
-          if [ -d "previous-allure-report/allure-report/history" ]; then
-            echo "Restoring Allure history"
+          if [ -d gh-pages/history ]; then
+            echo "Restoring Allure history from gh-pages"
             mkdir -p allure-results/history
-            cp -r previous-allure-report/allure-report/history/* allure-results/history/
-          else 
-            echo "No previous Allure history found"
+            cp -R gh-pages/history/* allure-results/history/
+          else
+            echo "No Allure history found on gh-pages"
           fi
 
       - name: Run tests with Allure
@@ -45,10 +45,15 @@ jobs:
       - name: Generate Allure report
         run: npx allure generate allure-results --clean -o allure-report
 
-      - name: Upload Allure report with history
+      - name: Publish Allure report to GitHub Pages
         if: always()
-        uses: actions/upload-artifact@v4
-        with: 
-          name: allure-report
-          path: allure-report
-          if-no-files-found: warn
+        run: |
+          rm -rf gh-pages/*
+          cp -R allure-report/* gh-pages
+          cd gh-pages
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Update Allure report" || echo "No changes"
+          git push
+     
