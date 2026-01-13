@@ -1,4 +1,7 @@
 [![Run Tests](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
+
+[![Allure Report](https://img.shields.io/badge/Allure-Report-blue)](https://olexandr29.github.io/eCommerce_JS/)
+
 # JavaScript UI Automation Framework (Mocha + WebDriver)
 
 ## 📌 Project Purpose
