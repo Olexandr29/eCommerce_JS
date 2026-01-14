@@ -11,7 +11,7 @@ This project aims to build a scalable and maintainable **UI automation framework
 - Mocha test framework
 - WebDriver (Selenium WebDriver)
 - [Page Object Model (POM)](#page-object-model-pom-conventions)
-- GitHub Actions for CI/CD
+- [GitHub Actions for CI/CD](#2-remote-cicd)
 - [Reporting tools(Allure/Mochawesome)](#reporting-tools-allure--mochawesome)
 
 The goal is to create a professional-grade automation environment that demonstrates real industry practices and allows running automated tests locally and remotely.
@@ -178,17 +178,15 @@ describe("Smoke Tests", function () {
 ---
 
 This example demonstrates:
-
-POM initialization
-
-Using page-level methods instead of inline selectors
-
-Clean, maintainable test structure
+- POM initialization
+- Using page-level methods instead of inline selectors
+- Clean, maintainable test structure
 
 ---
 
 
-## Local Test Execution
+## Test Execution:
+### 1 Local
 
 <details><summary>Run all tests:
 </summary>
@@ -205,7 +203,7 @@ By default, Mocha will run all test files inside `/test` directory (based on the
 
 <details><summary>Run a specific test suite or test case</summary>
 
-- **Run a single test suit (file)**
+- **Run a single test suite (file)**
 
 Temprorary modify the `describe` block in your test file
 
@@ -244,7 +242,26 @@ Always remove `.only` before commit changes to the repository.
 </details>
 
 ---
+### 2 Remote (CI/CD)
 
+<details><summary>Run all tests:
+</summary>
+This project is fully integrated with a CI pipeline and automated reporting to ensure transparent and repeatable test execution.
+
+#### CI Pipeline Flow
+
+The CI pipeline is implemented using `GitHub Actions` and is automatically triggered on each push or pull request to the main branch and the flow consists of:
+- Checkout repository
+- Install Node.js dependencies
+- Execute UI automation tests (Mocha + WebDriver)
+- Generate execution-level reports
+- Generate Allure results
+- Publish Allure report to GitHub Pages
+
+The current pipeline status is always visible via the CI badge at the top of this README.
+
+</details>
+ 
 
 ## Reporting tools (Allure / Mochawesome) 
 
@@ -299,20 +316,17 @@ An example of this implementation is provided in the **Allure Reporting** sectio
 
 <details><summary>2 Allure Reporting (Documentation-Level)</summary>
 
-Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution.
+#### Allure Reporting Overview
 
-#### Purpose
+Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution and provide a business-readable view of automated test results.
 
-- Represent automated tests as living documentation
-- Bridge manual test cases and automation
-- Provide business-readable reports
+***The Allure report includes:***
 
-#### What Allure can add
-- Steps (step)
-- Descriptions (description)
-- Severity levels (severity)
-- Labels, features, stories
-- Attachments (screenshots, logs)
+- Test suites grouped by test type (Smoke, Sanity, Functional, UI/UX, Negative)
+- Step-by-step execution flow for each test
+- Severity levels and metadata
+- Screenshots and attachments on failures
+- [Retry](#retry-strategy) information for flaky or unstable tests
 
 #### Design Principles
 
@@ -336,10 +350,11 @@ return this.logStep("Perform Login", async () => {
 });
 ```
 
-Allure reports are generated separately and viewed as an HTML dashboard.
+Allure reports are generated and viewed as an HTML dashboard.
 
 
-#### Running Tests with Allure
+#### Running Tests with Allure:
+<details><summary> 1.1 Locally via commands</summary>
 
 Run tests with Allure reporting enabled:
 ```bash
@@ -355,8 +370,9 @@ Open report:
 ```bash
 npm run allure:open
 ```
+</details>
 
-#### Running Tests with Allure via Batch Script
+<details><summary> 1.2 Locally via Batch Script</summary>
 
 For convenience during local development, the three Allure-related commands were grouped into a single Windows batch script.
 
@@ -369,16 +385,39 @@ To execute the script manually, simply run:
 ```bash
 ./run-allure-tests.bat
 ```
+</details>
 
-#### Test Organization
-- Tests are grouped by purpose:
-  - @Smoke
-  - @Sanity
-  - @Functional
-  - @UI/UX
-  - @Negative
-- Metadata (severity, description) is defined at test level
-- Steps are defined at page/action level
+<details><summary>2 Remotely</summary>
+Remote (CI\CD) tests running with Allure implemented using GitHub Actions and is automatically triggered on each push or pull request to the main branch. The details is described in [previous section](#2-remote-cicd)
+
+#### Live Allure Report
+
+The latest Allure report is published automatically after each CI run and is available via GitHub Pages:
+
+👉 https://olexandr29.github.io/eCommerce_JS/
+
+This allows reviewers to inspect test results without running the project locally.
+
+</details>
+
+#### History & Trends
+
+Allure reporting preserves execution history across CI runs, enabling:
+- Analysis of test stability over time
+- Detection of flaky tests
+- Visibility of [retries](#retry-strategy) and repeated failures
+- Trend-based quality assessment instead of single-run results
+- This transforms automated tests into living quality documentation, rather than static execution output.
+
+#### Retry Strategy
+
+- Retry logic is enabled only for Functional test suites
+- Max retries: 2
+- Smoke, Negative and UI/UX tests are excluded
+- Retries are visible in Allure and Mochawesome reports
+- Deterministic failures are not masked (Deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
+Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
+Allure report shows multiple failed retries with final FAILED status)
 
 </details>
 
@@ -398,17 +437,6 @@ Related documentations - [Manual test cases](https://github.com/Olexandr29/eComm
 [Traceability matrix](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/manual-to-automation-traceability.md).
 
 ---
-
-### Retry Strategy
-
-- Retry logic is enabled only for Functional test suites
-- Max retries: 2
-- Smoke, Negative and UI/UX tests are excluded
-- Retries are visible in Allure and Mochawesome reports
-- Deterministic failures are not masked (Deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
-Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
-Allure report shows multiple failed retries with final FAILED status)
-
 
 ## Process & Methodology
 
