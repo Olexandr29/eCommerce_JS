@@ -2,21 +2,20 @@
 
 [![Allure Report](https://img.shields.io/badge/Allure-Report-blue)](https://olexandr29.github.io/eCommerce_JS/)
 
-# JavaScript UI Automation Framework (Mocha + WebDriver)
+# JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
 
 ## 📌 Project Purpose
 
 This project aims to build a scalable and maintainable **UI automation framework** for testing eShop (the web application **saucedemo.com**) using:
 - JavaScript (Node.js)
 - Mocha test framework
-- WebDriver (Selenium WebDriver)
+- Selenium WebDriver
 - [Page Object Model (POM)](#page-object-model-pom-conventions)
 - [GitHub Actions for CI/CD](#2-remote-cicd)
 - [Reporting tools(Allure/Mochawesome)](#reporting-tools-allure--mochawesome)
 
 The goal is to create a professional-grade automation environment that demonstrates real industry practices and allows running automated tests locally and remotely.
 
----
 ## Page Object Model (POM) Conventions 
 
 <details><summary> 1. Project Structure</summary>
@@ -76,7 +75,6 @@ Test lifecycle management (driver setup/teardown, screenshots on failure) is han
 
 </details>
 
----
 
 <details><summary>2. Naming Rules</summary>
 
@@ -107,7 +105,6 @@ waitForVisible(), waitAndGetText(), safeClick()
 
 </details>
 
----
 
 <details><summary>3. Locator Strategy</summary>
 
@@ -139,7 +136,6 @@ Best practices used:
 
 </details>
 
----
 
 <details><summary>4. Example Usage (Test + POM)</summary>
 
@@ -173,16 +169,12 @@ describe("Smoke Tests", function () {
     });
 });
 ```
-</details>
-
----
-
 This example demonstrates:
 - POM initialization
 - Using page-level methods instead of inline selectors
 - Clean, maintainable test structure
 
----
+</details>
 
 
 ## Test Execution:
@@ -241,7 +233,7 @@ npm test
 Always remove `.only` before commit changes to the repository.
 </details>
 
----
+
 ### 2 Remote (CI/CD)
 
 <details><summary>Run all tests:
@@ -320,7 +312,7 @@ An example of this implementation is provided in the **Allure Reporting** sectio
 
 Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution and provide a business-readable view of automated test results.
 
-***The Allure report includes:***
+#### The Allure report includes:
 
 - Test suites grouped by test type (Smoke, Sanity, Functional, UI/UX, Negative)
 - Step-by-step execution flow for each test
@@ -421,9 +413,8 @@ Allure report shows multiple failed retries with final FAILED status)
 
 </details>
 
----
 
-### Test Documentation & Traceability
+## Test Documentation & Traceability
 
 This project maintains a clear mapping between manual test cases and automated tests to ensure transparent test coverage for the -
 
@@ -436,7 +427,6 @@ Related documentations - [Manual test cases](https://github.com/Olexandr29/eComm
 [Automated tests](https://github.com/Olexandr29/eCommerce_JS/tree/main/test) and
 [Traceability matrix](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/manual-to-automation-traceability.md).
 
----
 
 ## Process & Methodology
 

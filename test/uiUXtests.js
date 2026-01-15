@@ -7,7 +7,7 @@ const assert = require("assert");
 const { description, severity } = require("allure-js-commons");
 const { viewports } = require("../utils/viewportHelper");
 
-describe.only("@UI/UX tests", function () {
+describe("@UI/UX tests", function () {
     let driver;
     let base;
     let loginPage;
