@@ -30,6 +30,9 @@ jobs:
             echo "No gh-pages branch yet"
           fi
 
+      - name: Write Allure executor
+        run: node -e "require('./utils/allureExecutor').writeAllureExecutor()"
+    
       - name: Run tests with Allure
         continue-on-error: true
         run: npm test

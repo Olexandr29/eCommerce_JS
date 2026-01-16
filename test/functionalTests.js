@@ -83,8 +83,7 @@ describe("@Functional tests", function () {
         await loginPage.login(testData.users.standard.username, testData.users.standard.password);
         const inventoryPage = new InventoryPage(driver);
         await inventoryPage.addProductsToCart(products);
-        // assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
-        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 9, "Added and displayed amount of items is not equal");
+        assert.strictEqual(await inventoryPage.getCartBadgeNum(), 3, "Added and displayed amount of items is not equal");
     })
 
     it("TC-018: Remove one of 3 items from cart", async function testRemove1of3itemsFromCart() {
