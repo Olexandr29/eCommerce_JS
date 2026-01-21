@@ -1,0 +1,42 @@
+ name: Matrix OS
+
+ on:
+    workflow_dispatch:
+    push:
+    pull_request:
+
+ jobs:
+    test:
+        name: Tests (Node ${{ matrix.node }} | ${{ matrix.OS }})
+        runs-on: ${{ matrix.OS }}
+
+        strategy:
+            fail-fast: false
+            matrix:
+                node: [18.x, 20.x]
+                OS: [ubuntu-latest, windows-latest, macos-latest]
+            
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+        
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                node-version: ${{ matrix.node }}
+                cache: npm
+
+            - name: Install dependencies
+              run: npm ci
+            
+            - name: Run tests
+              run: npm test
+
+            - name: Upload test artifacts
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                name: reports-${{ matrix.OS }}-node-${{ matrix.node }}
+                path: |
+                    allure-results
+                    coverage
