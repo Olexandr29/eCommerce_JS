@@ -31,6 +31,9 @@
             
             - name: Run tests
               run: npm test
+              env:
+                    HEADLESS: true
+                    ALLURE_RESULTS_DIR: allure-results
 
             - name: Upload test artifacts
               if: always()
