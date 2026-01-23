@@ -1,6 +1,9 @@
-[![Run Tests](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/tests.yml)
+[![Linux only](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/ci-linux-allure-report.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/ci-linux-allure-report.yml)
+
+[![Matrix OS](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/ci-node-os-matrix.yml/badge.svg)](https://github.com/Olexandr29/eCommerce_JS/actions/workflows/ci-node-os-matrix.yml)
 
 [![Allure Report](https://img.shields.io/badge/Allure-Report-blue)](https://olexandr29.github.io/eCommerce_JS/)
+
 
 # JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
 
