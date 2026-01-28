@@ -5,6 +5,14 @@
 [![Allure Report](https://img.shields.io/badge/Allure-Report-blue)](https://olexandr29.github.io/eCommerce_JS/)
 
 
+## Architecture & CI/CD Flow
+
+The diagram below illustrates the overall test automation architecture, CI pipeline execution,
+matrix strategy, reporting flow, and GitHub Pages publication.
+
+![Architecture & CI Flow](docs/diagrams/architecture-ci.svg)
+
+
 # JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
 
 ## 📌 Project Purpose
