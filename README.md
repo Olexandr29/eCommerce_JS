@@ -7,10 +7,35 @@
 
 ## Architecture & CI/CD Flow
 
-The diagram below illustrates the overall test automation architecture, CI pipeline execution,
-matrix strategy, reporting flow, and GitHub Pages publication.
+<table>
+  <tr>
+    <td width="15%" valign="top">
+      <a href="link will be added in the next iteration">
+        <img src="link will be added in the next iteration" alt="Architecture & CI Flow" />
+      </a>
+    </td>
+    <td width="55%" valign="top">
+      <p>
+        The diagram illustrates the overall test automation architecture,
+        including the CI pipeline execution, matrix strategy across Node.js
+        versions and operating systems, test execution flow, reporting
+        artifacts, and publication of Allure reports to GitHub Pages.
+      </p>
+      <p>
+        Matrix CI ensures cross-platform reliability, while a dedicated
+        Linux-only workflow is responsible for generating and publishing
+        the aggregated Allure report with preserved execution history.
+      </p>
+      <p>
+        <strong>The full-resolution diagram is available here:
 
-![Architecture & CI Flow](docs/diagrams/architecture-ci.svg)
+- [View Architecture Diagram (SVG)](link will be added in the next iteration)
+- [Edit Source Diagram (draw.io)](link will be added in the next iteration)
+</strong>
+      </p>
+    </td>
+  </tr>
+</table>
 
 
 # JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
