@@ -10,8 +10,8 @@
 <table>
   <tr>
     <td width="15%" valign="top">
-      <a href="link will be added in the next iteration">
-        <img src="link will be added in the next iteration" alt="Architecture & CI Flow" />
+      <a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio.svg">
+        <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.png" alt="Architecture & CI Flow" />
       </a>
     </td>
     <td width="55%" valign="top">
@@ -29,8 +29,8 @@
       <p>
         <strong>The full-resolution diagram is available here:
 
-- [View Architecture Diagram (SVG)](link will be added in the next iteration)
-- [Edit Source Diagram (draw.io)](link will be added in the next iteration)
+- [View Architecture Diagram (SVG)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio.svg)
+- [Edit Source Diagram (draw.io)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio)
 </strong>
       </p>
     </td>
