@@ -23,7 +23,6 @@ describe("@Functional tests", function () {
     let loginPage;
 
     beforeEach(async function () {
-        this.timeout(33000);
         base = new BaseTest();
         await base.setup();
         driver = base.driver;
