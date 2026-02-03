@@ -26,15 +26,14 @@ describe("@Functional tests", function () {
         base = new BaseTest();
         await base.setup();
         driver = base.driver;
-
         loginPage = new LoginPage(driver);
         product = DataHelper.getRandomProduct();
         products = DataHelper.getRandomProducts(3);
-
-    });
+    })
 
     afterEach(async function () {
-        await base.tearDown(this.currentTest);
+        await base.attachFailureScreenshot(this.currentTest);
+        await base.tearDown();
     });
 
     this.retries(2);

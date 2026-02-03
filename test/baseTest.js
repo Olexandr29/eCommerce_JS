@@ -14,8 +14,9 @@ class BaseTest {
             BaseTest.allureEnvWritten = true;
         }
 
-        const options = new chrome.Options();
+        console.log("Chrome starting ...")
 
+        const options = new chrome.Options();
         options.addArguments(
             "--incognito",
             "--disable-dev-shm-usage",
@@ -38,35 +39,39 @@ class BaseTest {
             .build();
     }
 
-    async tearDown(test) {
-        if (!this.driver) {
+        async attachFailureScreenshot(test) {
+            if (!this.driver || test.state !== "failed") {
             return;
         }
 
-        try {
-            if (test.state === "failed") {
+            try {
                 const img = await this.driver.takeScreenshot();
                 allure.attachment(
                     "Failure screenshot",
                     Buffer.from(img, "base64"),
                     "image/png"
                 );
+            } catch (e) {
+                console.error("Screenshot failed:", e.message);
             }
-        } catch (e) {
-            console.error("Screenshot failed:", e.message);
         }
 
-        try {
-            await Promise.race([
-                this.driver.quit(),
-                new Promise((_, reject) =>
-                    setTimeout(() => reject(new Error("driver.quit timeout")), 11000)
-                )
-            ]);
-        } catch (e) {
-            console.error("driver.quit failed", e.message);
-        } finally {
-            this.driver = null;
+        async tearDown() {
+            if (!this.driver) {
+                return
+            }
+
+            try {
+                await Promise.race([
+                    this.driver.quit(),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error("driver.quit timeout")), 11000)
+                        )
+                ]);
+            } catch (e) {
+                console.error("driver.quit failed", e.message);
+            } finally {
+                this.driver = null;
         }
     }
 }
