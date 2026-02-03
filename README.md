@@ -9,7 +9,7 @@
 
 <table>
   <tr>
-    <td width="15%" valign="top">
+    <td width="35%" valign="top">
       <a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio.svg">
         <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.png" alt="Architecture & CI Flow" />
       </a>
@@ -435,7 +435,10 @@ Allure reporting preserves execution history across CI runs, enabling:
 - Detection of flaky tests
 - Visibility of [retries](#retry-strategy) and repeated failures
 - Trend-based quality assessment instead of single-run results
-- This transforms automated tests into living quality documentation, rather than static execution output.
+
+The `Allure Trends tab` is used as the primary source for flaky test analysis, and demonstrates tests that have periodical pass/fail behavior or frequent retries across multiple CI runs, and they are flagged as unstable, and prioritized for stabilization.
+
+This approach transforms automated tests into living quality documentation, rather than static execution output.
 
 #### Retry Strategy
 
@@ -443,7 +446,15 @@ Allure reporting preserves execution history across CI runs, enabling:
 - Max retries: 2
 - Smoke, Negative and UI/UX tests are excluded
 - Retries are visible in Allure and Mochawesome reports
-- Deterministic failures are not masked (Deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
+
+A test is considered `flaky` if it fails and passes intermittently across retries
+or across multiple CI runs.
+Such tests are candidates for refactoring, stabilization,
+or temporary quarantine until fixed.
+
+Deterministic failures are not masked.
+
+A deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
 Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
 Allure report shows multiple failed retries with final FAILED status)
 
