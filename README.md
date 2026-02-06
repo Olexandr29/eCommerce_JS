@@ -311,7 +311,7 @@ The current pipeline status is always visible via the CI badge at the top of thi
 
 <table>
 <tr>
-<td width="40%" valign="top">
+<td width="40%" valign="middle">
 <a href="docs/reports/4 Mochawesome Report.png">
   <img
   src="docs/reports/4 Mochawesome Report.png"
@@ -420,25 +420,28 @@ Allure is used as a high-level reporting and documentation tool, built on top of
 - Screenshots and attachments on failures
 - [Retry](#retry-strategy) information for flaky or unstable tests
 
+</td>
+</tr>
 
-#### Design Principles
-
-- One logical user action = one Allure step
-- Reusable actions (e.g. login) are documented once
-- Avoid step noise and duplication
+<tr>
+<td width="40%" valign="top">
 
 #### Example (Test Metadata)
 ```js
 description(this.test.title);
 severity(AllureSeverity.CRITICAL);
 ```
+</td>
 
+<td width="60%" valign="top">
 
+#### Design Principles
 
-
+- One logical user action = one Allure step
+- Reusable actions (e.g. login) are documented once
+- Avoid step noise and duplication
 </td>
 </tr>
-
 </table>
 
 #### Example (Page-Level Step)
