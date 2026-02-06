@@ -6,15 +6,20 @@
 
 
 ## Architecture & CI/CD Flow
+<table>
+<tr>
+Line with full amount of info that yuo need in this Table Row
+</tr>
+</table>
 
 <table>
   <tr>
-    <td width="35%" valign="top">
-      <a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio.svg">
-        <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.png" alt="Architecture & CI Flow" />
+    <td width="40%" valign="top">
+      <a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/diagrams/architecture-ci.drawio.svg">
+        <img src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/diagrams/architecture-ci.png" alt="Architecture & CI Flow" />
       </a>
     </td>
-    <td width="55%" valign="top">
+    <td width="60%" valign="top">
       <p>
         The diagram illustrates the overall test automation architecture,
         including the CI pipeline execution, matrix strategy across Node.js
@@ -29,8 +34,8 @@
       <p>
         <strong>The full-resolution diagram is available here:
 
-- [View Architecture Diagram (SVG)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio.svg)
-- [Edit Source Diagram (draw.io)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/architecture-ci.drawio)
+- [View Architecture Diagram (SVG)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/diagrams/architecture-ci.drawio.svg)
+- [Edit Source Diagram (draw.io)](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/diagrams/architecture-ci.drawio)
 </strong>
       </p>
     </td>
@@ -93,6 +98,15 @@ project-root/
 │   └── viewportHelper.js       # Centralized viewport definitions and browser resizing helper for UI/UX tests
 │
 ├── docs/                       # Project documentation and QA artifacts
+│   └── diagram/                # Diagram illustrating the test automation architecture and CI pipeline
+│       └── architecture-ci.drawio                # Source file (XML) for editing in draw.io
+│       └── architecture-ci.drawio.svg            # High quality scalable diagram for wiew (SVG format)
+│       └── architecture-ci.png                   # Lightweight PNG preview for quick rendering in README
+│   └── reports/                # Examples of Allure and Mochawesome Reports
+│       └── 1 Allure_Overview-Statuses...png      # Allure report, Overview page
+│       └── 2 Allure_Suites-History.png           # Allure report, Suites page
+│       └── 3 Allure_Graphs-Trend-Retr...png      # Allure report, Graphs page
+│       └── 4 Mochawesome Report.png              # Mochawesome report, general view
 │   └── Task_TestCases.md       # List of implemented test cases grouped by test type and other tasks with status 
 │   └── manual-to-automation-traceability.md      # Manual → Automated test coverage mapping (traceability matrix)
 │
@@ -295,7 +309,24 @@ The current pipeline status is always visible via the CI badge at the top of thi
 
 <details><summary>1 Mochawesome Reporting (Execution-Level)  </summary>
 
-Mochawesome is used as a Mocha reporter to provide structured execution reports in addition to console output.
+<table>
+<tr>
+<td width="40" valign="top">
+<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/4%20Mochawesome%20Report.png">
+  <img
+  src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/4%20Mochawesome%20Report.png"
+  alt="An example of the Machawesome report"
+  width="300"
+  />
+  </a>
+</td>
+<td widh="60" valign="top">
+Mochawesome is used as a Mocha reporter to provide structured execution reports(Execution-Level View) in addition to console output.
+</td>
+
+</tr>
+</table>
+
 
 #### Purpose
 
@@ -344,17 +375,49 @@ An example of this implementation is provided in the **Allure Reporting** sectio
 
 <details><summary>2 Allure Reporting (Documentation-Level)</summary>
 
+<table>
+<tr>
+<td width="40%" valign="top">
+<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/1%20Allure_Overview-Statuses-Trend-Environment-Executors.png">
+<img
+ src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/1%20Allure_Overview-Statuses-Trend-Environment-Executors.png"
+ alt="Allure Report, Overview page"
+ width="300"
+ />
+ </a>
+</td>
+<td width="60%", valign="top">
+
 #### Allure Reporting Overview
 
 Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution and provide a business-readable view of automated test results.
 
-#### The Allure report includes:
+ #### The Allure report includes:
 
+- Overall pass/fail statistics
 - Test suites grouped by test type (Smoke, Sanity, Functional, UI/UX, Negative)
 - Step-by-step execution flow for each test
 - Severity levels and metadata
+- Execution environment
+- Test executor metadata
+- History across CI runs
 - Screenshots and attachments on failures
 - [Retry](#retry-strategy) information for flaky or unstable tests
+</td>
+</tr>
+
+<tr>
+<td width="40%" valign="top">
+<a href="docs/reports/2 Allure_Suites-History.png">
+<img
+source="docs/reports/2 Allure_Suites-History.png"
+alt="Allure Report, Suites page"
+width="300"
+/>
+</a>
+</td>
+
+<td width="60" valign="top">
 
 #### Design Principles
 
@@ -367,6 +430,22 @@ Allure is used as a high-level reporting and documentation tool, built on top of
 description(this.test.title);
 severity(AllureSeverity.CRITICAL);
 ```
+</td>
+</tr>
+
+<tr>
+<td width="40%" valign="top">
+<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png">
+<img
+source="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png"
+alt="Allure Report, Graphs page"
+width="300"
+>
+</a>
+</td>
+
+<td width="60%" valign="top">
+
 
 #### Example (Page-Level Step)
 ```js
@@ -379,6 +458,12 @@ return this.logStep("Perform Login", async () => {
 ```
 
 Allure reports are generated and viewed as an HTML dashboard.
+
+</td>
+</tr>
+
+</table>
+
 
 
 #### Running Tests with Allure:

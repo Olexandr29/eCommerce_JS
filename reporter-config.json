@@ -1,5 +1,15 @@
 {
-"reporterEnabled": "spec,allure-mocha",
+"reporterEnabled": "spec, mochawesome, allure-mocha",
+
+"mochawesomeReporterOptions": {
+    "reportDir": "mochawesome-report",
+    "reportFilename": "mochawesome",
+    "html": true,
+    "json": true,
+    "quiet": true,
+    "consoleReporter": "none"
+},
+
 "allure-mocha": {
 "resultsDir": "allure-results"
 }

@@ -19,6 +19,6 @@
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.5.0",
     "mocha-multi-reporters": "^1.5.1",
-    "mochawesome": "^2.0.5"
+    "mochawesome": "^7.1.3"
   }
 }
