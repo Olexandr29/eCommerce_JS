@@ -311,21 +311,16 @@ The current pipeline status is always visible via the CI badge at the top of thi
 
 <table>
 <tr>
-<td width="40" valign="top">
-<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/4%20Mochawesome%20Report.png">
+<td width="40%" valign="top">
+<a href="docs/reports/4 Mochawesome Report.png">
   <img
-  src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/4%20Mochawesome%20Report.png"
+  src="docs/reports/4 Mochawesome Report.png"
   alt="An example of the Machawesome report"
   />
   </a>
 </td>
-<td widh="60" valign="top">
+<td widh="60%" valign="top">
 Mochawesome is used as a Mocha reporter to provide structured execution reports(Execution-Level View) in addition to console output.
-</td>
-
-</tr>
-</table>
-
 
 #### Purpose
 
@@ -333,12 +328,19 @@ Mochawesome is used as a Mocha reporter to provide structured execution reports(
 - Analyze passed/failed tests
 - Review execution duration
 - Useful for engineering debugging and CI artifacts
+</td>
+</tr>
+
+<tr>
+<td width="40%" valign="top">
 
 #### Characteristics
 
 - Based on Mocha test structure
 - Does not understand Page Objects or business steps
 - Focused on test execution, not documentation
+</td>
+<td widh="60%" valign="top">
 
 #### Typical Output
 
@@ -346,6 +348,10 @@ Mochawesome is used as a Mocha reporter to provide structured execution reports(
 - Status (passed / failed)
 - Execution time
 - Stack traces on failure
+</td>
+</tr>
+</table>
+
 
 #### Example (console output):
 ```test
@@ -377,13 +383,24 @@ An example of this implementation is provided in the **Allure Reporting** sectio
 <table>
 <tr>
 <td width="40%" valign="top">
-<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/1%20Allure_Overview-Statuses-Trend-Environment-Executors.png">
+<a href="docs/reports/1 Allure_Overview-Statuses-Trend-Environment-Executors.png">
 <img
- src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/1%20Allure_Overview-Statuses-Trend-Environment-Executors.png"
+ src="docs/reports/1 Allure_Overview-Statuses-Trend-Environment-Executors.png"
  alt="Allure Report, Overview page"
- width="300"
  />
  </a>
+ <a href="docs/reports/2 Allure_Suites-History.png">
+<img
+src="docs/reports/2 Allure_Suites-History.png"
+alt="Allure Report, Suites page"
+/>
+</a>
+<a href="docs/reports/3 Allure_Graphs-Trend-Retries_Trend.png">
+<img
+src="docs/reports/3 Allure_Graphs-Trend-Retries_Trend.png"
+alt="Allure Report, Graphs page"
+>
+</a>
 </td>
 <td width="60%" valign="top">
 
@@ -402,21 +419,7 @@ Allure is used as a high-level reporting and documentation tool, built on top of
 - History across CI runs
 - Screenshots and attachments on failures
 - [Retry](#retry-strategy) information for flaky or unstable tests
-</td>
-</tr>
 
-<tr>
-<td width="40%" valign="top">
-<a href="docs/reports/2 Allure_Suites-History.png">
-<img
-src="docs/reports/2 Allure_Suites-History.png"
-alt="Allure Report, Suites page"
-width="300"
-/>
-</a>
-</td>
-
-<td width="60%" valign="top">
 
 #### Design Principles
 
@@ -429,22 +432,14 @@ width="300"
 description(this.test.title);
 severity(AllureSeverity.CRITICAL);
 ```
+
+
+
+
 </td>
 </tr>
 
-<tr>
-<td width="40%" valign="top">
-<a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png">
-<img
-src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png"
-alt="Allure Report, Graphs page"
-width="300"
->
-</a>
-</td>
-
-<td width="60%" valign="top">
-
+</table>
 
 #### Example (Page-Level Step)
 ```js
@@ -457,12 +452,6 @@ return this.logStep("Perform Login", async () => {
 ```
 
 Allure reports are generated and viewed as an HTML dashboard.
-
-</td>
-</tr>
-
-</table>
-
 
 
 #### Running Tests with Allure:
