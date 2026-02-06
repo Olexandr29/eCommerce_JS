@@ -316,7 +316,6 @@ The current pipeline status is always visible via the CI badge at the top of thi
   <img
   src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/4%20Mochawesome%20Report.png"
   alt="An example of the Machawesome report"
-  width="300"
   />
   </a>
 </td>
@@ -386,11 +385,11 @@ An example of this implementation is provided in the **Allure Reporting** sectio
  />
  </a>
 </td>
-<td width="60%", valign="top">
+<td width="60%" valign="top">
 
 #### Allure Reporting Overview
 
-Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution and provide a business-readable view of automated test results.
+Allure is used as a high-level reporting and documentation tool, built on top of Mocha execution and provides a business-readable view of automated test results.
 
  #### The Allure report includes:
 
@@ -410,14 +409,14 @@ Allure is used as a high-level reporting and documentation tool, built on top of
 <td width="40%" valign="top">
 <a href="docs/reports/2 Allure_Suites-History.png">
 <img
-source="docs/reports/2 Allure_Suites-History.png"
+src="docs/reports/2 Allure_Suites-History.png"
 alt="Allure Report, Suites page"
 width="300"
 />
 </a>
 </td>
 
-<td width="60" valign="top">
+<td width="60%" valign="top">
 
 #### Design Principles
 
@@ -437,7 +436,7 @@ severity(AllureSeverity.CRITICAL);
 <td width="40%" valign="top">
 <a href="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png">
 <img
-source="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png"
+src="https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/reports/3%20Allure_Graphs-Trend-Retries_Trend.png"
 alt="Allure Report, Graphs page"
 width="300"
 >
