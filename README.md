@@ -4,13 +4,107 @@
 
 [![Allure Report](https://img.shields.io/badge/Allure-Report-blue)](https://olexandr29.github.io/eCommerce_JS/)
 
+# JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
+
+## Overview
+
+This repository contains a **portfolio-grade UI automation framework** for testing an eCommerce web application (**saucedemo.com**).
+
+The project focuses not only on automated test implementation, but also on **architecture design, CI/CD reliability, reporting strategy, and test traceability**, mirroring real-world automation practices used in production QA teams.
+
+The framework supports local execution and fully automated CI pipelines with live reporting via GitHub Pages.
+
+## How I Built This Project
+
+This project was designed as an **engineering-focused automation framework**, not as a simple collection of UI tests.
+
+Key priorities during development were:
+
+- test maintainability and ease of long-term support
+- clear, structured, and readable test design
+- clear separation between execution, reporting, and quality analysis
+
+## Project Goals & Scope
+
+**Primary goals**
+
+- Build a scalable and maintainable UI automation framework for a real eCommerce-like application (saucedemo.com)
+- Demonstrate industry-standard practices: 
+  - Page Object Model
+  - Layered reporting
+  - CI/CD automation
+  - Manual-to-automation traceability
+- Provide transparent and review-friendly test results via live reporting (GitHub Pages + Allure)
+
+**Scope**
+
+- UI automation of critical user flows:
+  - Authentication
+  - Product browsing (PLP / PDP)
+  - Cart management
+  - Checkout and order confirmation
+- Test coverage across:
+  - Smoke
+  - Sanity
+  - Functional (E2E)
+  - UI/UX
+  - Negative scenarios
+
+**Out of scope (intentional)**
+- Backend / API testing
+- Performance or load testing
+- Mobile automation
+- Visual regression testing
+
+These areas were intentionally excluded to keep the project focused on **UI automation architecture and quality strategy**, rather than tool sprawl.
+
+### Tech Stack & Design Decisions
+
+- JavaScript (Node.js)
+
+Chosen for fast iteration, strong ecosystem support, and alignment with modern web-focused automation environments.
+
+- Mocha test framework
+
+ Provides full control over test lifecycle, hooks, retries, and execution flow without opinionated abstractions.
+  This flexibility was required to implement a selective retry strategy and advanced reporting integration.
+
+- Selenium WebDriver
+
+ Selected for it's explicit control over browser behavior, widespread industry adoption, and because hands-on experience of using Selenium with Java in previous project.
+
+- [Page Object Model (POM)](#page-object-model-pom-conventions)
+
+Enforces separation of concerns:
+  - Tests describe *what* is verified
+  - Page Objects define *how* the UI is interacted with 
+
+This allows scaling test coverage without proportional maintenance growth.
+
+- [GitHub Actions for CI/CD](#2-remote-cicd)
+
+Used as the execution and free platform for CI pipelines.
+  CI/CD design decisions and architecture are described in a dedicated section below.
+
+- [Reporting tools(Mochawesome/Allure)](#reporting-tools-allure--mochawesome)
+  - Mochawesome provides execution-level diagnostics for engineers
+  - Allure provides documentation-level reporting, trends, and quality signals
 
 ## Architecture & CI/CD Flow
-<table>
-<tr>
-Line with full amount of info that yuo need in this Table Row
-</tr>
-</table>
+
+The CI pipeline is implemented using **GitHub Actions** and is designed with **reliability and observability** as first-class concerns.
+
+Key architectural decisions:
+- **Linux-only Allure publishing**:
+  - Guarantees consistent filesystem behavior
+  - Prevents Allure history corruption
+  - Simplifies artifact aggregation and GitHub Pages deployment
+- **Matrix execution (OS + Node.js versions)** ensures cross-platform reliability and early detection of environment-specific issues.
+- **Separation of concerns in CI**:
+  - Matrix jobs are responsible only for test execution.
+  - A dedicated Linux-only workflow generates and publishes the aggregated Allure report.
+
+This design avoids common CI issues where reporting becomes flaky or non-deterministic due to parallel execution.
 
 <table>
   <tr>
@@ -42,22 +136,9 @@ Line with full amount of info that yuo need in this Table Row
   </tr>
 </table>
 
+## Framework Design
 
-# JavaScript UI Automation Framework (Mocha + Selenium WebDriver)
-
-## 📌 Project Purpose
-
-This project aims to build a scalable and maintainable **UI automation framework** for testing eShop (the web application **saucedemo.com**) using:
-- JavaScript (Node.js)
-- Mocha test framework
-- Selenium WebDriver
-- [Page Object Model (POM)](#page-object-model-pom-conventions)
-- [GitHub Actions for CI/CD](#2-remote-cicd)
-- [Reporting tools(Allure/Mochawesome)](#reporting-tools-allure--mochawesome)
-
-The goal is to create a professional-grade automation environment that demonstrates real industry practices and allows running automated tests locally and remotely.
-
-## Page Object Model (POM) Conventions 
+### Page Object Model (POM) Conventions 
 
 <details><summary> 1. Project Structure</summary>
 
@@ -226,6 +307,30 @@ This example demonstrates:
 
 </details>
 
+## Test Strategy
+
+- Smoke tests validate application availability and critical flows
+- Sanity tests verify core features after changes
+- Functional tests cover end-to-end business scenarios
+- UI/UX tests validate UI behavior and state transitions
+- Negative tests validate system behavior for invalid inputs
+
+#### Retry Strategy
+
+- Retry logic is enabled only for Functional test suites
+- Max retries: 2
+- Smoke, Negative and UI/UX tests are excluded
+- Retries are visible in Allure and Mochawesome reports
+
+A test is considered `flaky` if it fails and passes intermittently across retries
+or across multiple CI runs.
+Such tests are candidates for refactoring, stabilization,
+or temporary quarantine until fixed.
+
+Retries are applied selectively and never used to mask deterministic failures.
+
+A deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
+Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
 
 ## Test Execution:
 ### 1 Local
@@ -516,24 +621,6 @@ The `Allure Trends tab` is used as the primary source for flaky test analysis, a
 
 This approach transforms automated tests into living quality documentation, rather than static execution output.
 
-#### Retry Strategy
-
-- Retry logic is enabled only for Functional test suites
-- Max retries: 2
-- Smoke, Negative and UI/UX tests are excluded
-- Retries are visible in Allure and Mochawesome reports
-
-A test is considered `flaky` if it fails and passes intermittently across retries
-or across multiple CI runs.
-Such tests are candidates for refactoring, stabilization,
-or temporary quarantine until fixed.
-
-Deterministic failures are not masked.
-
-A deterministic failure was intentionally introduced in TC-014 to validate retry behavior.
-Test failed consistently across all retry attempts, confirming that retries do not mask real defects.
-Allure report shows multiple failed retries with final FAILED status)
-
 </details>
 
 
@@ -550,7 +637,6 @@ Related documentations - [Manual test cases](https://github.com/Olexandr29/eComm
 [Automated tests](https://github.com/Olexandr29/eCommerce_JS/tree/main/test) and
 [Traceability matrix](https://github.com/Olexandr29/eCommerce_JS/blob/main/docs/manual-to-automation-traceability.md).
 
-
 ## Process & Methodology
 
 - Project organized using SCRUM methodology (2-week sprints)
@@ -559,7 +645,6 @@ Related documentations - [Manual test cases](https://github.com/Olexandr29/eComm
 - Starting from Sprint 4, task management is migrated to GitHub Projects → https://github.com/users/Olexandr29/projects/1
 - Incremental implementation:
   - feature → test → reporting → refactoring
-
 
 ## Summary
 
